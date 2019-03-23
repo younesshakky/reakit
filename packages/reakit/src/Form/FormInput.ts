@@ -1,5 +1,5 @@
 import * as React from "react";
-import { As, PropsWithAs } from "../__utils/types";
+import { As, PropsWithAs, Keys } from "../__utils/types";
 import { unstable_createComponent } from "../utils/createComponent";
 import { mergeProps } from "../utils/mergeProps";
 import { useHook } from "../system/useHook";
@@ -20,7 +20,7 @@ export type unstable_FormInputOptions<
   Partial<unstable_FormStateReturn<V>> &
   Pick<
     unstable_FormStateReturn<V>,
-    "values" | "touched" | "errors" | "update" | "blur"
+    "baseId" | "values" | "touched" | "errors" | "update" | "blur"
   > & {
     /** TODO: Description */
     name: P;
@@ -53,13 +53,25 @@ export function unstable_useFormInput<V, P extends DeepPath<V, P>>(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_FormInputOptions<any, any>> = [
+const keys: Keys<unstable_FormInputOptions<any, any>> = [
   ...useBox.__keys,
-  ...unstable_useFormState.__keys,
+  "baseId",
+  "values",
+  "touched",
+  "errors",
+  "update",
+  "blur",
   "name"
 ];
 
+const allKeys = [
+  ...useBox.__allKeys,
+  ...unstable_useFormState.__allKeys,
+  ...keys
+];
+
 unstable_useFormInput.__keys = keys;
+unstable_useFormInput.__allKeys = allKeys;
 
 export const unstable_FormInput = (unstable_createComponent({
   as: "input",

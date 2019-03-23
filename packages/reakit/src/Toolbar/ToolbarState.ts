@@ -5,6 +5,7 @@ import {
   unstable_RoverActions,
   unstable_RoverInitialState
 } from "../Rover/RoverState";
+import { Keys } from "../__utils/types";
 
 export type unstable_ToolbarState = unstable_RoverState;
 
@@ -21,8 +22,6 @@ export function useToolbarState(
   return useRoverState(initialState);
 }
 
-const keys: Array<keyof unstable_ToolbarStateReturn> = [
-  ...useRoverState.__keys
-];
+const allKeys: Keys<unstable_ToolbarStateReturn> = [...useRoverState.__allKeys];
 
-useToolbarState.__keys = keys;
+useToolbarState.__allKeys = allKeys;

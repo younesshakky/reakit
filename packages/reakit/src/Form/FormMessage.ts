@@ -2,7 +2,7 @@ import { unstable_BoxOptions, unstable_BoxProps, useBox } from "../Box/Box";
 import { useHook } from "../system/useHook";
 import { unstable_createComponent } from "../utils/createComponent";
 import { mergeProps } from "../utils/mergeProps";
-import { As, PropsWithAs } from "../__utils/types";
+import { As, PropsWithAs, Keys } from "../__utils/types";
 import { unstable_FormStateReturn, unstable_useFormState } from "./FormState";
 import { unstable_getIn } from "./utils/getIn";
 import { getMessageId } from "./__utils/getMessageId";
@@ -15,7 +15,10 @@ export type unstable_FormMessageOptions<
   P extends DeepPath<V, P>
 > = unstable_BoxOptions &
   Partial<unstable_FormStateReturn<V>> &
-  Pick<unstable_FormStateReturn<V>, "touched" | "errors" | "messages"> & {
+  Pick<
+    unstable_FormStateReturn<V>,
+    "baseId" | "touched" | "errors" | "messages"
+  > & {
     /** TODO: Description */
     name: P;
   };
@@ -49,13 +52,23 @@ export function unstable_useFormMessage<V, P extends DeepPath<V, P>>(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_FormMessageOptions<any, any>> = [
+const keys: Keys<unstable_FormMessageOptions<any, any>> = [
   ...useBox.__keys,
-  ...unstable_useFormState.__keys,
+  "baseId",
+  "touched",
+  "errors",
+  "messages",
   "name"
 ];
 
+const allKeys = [
+  ...useBox.__allKeys,
+  ...unstable_useFormState.__allKeys,
+  ...keys
+];
+
 unstable_useFormMessage.__keys = keys;
+unstable_useFormMessage.__allKeys = allKeys;
 
 export const unstable_FormMessage = (unstable_createComponent({
   as: "div",

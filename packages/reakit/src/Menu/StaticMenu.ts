@@ -4,12 +4,16 @@ import { unstable_createComponent } from "../utils/createComponent";
 import { unstable_useCreateElement } from "../utils/useCreateElement";
 import { useHook } from "../system/useHook";
 import { unstable_BoxOptions, unstable_BoxProps, useBox } from "../Box/Box";
+import { Keys } from "../__utils/types";
 import { useShortcuts } from "./__utils/useShortcuts";
-import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
+import {
+  unstable_StaticMenuStateReturn,
+  unstable_useStaticMenuState
+} from "./StaticMenuState";
 
 export type unstable_StaticMenuOptions = unstable_BoxOptions &
-  Partial<unstable_MenuStateReturn> &
-  Pick<unstable_MenuStateReturn, "unstable_stops" | "unstable_move">;
+  Partial<Pick<unstable_StaticMenuStateReturn, "orientation">> &
+  Pick<unstable_StaticMenuStateReturn, "unstable_stops" | "unstable_move">;
 
 export type unstable_StaticMenuProps = unstable_BoxProps;
 
@@ -42,12 +46,21 @@ export function unstable_useStaticMenu(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_StaticMenuOptions> = [
+const keys: Keys<unstable_StaticMenuOptions> = [
   ...useBox.__keys,
-  ...useMenuState.__keys
+  "orientation",
+  "unstable_stops",
+  "unstable_move"
+];
+
+const allKeys = [
+  ...useBox.__allKeys,
+  ...unstable_useStaticMenuState.__allKeys,
+  ...keys
 ];
 
 unstable_useStaticMenu.__keys = keys;
+unstable_useStaticMenu.__allKeys = allKeys;
 
 export const unstable_StaticMenu = unstable_createComponent({
   as: "div",

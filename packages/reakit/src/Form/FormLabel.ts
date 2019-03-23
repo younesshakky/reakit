@@ -1,5 +1,5 @@
 import * as React from "react";
-import { As, PropsWithAs } from "../__utils/types";
+import { As, PropsWithAs, Keys } from "../__utils/types";
 import { unstable_createComponent } from "../utils/createComponent";
 import { mergeProps } from "../utils/mergeProps";
 import { useHook } from "../system/useHook";
@@ -13,7 +13,8 @@ export type unstable_FormLabelOptions<
   V,
   P extends DeepPath<V, P>
 > = unstable_BoxOptions &
-  Partial<unstable_FormStateReturn<V>> & {
+  Partial<unstable_FormStateReturn<V>> &
+  Pick<unstable_FormStateReturn<V>, "baseId"> & {
     /** TODO: Description */
     name: P;
     /** TODO: Description */
@@ -41,14 +42,21 @@ export function unstable_useFormLabel<V, P extends DeepPath<V, P>>(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_FormLabelOptions<any, any>> = [
+const keys: Keys<unstable_FormLabelOptions<any, any>> = [
   ...useBox.__keys,
-  ...unstable_useFormState.__keys,
+  "baseId",
   "name",
   "label"
 ];
 
+const allKeys = [
+  ...useBox.__allKeys,
+  ...unstable_useFormState.__allKeys,
+  ...keys
+];
+
 unstable_useFormLabel.__keys = keys;
+unstable_useFormLabel.__allKeys = allKeys;
 
 export const unstable_FormLabel = (unstable_createComponent({
   as: "label",

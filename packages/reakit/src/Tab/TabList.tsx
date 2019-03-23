@@ -4,10 +4,11 @@ import { unstable_createComponent } from "../utils/createComponent";
 import { useHook } from "../system/useHook";
 import { unstable_BoxOptions, unstable_BoxProps, useBox } from "../Box/Box";
 import { unstable_useCreateElement } from "../utils/useCreateElement";
+import { Keys } from "../__utils/types";
 import { useTabState, unstable_TabStateReturn } from "./TabState";
 
 export type unstable_TabListOptions = unstable_BoxOptions &
-  Partial<unstable_TabStateReturn>;
+  Partial<Pick<unstable_TabStateReturn, "orientation">>;
 
 export type unstable_TabListProps = unstable_BoxProps;
 
@@ -27,12 +28,12 @@ export function useTabList(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_TabListOptions> = [
-  ...useBox.__keys,
-  ...useTabState.__keys
-];
+const keys: Keys<unstable_TabListOptions> = [...useBox.__keys, "orientation"];
+
+const allKeys = [...useBox.__allKeys, ...useTabState.__allKeys, ...keys];
 
 useTabList.__keys = keys;
+useTabList.__allKeys = allKeys;
 
 export const TabList = unstable_createComponent({
   as: "div",

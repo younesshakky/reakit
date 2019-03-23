@@ -6,12 +6,12 @@ import {
   unstable_HiddenProps,
   useHidden
 } from "../Hidden/Hidden";
+import { Keys } from "../__utils/types";
 import { getTabPanelId, getTabId } from "./__utils";
 import { useTabState, unstable_TabStateReturn } from "./TabState";
 
 export type unstable_TabPanelOptions = unstable_HiddenOptions &
-  Partial<unstable_TabStateReturn> &
-  Pick<unstable_TabStateReturn, "unstable_selectedId"> & {
+  Pick<unstable_TabStateReturn, "unstable_baseId" | "unstable_selectedId"> & {
     /** TODO: Description */
     stopId: string;
   };
@@ -39,13 +39,17 @@ export function useTabPanel(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_TabPanelOptions> = [
+const keys: Keys<unstable_TabPanelOptions> = [
   ...useHidden.__keys,
-  ...useTabState.__keys,
+  "unstable_baseId",
+  "unstable_selectedId",
   "stopId"
 ];
 
+const allKeys = [...useHidden.__allKeys, ...useTabState.__allKeys, ...keys];
+
 useTabPanel.__keys = keys;
+useTabPanel.__allKeys = allKeys;
 
 export const TabPanel = unstable_createComponent({
   as: "div",

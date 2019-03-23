@@ -6,6 +6,7 @@ import {
   unstable_RoverState,
   unstable_RoverActions
 } from "../Rover/RoverState";
+import { Keys } from "../__utils/types";
 
 export type unstable_TabState = unstable_RoverState & {
   /** TODO: Description */
@@ -49,12 +50,12 @@ export function useTabState(
   };
 }
 
-const keys: Array<keyof unstable_TabStateReturn> = [
-  ...useRoverState.__keys,
+const allKeys: Keys<unstable_TabStateReturn> = [
+  ...useRoverState.__allKeys,
   "unstable_baseId",
   "unstable_selectedId",
   "unstable_select",
   "unstable_manual"
 ];
 
-useTabState.__keys = keys;
+useTabState.__allKeys = allKeys;

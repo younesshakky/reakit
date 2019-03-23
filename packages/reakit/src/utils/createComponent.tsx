@@ -3,8 +3,8 @@ import * as React from "react";
 import { forwardRef } from "../__utils/forwardRef";
 import { As, PropsWithAs } from "../__utils/types";
 import { useWhyDidYouUpdate } from "../__utils/useWhyDidYouUpdate";
-import { unstable_splitProps } from "./splitProps";
 import { unstable_useCreateElement as defaultUseCreateElement } from "./useCreateElement";
+import { unstable_splitProps } from "./splitProps";
 
 type Hook<O> = {
   (
@@ -12,19 +12,22 @@ type Hook<O> = {
     props: React.HTMLAttributes<any> & React.RefAttributes<any>
   ): typeof props;
   __keys?: any[];
+  __allKeys?: any[];
 };
 
 type Options<T extends As, O> = {
   as: T;
   useHook?: Hook<O>;
-  hookKeys?: Array<any>;
+  keys?: any[];
+  allKeys?: any[];
   useCreateElement?: typeof defaultUseCreateElement;
 };
 
 export function unstable_createComponent<T extends As, O>({
   as: type,
   useHook,
-  hookKeys = (useHook && useHook.__keys) || [],
+  keys = (useHook && useHook.__keys) || [],
+  allKeys = (useHook && (useHook.__allKeys || useHook.__keys)) || [],
   useCreateElement = defaultUseCreateElement
 }: Options<T, O>) {
   const displayName =
@@ -40,7 +43,8 @@ export function unstable_createComponent<T extends As, O>({
       useWhyDidYouUpdate(displayName, props);
     }
     if (useHook) {
-      const [options, htmlProps] = unstable_splitProps(props, hookKeys);
+      const [allOptions, htmlProps] = unstable_splitProps(props, allKeys);
+      const [options] = unstable_splitProps(allOptions, keys);
       const elementProps = useHook(options, { ref, ...htmlProps });
       return useCreateElement(as, elementProps);
     }

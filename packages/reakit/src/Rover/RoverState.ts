@@ -2,6 +2,7 @@
 import * as React from "react";
 import { warning } from "../__utils/warning";
 import { SealedInitialState, useSealedState } from "../__utils/useSealedState";
+import { Keys } from "../__utils/types";
 
 type Stop = {
   id: string;
@@ -242,7 +243,7 @@ export function useRoverState(
   };
 }
 
-const keys: Array<keyof unstable_RoverStateReturn> = [
+const allKeys: Keys<unstable_RoverStateReturn> = [
   "orientation",
   "unstable_stops",
   "unstable_currentId",
@@ -259,4 +260,4 @@ const keys: Array<keyof unstable_RoverStateReturn> = [
   "unstable_orientate"
 ];
 
-useRoverState.__keys = keys;
+useRoverState.__allKeys = allKeys;

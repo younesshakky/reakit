@@ -6,10 +6,13 @@ import {
   unstable_RoverProps,
   useRover
 } from "../Rover/Rover";
+import { Keys } from "../__utils/types";
 import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 
 export type unstable_MenuItemOptions = unstable_RoverOptions &
-  Partial<unstable_MenuStateReturn>;
+  Partial<
+    Pick<unstable_MenuStateReturn, "unstable_parent" | "placement" | "hide">
+  >;
 
 export type unstable_MenuItemProps = unstable_RoverProps;
 
@@ -69,12 +72,17 @@ export function useMenuItem(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_MenuItemOptions> = [
+const keys: Keys<unstable_MenuItemOptions> = [
   ...useRover.__keys,
-  ...useMenuState.__keys
+  "unstable_parent",
+  "placement",
+  "hide"
 ];
 
+const allKeys = [...useRover.__allKeys, ...useMenuState.__allKeys, ...keys];
+
 useMenuItem.__keys = keys;
+useMenuItem.__allKeys = allKeys;
 
 export const MenuItem = unstable_createComponent({
   as: "button",

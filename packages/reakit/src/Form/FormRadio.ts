@@ -8,7 +8,7 @@ import {
 import { useHook } from "../system/useHook";
 import { unstable_createComponent } from "../utils/createComponent";
 import { mergeProps } from "../utils/mergeProps";
-import { As, PropsWithAs } from "../__utils/types";
+import { As, PropsWithAs, Keys } from "../__utils/types";
 import { FormRadioGroupContext } from "./FormRadioGroup";
 import { unstable_FormStateReturn, unstable_useFormState } from "./FormState";
 import { unstable_getIn } from "./utils/getIn";
@@ -59,14 +59,23 @@ export function unstable_useFormRadio<V, P extends DeepPath<V, P>>(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_FormRadioOptions<any, any>> = [
+const keys: Keys<unstable_FormRadioOptions<any, any>> = [
   ...useBox.__keys,
-  ...unstable_useFormState.__keys,
+  "values",
+  "update",
+  "blur",
   "name",
   "value"
 ];
 
+const allKeys = [
+  ...useBox.__allKeys,
+  ...unstable_useFormState.__allKeys,
+  ...keys
+];
+
 unstable_useFormRadio.__keys = keys;
+unstable_useFormRadio.__allKeys = allKeys;
 
 export const unstable_FormRadio = (unstable_createComponent({
   as: "input",

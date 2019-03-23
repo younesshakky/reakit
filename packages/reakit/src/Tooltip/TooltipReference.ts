@@ -2,10 +2,16 @@ import { mergeProps } from "../utils/mergeProps";
 import { unstable_createComponent } from "../utils/createComponent";
 import { useHook } from "../system/useHook";
 import { unstable_BoxOptions, unstable_BoxProps, useBox } from "../Box/Box";
+import { Keys } from "../__utils/types";
 import { useTooltipState, unstable_TooltipStateReturn } from "./TooltipState";
 
 export type unstable_TooltipReferenceOptions = unstable_BoxOptions &
-  Partial<unstable_TooltipStateReturn> &
+  Partial<
+    Pick<
+      unstable_TooltipStateReturn,
+      "unstable_referenceRef" | "unstable_hiddenId"
+    >
+  > &
   Pick<unstable_TooltipStateReturn, "show" | "hide">;
 
 export type unstable_TooltipReferenceProps = unstable_BoxProps;
@@ -31,12 +37,18 @@ export function useTooltipReference(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_TooltipReferenceOptions> = [
+const keys: Keys<unstable_TooltipReferenceOptions> = [
   ...useBox.__keys,
-  ...useTooltipState.__keys
+  "unstable_referenceRef",
+  "unstable_hiddenId",
+  "show",
+  "hide"
 ];
 
+const allKeys = [...useBox.__allKeys, ...useTooltipState.__allKeys, ...keys];
+
 useTooltipReference.__keys = keys;
+useTooltipReference.__allKeys = allKeys;
 
 export const TooltipReference = unstable_createComponent({
   as: "div",

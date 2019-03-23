@@ -3,6 +3,8 @@ import { unstable_createComponent } from "../utils/createComponent";
 import { mergeProps } from "../utils/mergeProps";
 import { useHook } from "../system/useHook";
 import { unstable_BoxOptions, unstable_BoxProps, useBox } from "../Box/Box";
+import { useLiveRef } from "../__utils/useLiveRef";
+import { Keys } from "../__utils/types";
 
 export type unstable_TabbableOptions = unstable_BoxOptions & {
   /** TODO: Description */
@@ -38,6 +40,8 @@ export function useTabbable(
   }: unstable_TabbableOptions = {},
   htmlProps: unstable_TabbableProps = {}
 ) {
+  const clickKeysRef = useLiveRef(unstable_clickKeys);
+
   const allOptions: unstable_TabbableOptions = {
     tabIndex,
     unstable_clickKeys,
@@ -61,7 +65,7 @@ export function useTabbable(
       onKeyDown: event => {
         if (isNativeTabbable(event.target) || options.disabled) return;
 
-        if (unstable_clickKeys.indexOf(event.key) !== -1) {
+        if (clickKeysRef.current.indexOf(event.key) !== -1) {
           event.preventDefault();
           event.target.dispatchEvent(
             new MouseEvent("click", {
@@ -81,7 +85,7 @@ export function useTabbable(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_TabbableOptions> = [
+const keys: Keys<unstable_TabbableOptions> = [
   ...useBox.__keys,
   "tabIndex",
   "disabled",
@@ -90,7 +94,10 @@ const keys: Array<keyof unstable_TabbableOptions> = [
   "unstable_clickKeys"
 ];
 
+const allKeys = [...useBox.__allKeys, ...keys];
+
 useTabbable.__keys = keys;
+useTabbable.__allKeys = allKeys;
 
 export const Tabbable = unstable_createComponent({
   as: "button",

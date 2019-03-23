@@ -6,10 +6,10 @@ import {
   unstable_RoverProps,
   useRover
 } from "../Rover/Rover";
-import { unstable_ToolbarStateReturn, useToolbarState } from "./ToolbarState";
+import { Keys } from "../__utils/types";
+import { useToolbarState } from "./ToolbarState";
 
-export type unstable_ToolbarItemOptions = unstable_RoverOptions &
-  Partial<unstable_ToolbarStateReturn>;
+export type unstable_ToolbarItemOptions = unstable_RoverOptions;
 
 export type unstable_ToolbarItemProps = unstable_RoverProps &
   React.LiHTMLAttributes<any>;
@@ -23,12 +23,12 @@ export function useToolbarItem(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_ToolbarItemOptions> = [
-  ...useRover.__keys,
-  ...useToolbarState.__keys
-];
+const keys: Keys<unstable_ToolbarItemOptions> = [...useRover.__keys];
+
+const allKeys = [...useRover.__allKeys, ...useToolbarState.__allKeys, ...keys];
 
 useToolbarItem.__keys = keys;
+useToolbarItem.__allKeys = allKeys;
 
 export const ToolbarItem = unstable_createComponent({
   as: "button",

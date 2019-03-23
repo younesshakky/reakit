@@ -6,11 +6,14 @@ import {
   unstable_PopoverDisclosureProps,
   usePopoverDisclosure
 } from "../Popover/PopoverDisclosure";
+import { Keys } from "../__utils/types";
 import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 
 export type unstable_MenuDisclosureOptions = unstable_PopoverDisclosureOptions &
-  Partial<unstable_MenuStateReturn> &
-  Pick<unstable_MenuStateReturn, "placement" | "show" | "unstable_last">;
+  Pick<
+    unstable_MenuStateReturn,
+    "placement" | "show" | "unstable_first" | "unstable_last"
+  >;
 
 export type unstable_MenuDisclosureProps = unstable_PopoverDisclosureProps;
 
@@ -51,12 +54,22 @@ export function useMenuDisclosure(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_MenuDisclosureOptions> = [
+const keys: Keys<unstable_MenuDisclosureOptions> = [
   ...usePopoverDisclosure.__keys,
-  ...useMenuState.__keys
+  "placement",
+  "show",
+  "unstable_first",
+  "unstable_last"
+];
+
+const allKeys = [
+  ...usePopoverDisclosure.__allKeys,
+  ...useMenuState.__allKeys,
+  ...keys
 ];
 
 useMenuDisclosure.__keys = keys;
+useMenuDisclosure.__allKeys = allKeys;
 
 export const MenuDisclosure = unstable_createComponent({
   as: "button",

@@ -2,6 +2,7 @@ import { unstable_createComponent } from "../utils/createComponent";
 import { mergeProps } from "../utils/mergeProps";
 import { useHook } from "../system/useHook";
 import { unstable_BoxOptions, unstable_BoxProps, useBox } from "../Box/Box";
+import { Keys } from "../__utils/types";
 
 export type unstable_SeparatorOptions = unstable_BoxOptions & {
   /** TODO: Description */
@@ -31,12 +32,12 @@ export function useSeparator(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_SeparatorOptions> = [
-  ...useBox.__keys,
-  "orientation"
-];
+const keys: Keys<unstable_SeparatorOptions> = [...useBox.__keys, "orientation"];
+
+const allKeys = [...useBox.__allKeys, ...keys];
 
 useSeparator.__keys = keys;
+useSeparator.__allKeys = allKeys;
 
 export const Separator = unstable_createComponent({
   as: "hr",

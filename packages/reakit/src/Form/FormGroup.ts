@@ -2,7 +2,7 @@ import * as React from "react";
 import { unstable_BoxOptions, unstable_BoxProps, useBox } from "../Box/Box";
 import { useHook } from "../system/useHook";
 import { mergeProps } from "../utils/mergeProps";
-import { As, PropsWithAs } from "../__utils/types";
+import { As, PropsWithAs, Keys } from "../__utils/types";
 import { unstable_createComponent } from "../utils/createComponent";
 import { DeepPath } from "./__utils/types";
 import { getInputId } from "./__utils/getInputId";
@@ -16,7 +16,7 @@ export type unstable_FormGroupOptions<
   P extends DeepPath<V, P>
 > = unstable_BoxOptions &
   Partial<unstable_FormStateReturn<V>> &
-  Pick<unstable_FormStateReturn<V>, "touched" | "errors"> & {
+  Pick<unstable_FormStateReturn<V>, "baseId" | "touched" | "errors"> & {
     /** TODO: Description */
     name: P;
   };
@@ -44,13 +44,22 @@ export function unstable_useFormGroup<V, P extends DeepPath<V, P>>(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_FormGroupOptions<any, any>> = [
+const keys: Keys<unstable_FormGroupOptions<any, any>> = [
   ...useBox.__keys,
-  ...unstable_useFormState.__keys,
+  "baseId",
+  "touched",
+  "errors",
   "name"
 ];
 
+const allKeys = [
+  ...useBox.__allKeys,
+  ...unstable_useFormState.__allKeys,
+  ...keys
+];
+
 unstable_useFormGroup.__keys = keys;
+unstable_useFormGroup.__allKeys = allKeys;
 
 export const unstable_FormGroup = (unstable_createComponent({
   as: "fieldset",

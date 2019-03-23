@@ -5,6 +5,7 @@ import {
   unstable_PopoverInitialState,
   usePopoverState
 } from "../Popover/PopoverState";
+import { Keys } from "../__utils/types";
 
 export type unstable_TooltipState = unstable_PopoverState;
 
@@ -22,8 +23,8 @@ export function useTooltipState(
   return usePopoverState({ ...sealed, placement });
 }
 
-const keys: Array<keyof unstable_TooltipStateReturn> = [
-  ...usePopoverState.__keys
+const allKeys: Keys<unstable_TooltipStateReturn> = [
+  ...usePopoverState.__allKeys
 ];
 
-useTooltipState.__keys = keys;
+useTooltipState.__allKeys = allKeys;

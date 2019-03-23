@@ -9,10 +9,16 @@ import {
   unstable_HiddenProps,
   useHidden
 } from "../Hidden/Hidden";
+import { Keys } from "../__utils/types";
 import { unstable_TooltipStateReturn, useTooltipState } from "./TooltipState";
 
 export type unstable_TooltipOptions = unstable_HiddenOptions &
-  Partial<unstable_TooltipStateReturn>;
+  Partial<
+    Pick<
+      unstable_TooltipStateReturn,
+      "unstable_popoverRef" | "unstable_popoverStyles"
+    >
+  >;
 
 export type unstable_TooltipProps = unstable_HiddenProps;
 
@@ -36,12 +42,16 @@ export function useTooltip(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_TooltipOptions> = [
+const keys: Keys<unstable_TooltipOptions> = [
   ...useHidden.__keys,
-  ...useTooltipState.__keys
+  "unstable_popoverRef",
+  "unstable_popoverStyles"
 ];
 
+const allKeys = [...useHidden.__allKeys, ...useTooltipState.__allKeys, ...keys];
+
 useTooltip.__keys = keys;
+useTooltip.__allKeys = allKeys;
 
 export const Tooltip = unstable_createComponent({
   as: "div",

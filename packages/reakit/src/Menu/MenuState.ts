@@ -13,6 +13,7 @@ import {
   unstable_PopoverInitialState,
   usePopoverState
 } from "../Popover/PopoverState";
+import { Keys } from "../__utils/types";
 
 export type unstable_MenuState = unstable_RoverState &
   unstable_PopoverState & {
@@ -69,7 +70,10 @@ export function useMenuState(
   return {
     ...rover,
     ...popover,
-    unstable_parent,
+    unstable_parent: React.useMemo(
+      () => unstable_parent,
+      Object.values(unstable_parent || {})
+    ),
     unstable_values: values,
     unstable_update: React.useCallback((name, value) => {
       setValues(vals => ({
@@ -80,12 +84,12 @@ export function useMenuState(
   };
 }
 
-const keys: Array<keyof unstable_MenuStateReturn> = [
-  ...useRoverState.__keys,
-  ...usePopoverState.__keys,
+const allKeys: Keys<unstable_MenuStateReturn> = [
+  ...useRoverState.__allKeys,
+  ...usePopoverState.__allKeys,
   "unstable_parent",
   "unstable_values",
   "unstable_update"
 ];
 
-useMenuState.__keys = keys;
+useMenuState.__allKeys = allKeys;

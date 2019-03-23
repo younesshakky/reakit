@@ -10,6 +10,7 @@ import {
   unstable_HiddenProps,
   useHidden
 } from "../Hidden/Hidden";
+import { Keys } from "../__utils/types";
 import { useDisclosureRef } from "./__utils/useDisclosureRef";
 import { usePreventBodyScroll } from "./__utils/usePreventBodyScroll";
 import { useFocusOnShow } from "./__utils/useFocusOnShow";
@@ -21,7 +22,7 @@ import { useFocusOnHide } from "./__utils/useFocusOnHide";
 import { useDialogState, unstable_DialogStateReturn } from "./DialogState";
 
 export type unstable_DialogOptions = unstable_HiddenOptions &
-  Partial<unstable_DialogStateReturn> &
+  Partial<Pick<unstable_DialogStateReturn, "hide" | "visible">> &
   Pick<unstable_DialogStateReturn, "unstable_hiddenId"> & {
     /** TODO: Description */
     unstable_modal?: boolean;
@@ -147,9 +148,11 @@ export function useDialog(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_DialogOptions> = [
+const keys: Keys<unstable_DialogOptions> = [
   ...useHidden.__keys,
-  ...useDialogState.__keys,
+  "hide",
+  "visible",
+  "unstable_hiddenId",
   "unstable_modal",
   "unstable_hideOnEsc",
   "unstable_hideOnClickOutside",
@@ -160,7 +163,10 @@ const keys: Array<keyof unstable_DialogOptions> = [
   "unstable_autoFocusOnHide"
 ];
 
+const allKeys = [...useHidden.__allKeys, ...useDialogState.__allKeys, ...keys];
+
 useDialog.__keys = keys;
+useDialog.__allKeys = allKeys;
 
 export const Dialog = unstable_createComponent({
   as: "div",

@@ -2,6 +2,7 @@ import * as React from "react";
 import { unstable_createComponent } from "../utils/createComponent";
 import { mergeProps } from "../utils/mergeProps";
 import { useHook } from "../system/useHook";
+import { Keys } from "../__utils/types";
 import { useMenuItem } from "./MenuItem";
 import {
   unstable_MenuDisclosureOptions,
@@ -12,8 +13,8 @@ import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 import { useKeyboardFocus } from "./__utils/useKeyboardFocus";
 
 export type unstable_MenuItemDisclosureOptions = unstable_MenuDisclosureOptions &
-  Partial<unstable_MenuStateReturn> &
-  Pick<unstable_MenuStateReturn, "hide"> & {
+  Partial<Pick<unstable_MenuStateReturn, "unstable_parent" | "visible">> &
+  Pick<unstable_MenuStateReturn, "show" | "hide"> & {
     /** TODO: Description */
     stopId?: string;
   };
@@ -32,14 +33,10 @@ export function unstable_useMenuItemDisclosure(
     throw new Error("Missing parent prop");
   }
 
-  useKeyboardFocus(
-    ref,
-    options.show,
-    parent && parent.orientation === "horizontal"
-  );
+  useKeyboardFocus(ref, options.show, parent.orientation === "horizontal");
 
   React.useEffect(() => {
-    if (!parent || parent.orientation !== "horizontal") return;
+    if (parent.orientation !== "horizontal") return;
     const thisStop = parent.unstable_stops.find(
       stop => stop.ref.current === ref.current
     );
@@ -72,13 +69,23 @@ export function unstable_useMenuItemDisclosure(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_MenuItemDisclosureOptions> = [
+const keys: Keys<unstable_MenuItemDisclosureOptions> = [
   ...useMenuDisclosure.__keys,
-  ...useMenuState.__keys,
+  "unstable_parent",
+  "visible",
+  "show",
+  "hide",
   "stopId"
 ];
 
+const allKeys = [
+  ...useMenuDisclosure.__allKeys,
+  ...useMenuState.__allKeys,
+  ...keys
+];
+
 unstable_useMenuItemDisclosure.__keys = keys;
+unstable_useMenuItemDisclosure.__allKeys = allKeys;
 
 export const unstable_MenuItemDisclosure = unstable_createComponent({
   as: "button",

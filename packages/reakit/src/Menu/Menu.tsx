@@ -10,6 +10,7 @@ import {
   unstable_PopoverProps,
   usePopover
 } from "../Popover/Popover";
+import { Keys } from "../__utils/types";
 import {
   unstable_StaticMenuOptions,
   unstable_StaticMenuProps,
@@ -19,7 +20,7 @@ import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 
 export type unstable_MenuOptions = unstable_PopoverOptions &
   unstable_StaticMenuOptions &
-  Partial<unstable_MenuStateReturn>;
+  Partial<Pick<unstable_MenuStateReturn, "unstable_parent">>;
 
 export type unstable_MenuProps = unstable_PopoverProps &
   unstable_StaticMenuProps;
@@ -42,13 +43,21 @@ export function useMenu(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_MenuOptions> = [
+const keys: Keys<unstable_MenuOptions> = [
   ...usePopover.__keys,
   ...unstable_useStaticMenu.__keys,
-  ...useMenuState.__keys
+  "unstable_parent"
+];
+
+const allKeys = [
+  ...usePopover.__allKeys,
+  ...unstable_useStaticMenu.__allKeys,
+  ...useMenuState.__allKeys,
+  ...keys
 ];
 
 useMenu.__keys = keys;
+useMenu.__allKeys = allKeys;
 
 export const Menu = unstable_createComponent({
   as: "div",

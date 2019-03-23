@@ -7,6 +7,7 @@ import {
   unstable_TabbableProps,
   useTabbable
 } from "../Tabbable/Tabbable";
+import { Keys } from "../__utils/types";
 
 export type unstable_ButtonOptions = unstable_TabbableOptions;
 
@@ -35,9 +36,12 @@ export function useButton(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_ButtonOptions> = [...useTabbable.__keys];
+const keys: Keys<unstable_ButtonOptions> = [...useTabbable.__keys];
+
+const allKeys = [...useTabbable.__allKeys];
 
 useButton.__keys = keys;
+useButton.__allKeys = allKeys;
 
 export const Button = unstable_createComponent({
   as: "button",

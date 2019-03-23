@@ -10,10 +10,16 @@ import {
   unstable_DialogProps,
   useDialog
 } from "../Dialog/Dialog";
+import { Keys } from "../__utils/types";
 import { unstable_PopoverStateReturn, usePopoverState } from "./PopoverState";
 
 export type unstable_PopoverOptions = unstable_DialogOptions &
-  Partial<unstable_PopoverStateReturn>;
+  Partial<
+    Pick<
+      unstable_PopoverStateReturn,
+      "unstable_popoverRef" | "unstable_popoverStyles"
+    >
+  >;
 
 export type unstable_PopoverProps = unstable_DialogProps;
 
@@ -37,12 +43,16 @@ export function usePopover(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_PopoverOptions> = [
+const keys: Keys<unstable_PopoverOptions> = [
   ...useDialog.__keys,
-  ...usePopoverState.__keys
+  "unstable_popoverRef",
+  "unstable_popoverStyles"
 ];
 
+const allKeys = [...useDialog.__allKeys, ...usePopoverState.__allKeys, ...keys];
+
 usePopover.__keys = keys;
+usePopover.__allKeys = allKeys;
 
 export const Popover = unstable_createComponent({
   as: "div",

@@ -6,7 +6,7 @@ import {
 import { useHook } from "../system/useHook";
 import { unstable_createComponent } from "../utils/createComponent";
 import { mergeProps } from "../utils/mergeProps";
-import { ArrayValue, As, PropsWithAs } from "../__utils/types";
+import { ArrayValue, As, PropsWithAs, Keys } from "../__utils/types";
 import { unstable_FormStateReturn, unstable_useFormState } from "./FormState";
 import { unstable_getIn } from "./utils/getIn";
 import { formatInputName } from "./__utils/formatInputName";
@@ -19,7 +19,7 @@ export type unstable_FormPushButtonOptions<
   P extends DeepPath<V, P>
 > = unstable_ButtonOptions &
   Partial<unstable_FormStateReturn<V>> &
-  Pick<unstable_FormStateReturn<V>, "values" | "push"> & {
+  Pick<unstable_FormStateReturn<V>, "baseId" | "values" | "push"> & {
     /** TODO: Description */
     name: P;
     /** TODO: Description */
@@ -38,9 +38,6 @@ export function unstable_useFormPushButton<V, P extends DeepPath<V, P>>(
       onClick: () => {
         options.push(options.name, options.value);
         const { length } = unstable_getIn(options.values, options.name, []);
-
-        if (!options.baseId) return;
-
         const inputId = getInputId(
           `${formatInputName(options.name, "-")}-${length}`,
           options.baseId
@@ -64,14 +61,23 @@ export function unstable_useFormPushButton<V, P extends DeepPath<V, P>>(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_FormPushButtonOptions<any, any>> = [
+const keys: Keys<unstable_FormPushButtonOptions<any, any>> = [
   ...useButton.__keys,
-  ...unstable_useFormState.__keys,
+  "baseId",
+  "values",
+  "push",
   "name",
   "value"
 ];
 
+const allKeys = [
+  ...useButton.__allKeys,
+  ...unstable_useFormState.__allKeys,
+  ...keys
+];
+
 unstable_useFormPushButton.__keys = keys;
+unstable_useFormPushButton.__allKeys = allKeys;
 
 export const unstable_FormPushButton = (unstable_createComponent({
   as: "button",

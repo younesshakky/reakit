@@ -4,7 +4,7 @@ import { useHook } from "../system/useHook";
 import { unstable_createComponent } from "../utils/createComponent";
 import { mergeProps } from "../utils/mergeProps";
 import { unstable_useCreateElement } from "../utils/useCreateElement";
-import { As, PropsWithAs } from "../__utils/types";
+import { As, PropsWithAs, Keys } from "../__utils/types";
 import {
   unstable_FormGroupOptions,
   unstable_FormGroupProps,
@@ -17,8 +17,7 @@ export type unstable_FormRadioGroupOptions<
   V,
   P extends DeepPath<V, P>
 > = unstable_FormGroupOptions<V, P> &
-  Partial<unstable_FormStateReturn<V>> &
-  Pick<unstable_FormStateReturn<V>, "touched" | "errors"> & {
+  Partial<unstable_FormStateReturn<V>> & {
     /** TODO: Description */
     name: P;
   };
@@ -40,13 +39,19 @@ export function unstable_useFormRadioGroup<V, P extends DeepPath<V, P>>(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_FormRadioGroupOptions<any, any>> = [
+const keys: Keys<unstable_FormRadioGroupOptions<any, any>> = [
   ...unstable_useFormGroup.__keys,
-  ...unstable_useFormState.__keys,
   "name"
 ];
 
+const allKeys = [
+  ...unstable_useFormGroup.__allKeys,
+  ...unstable_useFormState.__allKeys,
+  ...keys
+];
+
 unstable_useFormRadioGroup.__keys = keys;
+unstable_useFormRadioGroup.__allKeys = allKeys;
 
 export const unstable_FormRadioGroup = (unstable_createComponent({
   as: "fieldset",

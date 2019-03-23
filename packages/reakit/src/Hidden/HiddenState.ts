@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useSealedState, SealedInitialState } from "../__utils/useSealedState";
 import { unstable_useId } from "../utils/useId";
+import { Keys } from "../__utils/types";
 
 export type unstable_HiddenState = {
   /** TODO: Description */
@@ -50,7 +51,7 @@ export function useHiddenState(
   };
 }
 
-const keys: Array<keyof unstable_HiddenStateReturn> = [
+const allKeys: Keys<unstable_HiddenStateReturn> = [
   "unstable_hiddenId",
   "visible",
   "show",
@@ -58,4 +59,4 @@ const keys: Array<keyof unstable_HiddenStateReturn> = [
   "toggle"
 ];
 
-useHiddenState.__keys = keys;
+useHiddenState.__allKeys = allKeys;

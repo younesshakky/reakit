@@ -7,6 +7,7 @@ import {
   unstable_DialogInitialState,
   useDialogState
 } from "../Dialog/DialogState";
+import { Keys } from "../__utils/types";
 
 export type unstable_PopoverState = unstable_DialogState & {
   /** TODO: Description */
@@ -126,8 +127,8 @@ export function usePopoverState(
   };
 }
 
-const keys: Array<keyof unstable_PopoverStateReturn> = [
-  ...useDialogState.__keys,
+const allKeys: Keys<unstable_PopoverStateReturn> = [
+  ...useDialogState.__allKeys,
   "unstable_referenceRef",
   "unstable_popoverRef",
   "unstable_arrowRef",
@@ -138,4 +139,4 @@ const keys: Array<keyof unstable_PopoverStateReturn> = [
   "place"
 ];
 
-usePopoverState.__keys = keys;
+usePopoverState.__allKeys = allKeys;

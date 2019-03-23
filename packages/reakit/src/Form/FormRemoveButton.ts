@@ -6,7 +6,7 @@ import {
 import { useHook } from "../system/useHook";
 import { unstable_createComponent } from "../utils/createComponent";
 import { mergeProps } from "../utils/mergeProps";
-import { As, PropsWithAs } from "../__utils/types";
+import { As, PropsWithAs, Keys } from "../__utils/types";
 import { unstable_FormStateReturn, unstable_useFormState } from "./FormState";
 import { getInputId } from "./__utils/getInputId";
 import { getPushButtonId } from "./__utils/getPushButtonId";
@@ -17,7 +17,7 @@ export type unstable_FormRemoveButtonOptions<
   P extends DeepPath<V, P>
 > = unstable_ButtonOptions &
   Partial<unstable_FormStateReturn<V>> &
-  Pick<unstable_FormStateReturn<V>, "values" | "remove"> & {
+  Pick<unstable_FormStateReturn<V>, "baseId" | "values" | "remove"> & {
     /** TODO: Description */
     name: P;
     /** TODO: Description */
@@ -80,14 +80,23 @@ export function unstable_useFormRemoveButton<V, P extends DeepPath<V, P>>(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_FormRemoveButtonOptions<any, any>> = [
+const keys: Keys<unstable_FormRemoveButtonOptions<any, any>> = [
   ...useButton.__keys,
-  ...unstable_useFormState.__keys,
+  "baseId",
+  "values",
+  "remove",
   "name",
   "index"
 ];
 
+const allKeys = [
+  ...useButton.__allKeys,
+  ...unstable_useFormState.__allKeys,
+  ...keys
+];
+
 unstable_useFormRemoveButton.__keys = keys;
+unstable_useFormRemoveButton.__allKeys = allKeys;
 
 export const unstable_FormRemoveButton = (unstable_createComponent({
   as: "button",

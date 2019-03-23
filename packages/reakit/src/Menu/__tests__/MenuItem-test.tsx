@@ -4,6 +4,8 @@ import { MenuItem } from "../MenuItem";
 
 const props: Parameters<typeof MenuItem>[0] = {
   stopId: "item",
+  placement: "top",
+  hide: jest.fn(),
   unstable_stops: [],
   unstable_currentId: null,
   unstable_pastId: null,

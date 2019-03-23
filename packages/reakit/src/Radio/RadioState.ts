@@ -6,6 +6,7 @@ import {
   unstable_RoverInitialState,
   useRoverState
 } from "../Rover";
+import { Keys } from "../__utils/types";
 
 export type unstable_RadioState = unstable_RoverState & {
   /** TODO: Description */
@@ -43,10 +44,10 @@ export function unstable_useRadioState(
   };
 }
 
-const keys: Array<keyof unstable_RadioStateReturn> = [
-  ...useRoverState.__keys,
+const allKeys: Keys<unstable_RadioStateReturn> = [
+  ...useRoverState.__allKeys,
   "currentValue",
   "setValue"
 ];
 
-unstable_useRadioState.__keys = keys;
+unstable_useRadioState.__allKeys = allKeys;

@@ -3,7 +3,9 @@ import { render } from "react-testing-library";
 import { unstable_FormSubmitButton as FormSubmitButton } from "../FormSubmitButton";
 
 test("render", () => {
-  const { baseElement } = render(<FormSubmitButton submit={jest.fn()} />);
+  const { baseElement } = render(
+    <FormSubmitButton baseId="base" submit={jest.fn()} />
+  );
   expect(baseElement).toMatchInlineSnapshot(`
 <body>
   <div>

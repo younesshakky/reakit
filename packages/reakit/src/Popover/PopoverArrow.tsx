@@ -3,10 +3,16 @@ import { mergeProps } from "../utils/mergeProps";
 import { unstable_createComponent } from "../utils/createComponent";
 import { useHook } from "../system/useHook";
 import { unstable_BoxOptions, unstable_BoxProps, useBox } from "../Box/Box";
+import { Keys } from "../__utils/types";
 import { usePopoverState, unstable_PopoverStateReturn } from "./PopoverState";
 
 export type unstable_PopoverArrowOptions = unstable_BoxOptions &
-  Partial<unstable_PopoverStateReturn> &
+  Partial<
+    Pick<
+      unstable_PopoverStateReturn,
+      "unstable_arrowRef" | "unstable_arrowStyles"
+    >
+  > &
   Pick<unstable_PopoverStateReturn, "placement">;
 
 export type unstable_PopoverArrowProps = unstable_BoxProps;
@@ -56,12 +62,17 @@ export function usePopoverArrow(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_PopoverArrowOptions> = [
+const keys: Keys<unstable_PopoverArrowOptions> = [
   ...useBox.__keys,
-  ...usePopoverState.__keys
+  "unstable_arrowRef",
+  "unstable_arrowStyles",
+  "placement"
 ];
 
+const allKeys = [...useBox.__allKeys, ...usePopoverState.__allKeys, ...keys];
+
 usePopoverArrow.__keys = keys;
+usePopoverArrow.__allKeys = allKeys;
 
 export const PopoverArrow = unstable_createComponent({
   as: "div",

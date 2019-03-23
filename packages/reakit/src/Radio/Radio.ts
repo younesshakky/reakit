@@ -7,13 +7,14 @@ import {
   unstable_RoverProps,
   useRover
 } from "../Rover/Rover";
+import { Keys } from "../__utils/types";
 import {
   unstable_useRadioState,
   unstable_RadioStateReturn
 } from "./RadioState";
 
 export type unstable_RadioOptions = unstable_RoverOptions &
-  Partial<unstable_RadioStateReturn> & {
+  Partial<Pick<unstable_RadioStateReturn, "currentValue" | "setValue">> & {
     /** TODO: Descriptions */
     value: any;
     /** TODO: Descriptions */
@@ -55,14 +56,22 @@ export function unstable_useRadio(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_RadioOptions> = [
+const keys: Keys<unstable_RadioOptions> = [
   ...useRover.__keys,
-  ...unstable_useRadioState.__keys,
+  "currentValue",
+  "setValue",
   "value",
   "checked"
 ];
 
+const allKeys = [
+  ...useRover.__allKeys,
+  ...unstable_useRadioState.__allKeys,
+  ...keys
+];
+
 unstable_useRadio.__keys = keys;
+unstable_useRadio.__allKeys = allKeys;
 
 export const unstable_Radio = unstable_createComponent({
   as: "input",

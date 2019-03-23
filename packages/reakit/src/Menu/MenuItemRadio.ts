@@ -6,10 +6,13 @@ import {
   unstable_RadioProps,
   unstable_useRadio
 } from "../Radio/Radio";
+import { Keys } from "../__utils/types";
 import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 
 export type unstable_MenuItemRadioOptions = unstable_RadioOptions &
-  Partial<unstable_MenuStateReturn> &
+  Partial<
+    Pick<unstable_MenuStateReturn, "unstable_parent" | "hide" | "placement">
+  > &
   Pick<unstable_MenuStateReturn, "unstable_values" | "unstable_update"> & {
     /** TODO: Description */
     name: string;
@@ -70,13 +73,24 @@ export function unstable_useMenuItemRadio(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_MenuItemRadioOptions> = [
+const keys: Keys<unstable_MenuItemRadioOptions> = [
   ...unstable_useRadio.__keys,
-  ...useMenuState.__keys,
+  "unstable_parent",
+  "hide",
+  "placement",
+  "unstable_values",
+  "unstable_update",
   "name"
 ];
 
+const allKeys = [
+  ...unstable_useRadio.__allKeys,
+  ...useMenuState.__allKeys,
+  ...keys
+];
+
 unstable_useMenuItemRadio.__keys = keys;
+unstable_useMenuItemRadio.__allKeys = allKeys;
 
 export const unstable_MenuItemRadio = unstable_createComponent({
   as: "input",

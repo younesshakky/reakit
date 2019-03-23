@@ -6,10 +6,11 @@ import {
   unstable_ButtonOptions,
   unstable_ButtonProps
 } from "../Button/Button";
+import { Keys } from "../__utils/types";
 import { useHiddenState, unstable_HiddenStateReturn } from "./HiddenState";
 
 export type unstable_HiddenDisclosureOptions = unstable_ButtonOptions &
-  Partial<unstable_HiddenStateReturn> &
+  Partial<Pick<unstable_HiddenStateReturn, "visible">> &
   Pick<unstable_HiddenStateReturn, "toggle" | "unstable_hiddenId">;
 
 export type unstable_HiddenDisclosureProps = unstable_ButtonProps;
@@ -31,12 +32,19 @@ export function useHiddenDisclosure(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_HiddenDisclosureOptions> = [
+const keys: Keys<unstable_HiddenDisclosureOptions> = [
   ...useButton.__keys,
-  ...useHiddenState.__keys
+  "visible",
+  "toggle",
+  "unstable_hiddenId"
 ];
 
+const allKeys: Keys<
+  unstable_HiddenDisclosureOptions & unstable_HiddenStateReturn
+> = [...useButton.__allKeys, ...useHiddenState.__allKeys, ...keys];
+
 useHiddenDisclosure.__keys = keys;
+useHiddenDisclosure.__allKeys = allKeys;
 
 export const HiddenDisclosure = unstable_createComponent({
   as: "button",

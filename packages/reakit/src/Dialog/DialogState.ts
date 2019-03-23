@@ -5,6 +5,7 @@ import {
   unstable_HiddenActions,
   unstable_HiddenInitialState
 } from "../Hidden/HiddenState";
+import { Keys } from "../__utils/types";
 
 export type unstable_DialogState = unstable_HiddenState;
 
@@ -21,8 +22,6 @@ export function useDialogState(
   return useHiddenState(initialState);
 }
 
-const keys: Array<keyof unstable_DialogStateReturn> = [
-  ...useHiddenState.__keys
-];
+const allKeys: Keys<unstable_DialogStateReturn> = [...useHiddenState.__allKeys];
 
-useDialogState.__keys = keys;
+useDialogState.__allKeys = allKeys;
