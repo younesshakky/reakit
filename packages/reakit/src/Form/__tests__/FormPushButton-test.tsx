@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-testing-library";
-import { FormPushButton } from "../FormPushButton";
+import { unstable_FormPushButton as FormPushButton } from "../FormPushButton";
 
 test("render", () => {
   const { baseElement } = render(

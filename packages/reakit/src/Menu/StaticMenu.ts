@@ -13,7 +13,7 @@ export type unstable_StaticMenuOptions = unstable_BoxOptions &
 
 export type unstable_StaticMenuProps = unstable_BoxProps;
 
-export function useStaticMenu(
+export function unstable_useStaticMenu(
   options: unstable_StaticMenuOptions,
   htmlProps: unstable_StaticMenuProps = {}
 ) {
@@ -47,11 +47,11 @@ const keys: Array<keyof unstable_StaticMenuOptions> = [
   ...useMenuState.keys
 ];
 
-useStaticMenu.keys = keys;
+unstable_useStaticMenu.keys = keys;
 
-export const StaticMenu = unstable_createComponent(
+export const unstable_StaticMenu = unstable_createComponent(
   "div",
-  useStaticMenu,
+  unstable_useStaticMenu,
   (type, props, children) => {
     warning(
       props["aria-label"] ||

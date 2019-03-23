@@ -11,7 +11,7 @@ import { getLabelId } from "./__utils/getLabelId";
 import { shouldShowError } from "./__utils/shouldShowError";
 import { formatInputName } from "./__utils/formatInputName";
 import { unstable_getIn } from "./utils/getIn";
-import { unstable_FormStateReturn, useFormState } from "./FormState";
+import { unstable_FormStateReturn, unstable_useFormState } from "./FormState";
 
 export type unstable_FormInputOptions<
   V,
@@ -29,7 +29,7 @@ export type unstable_FormInputOptions<
 export type unstable_FormInputProps = unstable_BoxProps &
   React.InputHTMLAttributes<any>;
 
-export function useFormInput<V, P extends DeepPath<V, P>>(
+export function unstable_useFormInput<V, P extends DeepPath<V, P>>(
   options: unstable_FormInputOptions<V, P>,
   htmlProps: unstable_FormInputProps = {}
 ) {
@@ -55,15 +55,15 @@ export function useFormInput<V, P extends DeepPath<V, P>>(
 
 const keys: Array<keyof unstable_FormInputOptions<any, any>> = [
   ...useBox.keys,
-  ...useFormState.keys,
+  ...unstable_useFormState.keys,
   "name"
 ];
 
-useFormInput.keys = keys;
+unstable_useFormInput.keys = keys;
 
-export const FormInput = (unstable_createComponent(
+export const unstable_FormInput = (unstable_createComponent(
   "input",
-  useFormInput
+  unstable_useFormInput
 ) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "input">(
   props: PropsWithAs<unstable_FormInputOptions<V, P>, T>
 ) => JSX.Element;

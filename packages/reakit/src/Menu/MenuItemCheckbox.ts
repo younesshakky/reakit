@@ -13,7 +13,7 @@ import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 export type unstable_MenuItemCheckboxOptions = unstable_CheckboxOptions &
   unstable_MenuItemOptions &
   Partial<unstable_MenuStateReturn> &
-  Pick<unstable_MenuStateReturn, "values" | "update"> & {
+  Pick<unstable_MenuStateReturn, "unstable_values" | "unstable_update"> & {
     /** TODO: Description */
     name: string;
   };
@@ -21,12 +21,12 @@ export type unstable_MenuItemCheckboxOptions = unstable_CheckboxOptions &
 export type unstable_MenuItemCheckboxProps = unstable_MenuItemProps &
   React.InputHTMLAttributes<any>;
 
-export function useMenuItemCheckbox(
+export function unstable_useMenuItemCheckbox(
   options: unstable_MenuItemCheckboxOptions,
   htmlProps: unstable_MenuItemCheckboxProps = {}
 ) {
-  const currentValue = options.values[options.name];
-  const setValue = (value: any) => options.update(options.name, value);
+  const currentValue = options.unstable_values[options.name];
+  const setValue = (value: any) => options.unstable_update(options.name, value);
 
   htmlProps = mergeProps(
     {
@@ -49,9 +49,9 @@ const keys: Array<keyof unstable_MenuItemCheckboxOptions> = [
   "name"
 ];
 
-useMenuItemCheckbox.keys = keys;
+unstable_useMenuItemCheckbox.keys = keys;
 
-export const MenuItemCheckbox = unstable_createComponent(
+export const unstable_MenuItemCheckbox = unstable_createComponent(
   "input",
-  useMenuItemCheckbox
+  unstable_useMenuItemCheckbox
 );

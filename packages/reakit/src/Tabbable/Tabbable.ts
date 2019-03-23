@@ -12,9 +12,9 @@ export type unstable_TabbableOptions = unstable_BoxOptions & {
   /** TODO: Description */
   onClick?: React.MouseEventHandler;
   /** TODO: Description */
-  focusable?: boolean;
+  unstable_focusable?: boolean;
   /** TODO: Description */
-  clickKeys?: string[];
+  unstable_clickKeys?: string[];
 };
 
 export type unstable_TabbableProps = unstable_BoxProps;
@@ -33,13 +33,17 @@ function isNativeTabbable(element: EventTarget) {
 export function useTabbable(
   {
     tabIndex = 0,
-    clickKeys = [" "],
+    unstable_clickKeys = [" "],
     ...options
   }: unstable_TabbableOptions = {},
   htmlProps: unstable_TabbableProps = {}
 ) {
-  const allOptions = { tabIndex, clickKeys, ...options };
-  const reallyDisabled = options.disabled && !options.focusable;
+  const allOptions: unstable_TabbableOptions = {
+    tabIndex,
+    unstable_clickKeys,
+    ...options
+  };
+  const reallyDisabled = options.disabled && !options.unstable_focusable;
 
   htmlProps = mergeProps(
     {
@@ -57,7 +61,7 @@ export function useTabbable(
       onKeyDown: event => {
         if (isNativeTabbable(event.target) || options.disabled) return;
 
-        if (clickKeys.indexOf(event.key) !== -1) {
+        if (unstable_clickKeys.indexOf(event.key) !== -1) {
           event.preventDefault();
           event.target.dispatchEvent(
             new MouseEvent("click", {
@@ -82,8 +86,8 @@ const keys: Array<keyof unstable_TabbableOptions> = [
   "tabIndex",
   "disabled",
   "onClick",
-  "focusable",
-  "clickKeys"
+  "unstable_focusable",
+  "unstable_clickKeys"
 ];
 
 useTabbable.keys = keys;

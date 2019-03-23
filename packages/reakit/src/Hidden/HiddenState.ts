@@ -4,7 +4,7 @@ import { unstable_useId } from "../utils/useId";
 
 export type unstable_HiddenState = {
   /** TODO: Description */
-  hiddenId: string;
+  unstable_hiddenId: string;
   /** Tell whether it's visible or not */
   visible: boolean;
 };
@@ -19,7 +19,7 @@ export type unstable_HiddenActions = {
 };
 
 export type unstable_HiddenInitialState = Partial<
-  Pick<unstable_HiddenState, "hiddenId" | "visible">
+  Pick<unstable_HiddenState, "unstable_hiddenId" | "visible">
 >;
 
 export type unstable_HiddenStateReturn = unstable_HiddenState &
@@ -29,7 +29,7 @@ export function useHiddenState(
   initialState: SealedInitialState<unstable_HiddenInitialState> = {}
 ): unstable_HiddenStateReturn {
   const {
-    hiddenId = unstable_useId("hidden-"),
+    unstable_hiddenId: hiddenId = unstable_useId("hidden-"),
     visible: sealedVisible = false
   } = useSealedState(initialState);
 
@@ -42,7 +42,7 @@ export function useHiddenState(
   const toggle = React.useCallback(() => setVisible(!visible), [visible]);
 
   return {
-    hiddenId,
+    unstable_hiddenId: hiddenId,
     visible,
     show,
     hide,
@@ -51,7 +51,7 @@ export function useHiddenState(
 }
 
 const keys: Array<keyof unstable_HiddenStateReturn> = [
-  "hiddenId",
+  "unstable_hiddenId",
   "visible",
   "show",
   "hide",

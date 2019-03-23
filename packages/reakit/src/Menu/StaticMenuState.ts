@@ -15,7 +15,7 @@ export type unstable_StaticMenuInitialState = unstable_RoverInitialState;
 export type unstable_StaticMenuStateReturn = unstable_StaticMenuState &
   unstable_StaticMenuActions;
 
-export function useStaticMenuState(
+export function unstable_useStaticMenuState(
   initialState: SealedInitialState<unstable_StaticMenuInitialState> = {}
 ): unstable_StaticMenuStateReturn {
   const { orientation = "vertical", ...sealed } = useSealedState(initialState);
@@ -26,4 +26,4 @@ const keys: Array<keyof unstable_StaticMenuStateReturn> = [
   ...useRoverState.keys
 ];
 
-useStaticMenuState.keys = keys;
+unstable_useStaticMenuState.keys = keys;

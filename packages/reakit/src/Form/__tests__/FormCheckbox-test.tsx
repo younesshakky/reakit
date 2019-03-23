@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-testing-library";
-import { FormCheckbox } from "../FormCheckbox";
+import { unstable_FormCheckbox as FormCheckbox } from "../FormCheckbox";
 
 test("render", () => {
   const { baseElement } = render(

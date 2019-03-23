@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-testing-library";
-import { FormRadioGroup } from "../FormRadioGroup";
+import { unstable_FormRadioGroup as FormRadioGroup } from "../FormRadioGroup";
 
 test("render", () => {
   const { baseElement } = render(

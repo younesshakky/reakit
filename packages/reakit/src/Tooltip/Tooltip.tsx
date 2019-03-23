@@ -23,9 +23,9 @@ export function useTooltip(
   htmlProps = mergeProps(
     {
       role: "tooltip",
-      ref: options.popoverRef,
+      ref: options.unstable_popoverRef,
       style: {
-        ...options.popoverStyles,
+        ...options.unstable_popoverStyles,
         pointerEvents: "none"
       }
     } as typeof htmlProps,

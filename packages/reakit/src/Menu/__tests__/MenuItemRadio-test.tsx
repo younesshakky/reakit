@@ -1,16 +1,16 @@
 import * as React from "react";
 import { render } from "react-testing-library";
-import { MenuItemRadio } from "../MenuItemRadio";
+import { unstable_MenuItemRadio as MenuItemRadio } from "../MenuItemRadio";
 
 const props: Parameters<typeof MenuItemRadio>[0] = {
   name: "checkbox",
   value: "checkbox",
-  values: {},
+  unstable_values: {},
   stopId: "item",
   stops: [],
   currentId: null,
   pastId: null,
-  update: jest.fn(),
+  unstable_update: jest.fn(),
   register: jest.fn(),
   unregister: jest.fn(),
   move: jest.fn(),

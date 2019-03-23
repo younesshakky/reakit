@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-testing-library";
-import { FormGroup } from "../FormGroup";
+import { unstable_FormGroup as FormGroup } from "../FormGroup";
 
 test("render", () => {
   const { baseElement } = render(

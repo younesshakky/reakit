@@ -18,14 +18,17 @@ export type unstable_PopoverOptions = unstable_DialogOptions &
 export type unstable_PopoverProps = unstable_DialogProps;
 
 export function usePopover(
-  { preventBodyScroll = false, ...options }: unstable_PopoverOptions,
+  { unstable_preventBodyScroll = false, ...options }: unstable_PopoverOptions,
   htmlProps: unstable_PopoverProps = {}
 ) {
-  const allOptions = { preventBodyScroll, ...options };
+  const allOptions: unstable_PopoverOptions = {
+    unstable_preventBodyScroll,
+    ...options
+  };
   htmlProps = mergeProps(
     {
-      ref: options.popoverRef,
-      style: options.popoverStyles
+      ref: options.unstable_popoverRef,
+      style: options.unstable_popoverStyles
     } as typeof htmlProps,
     htmlProps
   );

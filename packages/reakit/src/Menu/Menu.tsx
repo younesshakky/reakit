@@ -13,7 +13,7 @@ import {
 import {
   unstable_StaticMenuOptions,
   unstable_StaticMenuProps,
-  useStaticMenu
+  unstable_useStaticMenu
 } from "./StaticMenu";
 import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 
@@ -28,14 +28,15 @@ export function useMenu(
   options: unstable_MenuOptions,
   htmlProps: unstable_MenuProps = {}
 ) {
-  const allOptions = {
-    autoFocusOnShow:
-      !options.parent || options.parent.orientation !== "horizontal",
-    ...options
+  const allOptions: unstable_MenuOptions = {
+    ...options,
+    unstable_autoFocusOnShow:
+      !options.unstable_parent ||
+      options.unstable_parent.orientation !== "horizontal"
   };
 
   htmlProps = mergeProps({ role: "menu" } as typeof htmlProps, htmlProps);
-  htmlProps = useStaticMenu(allOptions, htmlProps);
+  htmlProps = unstable_useStaticMenu(allOptions, htmlProps);
   htmlProps = usePopover(allOptions, htmlProps);
   htmlProps = useHook("useMenu", allOptions, htmlProps);
   return htmlProps;
@@ -43,7 +44,7 @@ export function useMenu(
 
 const keys: Array<keyof unstable_MenuOptions> = [
   ...usePopover.keys,
-  ...useStaticMenu.keys,
+  ...unstable_useStaticMenu.keys,
   ...useMenuState.keys
 ];
 

@@ -24,9 +24,9 @@ export function usePopoverArrow(
   };
   htmlProps = mergeProps(
     {
-      ref: options.arrowRef,
+      ref: options.unstable_arrowRef,
       style: {
-        ...options.arrowStyles,
+        ...options.unstable_arrowStyles,
         position: "absolute",
         fontSize: "30px",
         width: "1em",

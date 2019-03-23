@@ -10,25 +10,25 @@ import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 
 export type unstable_MenuItemRadioOptions = unstable_RadioOptions &
   Partial<unstable_MenuStateReturn> &
-  Pick<unstable_MenuStateReturn, "values" | "update"> & {
+  Pick<unstable_MenuStateReturn, "unstable_values" | "unstable_update"> & {
     /** TODO: Description */
     name: string;
   };
 
 export type unstable_MenuItemRadioProps = unstable_RadioProps;
 
-export function useMenuItemRadio(
+export function unstable_useMenuItemRadio(
   options: unstable_MenuItemRadioOptions,
   htmlProps: unstable_MenuItemRadioProps = {}
 ) {
-  const currentValue = options.values[options.name];
-  const setValue = (value: any) => options.update(options.name, value);
+  const currentValue = options.unstable_values[options.name];
+  const setValue = (value: any) => options.unstable_update(options.name, value);
 
   htmlProps = mergeProps(
     {
       role: "menuitemradio",
       onKeyDown: event => {
-        const { parent, hide, placement } = options;
+        const { unstable_parent: parent, hide, placement } = options;
         if (!parent || !hide || !placement) return;
 
         const [dir] = placement.split("-");
@@ -73,9 +73,9 @@ const keys: Array<keyof unstable_MenuItemRadioOptions> = [
   "name"
 ];
 
-useMenuItemRadio.keys = keys;
+unstable_useMenuItemRadio.keys = keys;
 
-export const MenuItemRadio = unstable_createComponent(
+export const unstable_MenuItemRadio = unstable_createComponent(
   "input",
-  useMenuItemRadio
+  unstable_useMenuItemRadio
 );

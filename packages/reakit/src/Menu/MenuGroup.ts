@@ -17,7 +17,7 @@ export function useMenuGroup(
 ) {
   htmlProps = mergeProps(
     {
-      role: "menuitemradio"
+      role: "group"
     } as typeof htmlProps,
     htmlProps
   );

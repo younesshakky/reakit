@@ -11,7 +11,7 @@ import {
 import { DeepPath, DeepPathValue } from "./__utils/types";
 import { getInputId } from "./__utils/getInputId";
 import { getLabelId } from "./__utils/getLabelId";
-import { unstable_FormStateReturn, useFormState } from "./FormState";
+import { unstable_FormStateReturn, unstable_useFormState } from "./FormState";
 import { unstable_getIn } from "./utils/getIn";
 import { formatInputName } from "./__utils/formatInputName";
 import { getMessageId } from "./__utils/getMessageId";
@@ -35,7 +35,7 @@ export type unstable_FormCheckboxOptions<V, P extends DeepPath<V, P>> = Omit<
 export type unstable_FormCheckboxProps = unstable_CheckboxProps &
   React.InputHTMLAttributes<any>;
 
-export function useFormCheckbox<V, P extends DeepPath<V, P>>(
+export function unstable_useFormCheckbox<V, P extends DeepPath<V, P>>(
   options: unstable_FormCheckboxOptions<V, P>,
   htmlProps: unstable_FormCheckboxProps = {}
 ) {
@@ -67,16 +67,16 @@ export function useFormCheckbox<V, P extends DeepPath<V, P>>(
 
 const keys: Array<keyof unstable_FormCheckboxOptions<any, any>> = [
   ...useCheckbox.keys,
-  ...useFormState.keys,
+  ...unstable_useFormState.keys,
   "name",
   "value"
 ];
 
-useFormCheckbox.keys = keys;
+unstable_useFormCheckbox.keys = keys;
 
-export const FormCheckbox = (unstable_createComponent(
+export const unstable_FormCheckbox = (unstable_createComponent(
   "input",
-  useFormCheckbox
+  unstable_useFormCheckbox
 ) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "input">(
   props: PropsWithAs<unstable_FormCheckboxOptions<V, P>, T>
 ) => JSX.Element;

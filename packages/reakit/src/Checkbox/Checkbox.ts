@@ -15,9 +15,15 @@ import {
 
 export type unstable_CheckboxOptions = unstable_TabbableOptions &
   Partial<unstable_CheckboxStateReturn> & {
-    /** TODO: Descriptions */
+    /**
+     * Checkbox's value is going to be used when multiple checkboxes share the
+     * same state. Checking a checkbox with value will add it to the state
+     * array.
+     */
     value?: any;
-    /** TODO: Descriptions */
+    /**
+     * Checkbox's checked state. If present, it's used instead of currentValue.
+     */
     checked?: boolean;
   };
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-testing-library";
-import { FormInput } from "../FormInput";
+import { unstable_FormInput as FormInput } from "../FormInput";
 
 test("render", () => {
   const { baseElement } = render(

@@ -10,17 +10,17 @@ import {
 
 export type unstable_PopoverState = unstable_DialogState & {
   /** TODO: Description */
-  referenceRef: React.RefObject<HTMLElement | null>;
+  unstable_referenceRef: React.RefObject<HTMLElement | null>;
   /** TODO: Description */
-  popoverRef: React.RefObject<HTMLElement | null>;
+  unstable_popoverRef: React.RefObject<HTMLElement | null>;
   /** TODO: Description */
-  arrowRef: React.RefObject<HTMLElement | null>;
+  unstable_arrowRef: React.RefObject<HTMLElement | null>;
   /** TODO: Description */
-  popoverStyles: Partial<CSSStyleDeclaration>;
+  unstable_popoverStyles: Partial<CSSStyleDeclaration>;
   /** TODO: Description */
-  arrowStyles: Partial<CSSStyleDeclaration>;
+  unstable_arrowStyles: Partial<CSSStyleDeclaration>;
   /** TODO: Description */
-  originalPlacement: Placement;
+  unstable_originalPlacement: Placement;
   /** TODO: Description */
   placement: Placement;
 };
@@ -33,11 +33,11 @@ export type unstable_PopoverActions = unstable_DialogActions & {
 export type unstable_PopoverInitialState = unstable_DialogInitialState &
   Partial<Pick<unstable_PopoverState, "placement">> & {
     /** TODO: Description */
-    flip?: boolean;
+    unstable_flip?: boolean;
     /** TODO: Description */
-    shift?: boolean;
+    unstable_shift?: boolean;
     /** TODO: Description */
-    gutter?: number;
+    unstable_gutter?: number;
   };
 
 export type unstable_PopoverStateReturn = unstable_PopoverState &
@@ -48,9 +48,9 @@ export function usePopoverState(
 ): unstable_PopoverStateReturn {
   const {
     placement: sealedPlacement = "bottom",
-    flip = true,
-    shift = true,
-    gutter = 12,
+    unstable_flip: flip = true,
+    unstable_shift: shift = true,
+    unstable_gutter: gutter = 12,
     ...sealed
   } = useSealedState(initialState);
 
@@ -115,12 +115,12 @@ export function usePopoverState(
 
   return {
     ...dialog,
-    referenceRef,
-    popoverRef,
-    arrowRef,
-    popoverStyles,
-    arrowStyles,
-    originalPlacement,
+    unstable_referenceRef: referenceRef,
+    unstable_popoverRef: popoverRef,
+    unstable_arrowRef: arrowRef,
+    unstable_popoverStyles: popoverStyles,
+    unstable_arrowStyles: arrowStyles,
+    unstable_originalPlacement: originalPlacement,
     placement,
     place: React.useCallback(place, [])
   };
@@ -128,12 +128,12 @@ export function usePopoverState(
 
 const keys: Array<keyof unstable_PopoverStateReturn> = [
   ...useDialogState.keys,
-  "referenceRef",
-  "popoverRef",
-  "arrowRef",
-  "popoverStyles",
-  "arrowStyles",
-  "originalPlacement",
+  "unstable_referenceRef",
+  "unstable_popoverRef",
+  "unstable_arrowRef",
+  "unstable_popoverStyles",
+  "unstable_arrowStyles",
+  "unstable_originalPlacement",
   "placement",
   "place"
 ];

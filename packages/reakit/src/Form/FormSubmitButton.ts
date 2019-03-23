@@ -6,7 +6,7 @@ import {
 import { useHook } from "../system/useHook";
 import { unstable_createComponent } from "../utils/createComponent";
 import { mergeProps } from "../utils/mergeProps";
-import { unstable_FormStateReturn, useFormState } from "./FormState";
+import { unstable_FormStateReturn, unstable_useFormState } from "./FormState";
 import { getFirstInvalidInput } from "./__utils/getFirstInvalidInput";
 
 export type unstable_FormSubmitButtonOptions = unstable_ButtonOptions &
@@ -15,7 +15,7 @@ export type unstable_FormSubmitButtonOptions = unstable_ButtonOptions &
 
 export type unstable_FormSubmitButtonProps = unstable_ButtonProps;
 
-export function useFormSubmitButton(
+export function unstable_useFormSubmitButton(
   options: unstable_FormSubmitButtonOptions,
   htmlProps: unstable_FormSubmitButtonProps = {}
 ) {
@@ -44,12 +44,12 @@ export function useFormSubmitButton(
 
 const keys: Array<keyof unstable_FormSubmitButtonOptions> = [
   ...useButton.keys,
-  ...useFormState.keys
+  ...unstable_useFormState.keys
 ];
 
-useFormSubmitButton.keys = keys;
+unstable_useFormSubmitButton.keys = keys;
 
-export const FormSubmitButton = unstable_createComponent(
+export const unstable_FormSubmitButton = unstable_createComponent(
   "button",
-  useFormSubmitButton
+  unstable_useFormSubmitButton
 );

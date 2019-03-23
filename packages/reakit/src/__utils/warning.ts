@@ -1,4 +1,4 @@
-// https://github.com/alexreardon/tiny-warning
+// TODO: Replace by https://github.com/facebook/react/pull/15170
 const isProduction = process.env.NODE_ENV === "production";
 
 const warnings: string[] = [];

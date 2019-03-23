@@ -23,7 +23,7 @@ export function useTabPanel(
   htmlProps: unstable_TabPanelProps = {}
 ) {
   const visible = options.selectedId === options.stopId;
-  const allOptions = { visible, ...options };
+  const allOptions: unstable_TabPanelOptions = { visible, ...options };
 
   htmlProps = mergeProps(
     {

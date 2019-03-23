@@ -22,68 +22,73 @@ import { useDialogState, unstable_DialogStateReturn } from "./DialogState";
 
 export type unstable_DialogOptions = unstable_HiddenOptions &
   Partial<unstable_DialogStateReturn> &
-  Pick<unstable_DialogStateReturn, "hiddenId"> & {
+  Pick<unstable_DialogStateReturn, "unstable_hiddenId"> & {
     /** TODO: Description */
-    modal?: boolean;
+    unstable_modal?: boolean;
     /** TODO: Description */
-    hideOnEsc?: boolean;
+    unstable_hideOnEsc?: boolean;
     /** TODO: Description */
-    hideOnClickOutside?: boolean;
+    unstable_hideOnClickOutside?: boolean;
     /** TODO: Description */
-    preventBodyScroll?: boolean;
+    unstable_preventBodyScroll?: boolean;
     /** TODO: Description */
-    initialFocusRef?: React.RefObject<HTMLElement>;
+    unstable_initialFocusRef?: React.RefObject<HTMLElement>;
     /** TODO: Description */
-    finalFocusRef?: React.RefObject<HTMLElement>;
+    unstable_finalFocusRef?: React.RefObject<HTMLElement>;
     /** TODO: Description */
-    autoFocusOnShow?: boolean;
+    unstable_autoFocusOnShow?: boolean;
     /** TODO: Description */
-    autoFocusOnHide?: boolean;
+    unstable_autoFocusOnHide?: boolean;
   };
 
 export type unstable_DialogProps = unstable_HiddenProps;
 
 export function useDialog(
   {
-    modal = true,
-    hideOnEsc = true,
-    hideOnClickOutside = true,
-    preventBodyScroll = true,
-    autoFocusOnShow = true,
-    autoFocusOnHide = true,
+    unstable_modal = true,
+    unstable_hideOnEsc = true,
+    unstable_hideOnClickOutside = true,
+    unstable_preventBodyScroll = true,
+    unstable_autoFocusOnShow = true,
+    unstable_autoFocusOnHide = true,
     ...options
   }: unstable_DialogOptions,
   htmlProps: unstable_DialogProps = {}
 ) {
-  const allOptions = {
-    modal,
-    hideOnEsc,
-    hideOnClickOutside,
-    preventBodyScroll,
-    autoFocusOnShow,
-    autoFocusOnHide,
+  const allOptions: unstable_DialogOptions = {
+    unstable_modal,
+    unstable_hideOnEsc,
+    unstable_hideOnClickOutside,
+    unstable_preventBodyScroll,
+    unstable_autoFocusOnShow,
+    unstable_autoFocusOnHide,
     ...options
   };
   const dialog = React.useRef<HTMLElement>(null);
   const portal = usePortalRef(dialog, options.visible);
-  const disclosure = useDisclosureRef(options.hiddenId, options.visible);
+  const disclosure = useDisclosureRef(
+    options.unstable_hiddenId,
+    options.visible
+  );
 
-  preventBodyScroll = !modal ? false : preventBodyScroll;
-  usePreventBodyScroll(dialog, options.visible && preventBodyScroll);
+  unstable_preventBodyScroll = !unstable_modal
+    ? false
+    : unstable_preventBodyScroll;
+  usePreventBodyScroll(dialog, options.visible && unstable_preventBodyScroll);
 
-  useFocusTrap(dialog, portal, options.visible && modal);
+  useFocusTrap(dialog, portal, options.visible && unstable_modal);
 
   useFocusOnShow(
     dialog,
     portal,
-    options.initialFocusRef,
-    options.visible && autoFocusOnShow
+    options.unstable_initialFocusRef,
+    options.visible && unstable_autoFocusOnShow
   );
 
   useFocusOnHide(
     dialog,
-    options.finalFocusRef || disclosure,
-    !options.visible && autoFocusOnHide
+    options.unstable_finalFocusRef || disclosure,
+    !options.visible && unstable_autoFocusOnHide
   );
 
   // Close all nested dialogs when parent dialog closes
@@ -103,7 +108,7 @@ export function useDialog(
     portal,
     "click",
     hide,
-    options.visible && hideOnClickOutside
+    options.visible && unstable_hideOnClickOutside
   );
 
   // Hide on focus outside
@@ -111,7 +116,7 @@ export function useDialog(
     portal,
     "focus",
     hide,
-    options.visible && !modal && hideOnClickOutside
+    options.visible && !unstable_modal && unstable_hideOnClickOutside
   );
 
   htmlProps = mergeProps(
@@ -119,12 +124,12 @@ export function useDialog(
       ref: dialog,
       role: "dialog",
       tabIndex: -1,
-      "aria-modal": modal,
+      "aria-modal": unstable_modal,
       "data-dialog": true,
       onKeyDown: event => {
         const keyMap = {
           Escape: () => {
-            if (!options.hide || !hideOnEsc) return;
+            if (!options.hide || !unstable_hideOnEsc) return;
             event.stopPropagation();
             options.hide();
           }
@@ -145,14 +150,14 @@ export function useDialog(
 const keys: Array<keyof unstable_DialogOptions> = [
   ...useHidden.keys,
   ...useDialogState.keys,
-  "modal",
-  "hideOnEsc",
-  "hideOnClickOutside",
-  "preventBodyScroll",
-  "initialFocusRef",
-  "finalFocusRef",
-  "autoFocusOnShow",
-  "autoFocusOnHide"
+  "unstable_modal",
+  "unstable_hideOnEsc",
+  "unstable_hideOnClickOutside",
+  "unstable_preventBodyScroll",
+  "unstable_initialFocusRef",
+  "unstable_finalFocusRef",
+  "unstable_autoFocusOnShow",
+  "unstable_autoFocusOnHide"
 ];
 
 useDialog.keys = keys;

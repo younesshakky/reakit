@@ -16,13 +16,13 @@ export function useTooltipReference(
 ) {
   htmlProps = mergeProps(
     {
-      ref: options.referenceRef,
+      ref: options.unstable_referenceRef,
       tabIndex: 0,
       onFocus: options.show,
       onBlur: options.hide,
       onMouseEnter: options.show,
       onMouseLeave: options.hide,
-      "aria-describedby": options.hiddenId
+      "aria-describedby": options.unstable_hiddenId
     } as typeof htmlProps,
     htmlProps
   );

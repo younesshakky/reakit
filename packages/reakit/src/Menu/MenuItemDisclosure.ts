@@ -20,12 +20,12 @@ export type unstable_MenuItemDisclosureOptions = unstable_MenuDisclosureOptions 
 
 export type unstable_MenuItemDisclosureProps = unstable_MenuDisclosureProps;
 
-export function useMenuItemDisclosure(
+export function unstable_useMenuItemDisclosure(
   { stopId, ...options }: unstable_MenuItemDisclosureOptions,
   htmlProps: unstable_MenuItemDisclosureProps = {}
 ) {
   const ref = React.useRef<HTMLElement>(null);
-  const { parent } = options;
+  const { unstable_parent: parent } = options;
 
   if (!parent) {
     // TODO: Better error
@@ -73,9 +73,9 @@ const keys: Array<keyof unstable_MenuItemDisclosureOptions> = [
   "stopId"
 ];
 
-useMenuItemDisclosure.keys = keys;
+unstable_useMenuItemDisclosure.keys = keys;
 
-export const MenuItemDisclosure = unstable_createComponent(
+export const unstable_MenuItemDisclosure = unstable_createComponent(
   "button",
-  useMenuItemDisclosure
+  unstable_useMenuItemDisclosure
 );

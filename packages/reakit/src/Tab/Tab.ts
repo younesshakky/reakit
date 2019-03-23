@@ -19,10 +19,10 @@ export type unstable_TabOptions = unstable_RoverOptions &
 export type unstable_TabProps = unstable_RoverProps;
 
 export function useTab(
-  { focusable = true, ...options }: unstable_TabOptions,
+  { unstable_focusable = true, ...options }: unstable_TabOptions,
   htmlProps: unstable_TabProps = {}
 ) {
-  const allOptions = { focusable, ...options };
+  const allOptions: unstable_TabOptions = { unstable_focusable, ...options };
   const selected = options.selectedId === options.stopId;
 
   htmlProps = mergeProps(

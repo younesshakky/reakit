@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-testing-library";
-import { FormLabel } from "../FormLabel";
+import { unstable_FormLabel as FormLabel } from "../FormLabel";
 
 test("render", () => {
   const { baseElement } = render(

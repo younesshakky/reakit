@@ -3,7 +3,7 @@ import { useHook } from "../system/useHook";
 import { unstable_createComponent } from "../utils/createComponent";
 import { mergeProps } from "../utils/mergeProps";
 import { As, PropsWithAs } from "../__utils/types";
-import { unstable_FormStateReturn, useFormState } from "./FormState";
+import { unstable_FormStateReturn, unstable_useFormState } from "./FormState";
 import { unstable_getIn } from "./utils/getIn";
 import { getMessageId } from "./__utils/getMessageId";
 import { shouldShowError } from "./__utils/shouldShowError";
@@ -22,7 +22,7 @@ export type unstable_FormMessageOptions<
 
 export type unstable_FormMessageProps = unstable_BoxProps;
 
-export function useFormMessage<V, P extends DeepPath<V, P>>(
+export function unstable_useFormMessage<V, P extends DeepPath<V, P>>(
   options: unstable_FormMessageOptions<V, P>,
   htmlProps: unstable_FormMessageProps = {}
 ) {
@@ -51,15 +51,15 @@ export function useFormMessage<V, P extends DeepPath<V, P>>(
 
 const keys: Array<keyof unstable_FormMessageOptions<any, any>> = [
   ...useBox.keys,
-  ...useFormState.keys,
+  ...unstable_useFormState.keys,
   "name"
 ];
 
-useFormMessage.keys = keys;
+unstable_useFormMessage.keys = keys;
 
-export const FormMessage = (unstable_createComponent(
+export const unstable_FormMessage = (unstable_createComponent(
   "div",
-  useFormMessage
+  unstable_useFormMessage
 ) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "div">(
   props: PropsWithAs<unstable_FormMessageOptions<V, P>, T>
 ) => JSX.Element;

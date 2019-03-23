@@ -7,7 +7,7 @@ import { unstable_BoxOptions, unstable_BoxProps, useBox } from "../Box/Box";
 import { DeepPath } from "./__utils/types";
 import { getInputId } from "./__utils/getInputId";
 import { getLabelId } from "./__utils/getLabelId";
-import { unstable_FormStateReturn, useFormState } from "./FormState";
+import { unstable_FormStateReturn, unstable_useFormState } from "./FormState";
 
 export type unstable_FormLabelOptions<
   V,
@@ -23,7 +23,7 @@ export type unstable_FormLabelOptions<
 export type unstable_FormLabelProps = unstable_BoxProps &
   React.LabelHTMLAttributes<any>;
 
-export function useFormLabel<V, P extends DeepPath<V, P>>(
+export function unstable_useFormLabel<V, P extends DeepPath<V, P>>(
   options: unstable_FormLabelOptions<V, P>,
   htmlProps: unstable_FormLabelProps = {}
 ) {
@@ -43,16 +43,16 @@ export function useFormLabel<V, P extends DeepPath<V, P>>(
 
 const keys: Array<keyof unstable_FormLabelOptions<any, any>> = [
   ...useBox.keys,
-  ...useFormState.keys,
+  ...unstable_useFormState.keys,
   "name",
   "label"
 ];
 
-useFormLabel.keys = keys;
+unstable_useFormLabel.keys = keys;
 
-export const FormLabel = (unstable_createComponent(
+export const unstable_FormLabel = (unstable_createComponent(
   "label",
-  useFormLabel
+  unstable_useFormLabel
 ) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "label">(
   props: PropsWithAs<unstable_FormLabelOptions<V, P>, T>
 ) => JSX.Element;

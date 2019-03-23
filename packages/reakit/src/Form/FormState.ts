@@ -201,7 +201,7 @@ function reducer<V>(
   }
 }
 
-export function useFormState<V = Record<any, any>>(
+export function unstable_useFormState<V = Record<any, any>>(
   initialState: SealedInitialState<unstable_FormInitialState<V>> = {}
 ): unstable_FormStateReturn<V> {
   const {
@@ -329,4 +329,4 @@ const keys: Array<keyof unstable_FormStateReturn<any>> = [
   "remove"
 ];
 
-useFormState.keys = keys;
+unstable_useFormState.keys = keys;

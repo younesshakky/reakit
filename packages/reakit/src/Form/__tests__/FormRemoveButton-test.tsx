@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-testing-library";
-import { FormRemoveButton } from "../FormRemoveButton";
+import { unstable_FormRemoveButton as FormRemoveButton } from "../FormRemoveButton";
 
 test("render", () => {
   const { baseElement } = render(

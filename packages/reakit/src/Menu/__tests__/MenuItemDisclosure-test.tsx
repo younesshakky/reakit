@@ -1,16 +1,16 @@
 import * as React from "react";
 import { render } from "react-testing-library";
-import { MenuItemDisclosure } from "../MenuItemDisclosure";
+import { unstable_MenuItemDisclosure as MenuItemDisclosure } from "../MenuItemDisclosure";
 
 const props: Parameters<typeof MenuItemDisclosure>[0] = {
   stopId: "item",
-  hiddenId: "hidden",
+  unstable_hiddenId: "hidden",
   toggle: jest.fn(),
   placement: "bottom",
   show: jest.fn(),
   last: jest.fn(),
   hide: jest.fn(),
-  parent: {
+  unstable_parent: {
     stops: [],
     currentId: null,
     loop: false,

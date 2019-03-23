@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-testing-library";
-import { FormMessage } from "../FormMessage";
+import { unstable_FormMessage as FormMessage } from "../FormMessage";
 
 test("render", () => {
   const { baseElement } = render(

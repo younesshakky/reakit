@@ -14,10 +14,13 @@ export type unstable_ButtonProps = unstable_TabbableProps &
   React.ButtonHTMLAttributes<any>;
 
 export function useButton(
-  { clickKeys = ["Enter", " "], ...options }: unstable_ButtonOptions = {},
+  {
+    unstable_clickKeys = ["Enter", " "],
+    ...options
+  }: unstable_ButtonOptions = {},
   htmlProps: unstable_ButtonProps = {}
 ) {
-  const allOptions = { clickKeys, ...options };
+  const allOptions: unstable_ButtonOptions = { unstable_clickKeys, ...options };
 
   htmlProps = mergeProps(
     {

@@ -7,7 +7,7 @@ import { useHook } from "../system/useHook";
 import { unstable_createComponent } from "../utils/createComponent";
 import { mergeProps } from "../utils/mergeProps";
 import { ArrayValue, As, PropsWithAs } from "../__utils/types";
-import { unstable_FormStateReturn, useFormState } from "./FormState";
+import { unstable_FormStateReturn, unstable_useFormState } from "./FormState";
 import { unstable_getIn } from "./utils/getIn";
 import { formatInputName } from "./__utils/formatInputName";
 import { getInputId } from "./__utils/getInputId";
@@ -28,7 +28,7 @@ export type unstable_FormPushButtonOptions<
 
 export type unstable_FormPushButtonProps = unstable_ButtonProps;
 
-export function useFormPushButton<V, P extends DeepPath<V, P>>(
+export function unstable_useFormPushButton<V, P extends DeepPath<V, P>>(
   options: unstable_FormPushButtonOptions<V, P>,
   htmlProps: unstable_FormPushButtonProps = {}
 ) {
@@ -66,16 +66,16 @@ export function useFormPushButton<V, P extends DeepPath<V, P>>(
 
 const keys: Array<keyof unstable_FormPushButtonOptions<any, any>> = [
   ...useButton.keys,
-  ...useFormState.keys,
+  ...unstable_useFormState.keys,
   "name",
   "value"
 ];
 
-useFormPushButton.keys = keys;
+unstable_useFormPushButton.keys = keys;
 
-export const FormPushButton = (unstable_createComponent(
+export const unstable_FormPushButton = (unstable_createComponent(
   "button",
-  useFormPushButton
+  unstable_useFormPushButton
 ) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "button">(
   props: PropsWithAs<unstable_FormPushButtonOptions<V, P>, T>
 ) => JSX.Element;

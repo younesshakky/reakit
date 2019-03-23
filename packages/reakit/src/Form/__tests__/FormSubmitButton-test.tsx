@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-testing-library";
-import { FormSubmitButton } from "../FormSubmitButton";
+import { unstable_FormSubmitButton as FormSubmitButton } from "../FormSubmitButton";
 
 test("render", () => {
   const { baseElement } = render(<FormSubmitButton submit={jest.fn()} />);

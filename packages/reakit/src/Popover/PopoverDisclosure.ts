@@ -19,7 +19,7 @@ export function usePopoverDisclosure(
 ) {
   htmlProps = mergeProps(
     {
-      ref: options.referenceRef
+      ref: options.unstable_referenceRef
     } as typeof htmlProps,
     htmlProps
   );
