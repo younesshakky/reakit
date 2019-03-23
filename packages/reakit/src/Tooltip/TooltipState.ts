@@ -23,7 +23,7 @@ export function useTooltipState(
 }
 
 const keys: Array<keyof unstable_TooltipStateReturn> = [
-  ...usePopoverState.keys
+  ...usePopoverState.__keys
 ];
 
-useTooltipState.keys = keys;
+useTooltipState.__keys = keys;

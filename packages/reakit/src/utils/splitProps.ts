@@ -3,7 +3,7 @@ import { omit } from "../__utils/omit";
 
 export function unstable_splitProps<P, K extends keyof P>(
   props: P,
-  keys: ReadonlyArray<K> | K[]
+  keys: ReadonlyArray<K> | Array<K>
 ) {
   const picked = pick(props, keys);
   const omitted = omit(props, keys);

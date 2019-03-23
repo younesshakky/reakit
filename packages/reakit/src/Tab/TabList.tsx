@@ -28,24 +28,22 @@ export function useTabList(
 }
 
 const keys: Array<keyof unstable_TabListOptions> = [
-  ...useBox.keys,
-  ...useTabState.keys
+  ...useBox.__keys,
+  ...useTabState.__keys
 ];
 
-useTabList.keys = keys;
+useTabList.__keys = keys;
 
-export const TabList = unstable_createComponent(
-  "div",
-  useTabList,
-  (type, props, children) => {
+export const TabList = unstable_createComponent({
+  as: "div",
+  useHook: useTabList,
+  useCreateElement: (type, props, children) => {
     warning(
       props["aria-label"] || props["aria-labelledby"],
       `You should provide either \`aria-label\` or \`aria-labelledby\` props.
 See https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_roles_states_props-20`,
       "TabList"
     );
-
-    const element = unstable_useCreateElement(type, props, children);
-    return element;
+    return unstable_useCreateElement(type, props, children);
   }
-);
+});

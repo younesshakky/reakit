@@ -40,17 +40,17 @@ export function useDialogBackdrop(
 }
 
 const keys: Array<keyof unstable_DialogBackdropOptions> = [
-  ...useHidden.keys,
-  ...useDialogState.keys
+  ...useHidden.__keys,
+  ...useDialogState.__keys
 ];
 
-useDialogBackdrop.keys = keys;
+useDialogBackdrop.__keys = keys;
 
-export const DialogBackdrop = unstable_createComponent(
-  "div",
-  useDialogBackdrop,
-  (type, props, children) => {
+export const DialogBackdrop = unstable_createComponent({
+  as: "div",
+  useHook: useDialogBackdrop,
+  useCreateElement: (type, props, children) => {
     const element = unstable_useCreateElement(type, props, children);
     return <Portal>{element}</Portal>;
   }
-);
+});

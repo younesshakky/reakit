@@ -44,9 +44,9 @@ export function unstable_useRadioState(
 }
 
 const keys: Array<keyof unstable_RadioStateReturn> = [
-  ...useRoverState.keys,
+  ...useRoverState.__keys,
   "currentValue",
   "setValue"
 ];
 
-unstable_useRadioState.keys = keys;
+unstable_useRadioState.__keys = keys;

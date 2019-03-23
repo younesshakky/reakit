@@ -39,7 +39,7 @@ export function useHiddenState(
 
   const hide = React.useCallback(() => setVisible(false), []);
 
-  const toggle = React.useCallback(() => setVisible(!visible), [visible]);
+  const toggle = React.useCallback(() => setVisible(v => !v), []);
 
   return {
     unstable_hiddenId: hiddenId,
@@ -58,4 +58,4 @@ const keys: Array<keyof unstable_HiddenStateReturn> = [
   "toggle"
 ];
 
-useHiddenState.keys = keys;
+useHiddenState.__keys = keys;

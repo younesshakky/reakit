@@ -259,4 +259,4 @@ const keys: Array<keyof unstable_RoverStateReturn> = [
   "unstable_orientate"
 ];
 
-useRoverState.keys = keys;
+useRoverState.__keys = keys;

@@ -28,24 +28,22 @@ export function useToolbar(
 }
 
 const keys: Array<keyof unstable_ToolbarOptions> = [
-  ...useBox.keys,
-  ...useToolbarState.keys
+  ...useBox.__keys,
+  ...useToolbarState.__keys
 ];
 
-useToolbar.keys = keys;
+useToolbar.__keys = keys;
 
-export const Toolbar = unstable_createComponent(
-  "div",
-  useToolbar,
-  (type, props, children) => {
+export const Toolbar = unstable_createComponent({
+  as: "div",
+  useHook: useToolbar,
+  useCreateElement: (type, props, children) => {
     warning(
       props["aria-label"] || props["aria-labelledby"],
       `You should provide either \`aria-label\` or \`aria-labelledby\` props.
 See https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_roles_states_props-21`,
       "Toolbar"
     );
-
-    const element = unstable_useCreateElement(type, props, children);
-    return element;
+    return unstable_useCreateElement(type, props, children);
   }
-);
+});

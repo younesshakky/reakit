@@ -21,6 +21,8 @@ export function useToolbarState(
   return useRoverState(initialState);
 }
 
-const keys: Array<keyof unstable_ToolbarStateReturn> = [...useRoverState.keys];
+const keys: Array<keyof unstable_ToolbarStateReturn> = [
+  ...useRoverState.__keys
+];
 
-useToolbarState.keys = keys;
+useToolbarState.__keys = keys;

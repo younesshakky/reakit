@@ -71,14 +71,14 @@ export function unstable_useMenuItemRadio(
 }
 
 const keys: Array<keyof unstable_MenuItemRadioOptions> = [
-  ...unstable_useRadio.keys,
-  ...useMenuState.keys,
+  ...unstable_useRadio.__keys,
+  ...useMenuState.__keys,
   "name"
 ];
 
-unstable_useMenuItemRadio.keys = keys;
+unstable_useMenuItemRadio.__keys = keys;
 
-export const unstable_MenuItemRadio = unstable_createComponent(
-  "input",
-  unstable_useMenuItemRadio
-);
+export const unstable_MenuItemRadio = unstable_createComponent({
+  as: "input",
+  useHook: unstable_useMenuItemRadio
+});

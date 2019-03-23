@@ -45,16 +45,16 @@ export function unstable_useFormGroup<V, P extends DeepPath<V, P>>(
 }
 
 const keys: Array<keyof unstable_FormGroupOptions<any, any>> = [
-  ...useBox.keys,
-  ...unstable_useFormState.keys,
+  ...useBox.__keys,
+  ...unstable_useFormState.__keys,
   "name"
 ];
 
-unstable_useFormGroup.keys = keys;
+unstable_useFormGroup.__keys = keys;
 
-export const unstable_FormGroup = (unstable_createComponent(
-  "fieldset",
-  unstable_useFormGroup
-) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "fieldset">(
+export const unstable_FormGroup = (unstable_createComponent({
+  as: "fieldset",
+  useHook: unstable_useFormGroup
+}) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "fieldset">(
   props: PropsWithAs<unstable_FormGroupOptions<V, P>, T>
 ) => JSX.Element;

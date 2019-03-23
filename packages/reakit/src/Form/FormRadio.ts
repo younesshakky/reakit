@@ -60,17 +60,17 @@ export function unstable_useFormRadio<V, P extends DeepPath<V, P>>(
 }
 
 const keys: Array<keyof unstable_FormRadioOptions<any, any>> = [
-  ...useBox.keys,
-  ...unstable_useFormState.keys,
+  ...useBox.__keys,
+  ...unstable_useFormState.__keys,
   "name",
   "value"
 ];
 
-unstable_useFormRadio.keys = keys;
+unstable_useFormRadio.__keys = keys;
 
-export const unstable_FormRadio = (unstable_createComponent(
-  "input",
-  unstable_useFormRadio
-) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "input">(
+export const unstable_FormRadio = (unstable_createComponent({
+  as: "input",
+  useHook: unstable_useFormRadio
+}) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "input">(
   props: PropsWithAs<unstable_FormRadioOptions<V, P>, T>
 ) => JSX.Element;

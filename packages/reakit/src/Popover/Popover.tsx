@@ -38,16 +38,16 @@ export function usePopover(
 }
 
 const keys: Array<keyof unstable_PopoverOptions> = [
-  ...useDialog.keys,
-  ...usePopoverState.keys
+  ...useDialog.__keys,
+  ...usePopoverState.__keys
 ];
 
-usePopover.keys = keys;
+usePopover.__keys = keys;
 
-export const Popover = unstable_createComponent(
-  "div",
-  usePopover,
-  (type, props, children) => {
+export const Popover = unstable_createComponent({
+  as: "div",
+  useHook: usePopover,
+  useCreateElement: (type, props, children) => {
     warning(
       props["aria-label"] || props["aria-labelledby"],
       `You should provide either \`aria-label\` or \`aria-labelledby\` props.
@@ -58,4 +58,4 @@ See https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_roles_states_props`,
     const element = unstable_useCreateElement(type, props, children);
     return <Portal>{element}</Portal>;
   }
-);
+});

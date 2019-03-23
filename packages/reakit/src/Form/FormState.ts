@@ -329,4 +329,4 @@ const keys: Array<keyof unstable_FormStateReturn<any>> = [
   "remove"
 ];
 
-unstable_useFormState.keys = keys;
+unstable_useFormState.__keys = keys;

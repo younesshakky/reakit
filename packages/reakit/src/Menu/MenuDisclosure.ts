@@ -52,13 +52,13 @@ export function useMenuDisclosure(
 }
 
 const keys: Array<keyof unstable_MenuDisclosureOptions> = [
-  ...usePopoverDisclosure.keys,
-  ...useMenuState.keys
+  ...usePopoverDisclosure.__keys,
+  ...useMenuState.__keys
 ];
 
-useMenuDisclosure.keys = keys;
+useMenuDisclosure.__keys = keys;
 
-export const MenuDisclosure = unstable_createComponent(
-  "button",
-  useMenuDisclosure
-);
+export const MenuDisclosure = unstable_createComponent({
+  as: "button",
+  useHook: useMenuDisclosure
+});

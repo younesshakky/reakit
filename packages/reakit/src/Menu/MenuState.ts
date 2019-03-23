@@ -81,11 +81,11 @@ export function useMenuState(
 }
 
 const keys: Array<keyof unstable_MenuStateReturn> = [
-  ...useRoverState.keys,
-  ...usePopoverState.keys,
+  ...useRoverState.__keys,
+  ...usePopoverState.__keys,
   "unstable_parent",
   "unstable_values",
   "unstable_update"
 ];
 
-useMenuState.keys = keys;
+useMenuState.__keys = keys;

@@ -28,10 +28,13 @@ export function useHidden(
 }
 
 const keys: Array<keyof unstable_HiddenOptions> = [
-  ...useBox.keys,
-  ...useHiddenState.keys
+  ...useBox.__keys,
+  ...useHiddenState.__keys
 ];
 
-useHidden.keys = keys;
+useHidden.__keys = keys;
 
-export const Hidden = unstable_createComponent("div", useHidden);
+export const Hidden = unstable_createComponent({
+  as: "div",
+  useHook: useHidden
+});

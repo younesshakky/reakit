@@ -32,13 +32,13 @@ export function useHiddenDisclosure(
 }
 
 const keys: Array<keyof unstable_HiddenDisclosureOptions> = [
-  ...useButton.keys,
-  ...useHiddenState.keys
+  ...useButton.__keys,
+  ...useHiddenState.__keys
 ];
 
-useHiddenDisclosure.keys = keys;
+useHiddenDisclosure.__keys = keys;
 
-export const HiddenDisclosure = unstable_createComponent(
-  "button",
-  useHiddenDisclosure
-);
+export const HiddenDisclosure = unstable_createComponent({
+  as: "button",
+  useHook: useHiddenDisclosure
+});

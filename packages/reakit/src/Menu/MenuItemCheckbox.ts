@@ -43,15 +43,15 @@ export function unstable_useMenuItemCheckbox(
 }
 
 const keys: Array<keyof unstable_MenuItemCheckboxOptions> = [
-  ...useCheckbox.keys,
-  ...useMenuItem.keys,
-  ...useMenuState.keys,
+  ...useCheckbox.__keys,
+  ...useMenuItem.__keys,
+  ...useMenuState.__keys,
   "name"
 ];
 
-unstable_useMenuItemCheckbox.keys = keys;
+unstable_useMenuItemCheckbox.__keys = keys;
 
-export const unstable_MenuItemCheckbox = unstable_createComponent(
-  "input",
-  unstable_useMenuItemCheckbox
-);
+export const unstable_MenuItemCheckbox = unstable_createComponent({
+  as: "input",
+  useHook: unstable_useMenuItemCheckbox
+});

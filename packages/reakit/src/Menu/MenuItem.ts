@@ -70,10 +70,13 @@ export function useMenuItem(
 }
 
 const keys: Array<keyof unstable_MenuItemOptions> = [
-  ...useRover.keys,
-  ...useMenuState.keys
+  ...useRover.__keys,
+  ...useMenuState.__keys
 ];
 
-useMenuItem.keys = keys;
+useMenuItem.__keys = keys;
 
-export const MenuItem = unstable_createComponent("button", useMenuItem);
+export const MenuItem = unstable_createComponent({
+  as: "button",
+  useHook: useMenuItem
+});

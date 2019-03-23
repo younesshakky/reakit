@@ -29,13 +29,13 @@ export function usePopoverDisclosure(
 }
 
 const keys: Array<keyof unstable_PopoverDisclosureOptions> = [
-  ...useDialogDisclosure.keys,
-  ...usePopoverState.keys
+  ...useDialogDisclosure.__keys,
+  ...usePopoverState.__keys
 ];
 
-usePopoverDisclosure.keys = keys;
+usePopoverDisclosure.__keys = keys;
 
-export const PopoverDisclosure = unstable_createComponent(
-  "button",
-  usePopoverDisclosure
-);
+export const PopoverDisclosure = unstable_createComponent({
+  as: "button",
+  useHook: usePopoverDisclosure
+});

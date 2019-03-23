@@ -28,14 +28,14 @@ export function useRadioGroup(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_RadioGroupOptions> = [...useBox.keys];
+const keys: Array<keyof unstable_RadioGroupOptions> = [...useBox.__keys];
 
-useRadioGroup.keys = keys;
+useRadioGroup.__keys = keys;
 
-export const RadioGroup = unstable_createComponent(
-  "fieldset",
-  useRadioGroup,
-  (type, props, children) => {
+export const RadioGroup = unstable_createComponent({
+  as: "fieldset",
+  useHook: useRadioGroup,
+  useCreateElement: (type, props, children) => {
     warning(
       props["aria-label"] || props["aria-labelledby"],
       `You should provide either \`aria-label\` or \`aria-labelledby\` props.
@@ -44,4 +44,4 @@ See https://www.w3.org/TR/wai-aria-practices-1.1/#wai-aria-roles-states-and-prop
     );
     return unstable_useCreateElement(type, props, children);
   }
-);
+});

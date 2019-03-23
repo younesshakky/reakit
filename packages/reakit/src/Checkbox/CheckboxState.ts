@@ -48,4 +48,4 @@ const keys: Array<keyof unstable_CheckboxStateReturn> = [
   "setValue"
 ];
 
-useCheckboxState.keys = keys;
+useCheckboxState.__keys = keys;

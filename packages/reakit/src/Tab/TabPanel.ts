@@ -40,11 +40,14 @@ export function useTabPanel(
 }
 
 const keys: Array<keyof unstable_TabPanelOptions> = [
-  ...useHidden.keys,
-  ...useTabState.keys,
+  ...useHidden.__keys,
+  ...useTabState.__keys,
   "stopId"
 ];
 
-useTabPanel.keys = keys;
+useTabPanel.__keys = keys;
 
-export const TabPanel = unstable_createComponent("div", useTabPanel);
+export const TabPanel = unstable_createComponent({
+  as: "div",
+  useHook: useTabPanel
+});

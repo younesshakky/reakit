@@ -21,6 +21,8 @@ export function useDialogState(
   return useHiddenState(initialState);
 }
 
-const keys: Array<keyof unstable_DialogStateReturn> = [...useHiddenState.keys];
+const keys: Array<keyof unstable_DialogStateReturn> = [
+  ...useHiddenState.__keys
+];
 
-useDialogState.keys = keys;
+useDialogState.__keys = keys;

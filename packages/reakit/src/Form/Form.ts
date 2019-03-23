@@ -34,10 +34,13 @@ export function unstable_useForm(
 }
 
 const keys: Array<keyof unstable_FormOptions> = [
-  ...useBox.keys,
-  ...unstable_useFormState.keys
+  ...useBox.__keys,
+  ...unstable_useFormState.__keys
 ];
 
-unstable_useForm.keys = keys;
+unstable_useForm.__keys = keys;
 
-export const unstable_Form = unstable_createComponent("form", unstable_useForm);
+export const unstable_Form = unstable_createComponent({
+  as: "form",
+  useHook: unstable_useForm
+});

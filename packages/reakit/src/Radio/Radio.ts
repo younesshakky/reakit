@@ -56,15 +56,15 @@ export function unstable_useRadio(
 }
 
 const keys: Array<keyof unstable_RadioOptions> = [
-  ...useRover.keys,
-  ...unstable_useRadioState.keys,
+  ...useRover.__keys,
+  ...unstable_useRadioState.__keys,
   "value",
   "checked"
 ];
 
-unstable_useRadio.keys = keys;
+unstable_useRadio.__keys = keys;
 
-export const unstable_Radio = unstable_createComponent(
-  "input",
-  unstable_useRadio
-);
+export const unstable_Radio = unstable_createComponent({
+  as: "input",
+  useHook: unstable_useRadio
+});

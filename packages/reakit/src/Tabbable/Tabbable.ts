@@ -82,7 +82,7 @@ export function useTabbable(
 }
 
 const keys: Array<keyof unstable_TabbableOptions> = [
-  ...useBox.keys,
+  ...useBox.__keys,
   "tabIndex",
   "disabled",
   "onClick",
@@ -90,6 +90,9 @@ const keys: Array<keyof unstable_TabbableOptions> = [
   "unstable_clickKeys"
 ];
 
-useTabbable.keys = keys;
+useTabbable.__keys = keys;
 
-export const Tabbable = unstable_createComponent("button", useTabbable);
+export const Tabbable = unstable_createComponent({
+  as: "button",
+  useHook: useTabbable
+});

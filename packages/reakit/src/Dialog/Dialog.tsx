@@ -148,8 +148,8 @@ export function useDialog(
 }
 
 const keys: Array<keyof unstable_DialogOptions> = [
-  ...useHidden.keys,
-  ...useDialogState.keys,
+  ...useHidden.__keys,
+  ...useDialogState.__keys,
   "unstable_modal",
   "unstable_hideOnEsc",
   "unstable_hideOnClickOutside",
@@ -160,12 +160,12 @@ const keys: Array<keyof unstable_DialogOptions> = [
   "unstable_autoFocusOnHide"
 ];
 
-useDialog.keys = keys;
+useDialog.__keys = keys;
 
-export const Dialog = unstable_createComponent(
-  "div",
-  useDialog,
-  (type, props, children) => {
+export const Dialog = unstable_createComponent({
+  as: "div",
+  useHook: useDialog,
+  useCreateElement: (type, props, children) => {
     warning(
       props["aria-label"] || props["aria-labelledby"],
       `You should provide either \`aria-label\` or \`aria-labelledby\` props.
@@ -176,4 +176,4 @@ See https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_roles_states_props`,
     const element = unstable_useCreateElement(type, props, children);
     return <Portal>{element}</Portal>;
   }
-);
+});

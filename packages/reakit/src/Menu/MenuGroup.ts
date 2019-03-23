@@ -28,10 +28,13 @@ export function useMenuGroup(
 }
 
 const keys: Array<keyof unstable_MenuGroupOptions> = [
-  ...useBox.keys,
-  ...useMenuState.keys
+  ...useBox.__keys,
+  ...useMenuState.__keys
 ];
 
-useMenuGroup.keys = keys;
+useMenuGroup.__keys = keys;
 
-export const MenuGroup = unstable_createComponent("fieldset", useMenuGroup);
+export const MenuGroup = unstable_createComponent({
+  as: "fieldset",
+  useHook: useMenuGroup
+});

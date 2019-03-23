@@ -54,16 +54,16 @@ export function unstable_useFormInput<V, P extends DeepPath<V, P>>(
 }
 
 const keys: Array<keyof unstable_FormInputOptions<any, any>> = [
-  ...useBox.keys,
-  ...unstable_useFormState.keys,
+  ...useBox.__keys,
+  ...unstable_useFormState.__keys,
   "name"
 ];
 
-unstable_useFormInput.keys = keys;
+unstable_useFormInput.__keys = keys;
 
-export const unstable_FormInput = (unstable_createComponent(
-  "input",
-  unstable_useFormInput
-) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "input">(
+export const unstable_FormInput = (unstable_createComponent({
+  as: "input",
+  useHook: unstable_useFormInput
+}) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "input">(
   props: PropsWithAs<unstable_FormInputOptions<V, P>, T>
 ) => JSX.Element;

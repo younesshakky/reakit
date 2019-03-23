@@ -73,14 +73,14 @@ export function unstable_useMenuItemDisclosure(
 }
 
 const keys: Array<keyof unstable_MenuItemDisclosureOptions> = [
-  ...useMenuDisclosure.keys,
-  ...useMenuState.keys,
+  ...useMenuDisclosure.__keys,
+  ...useMenuState.__keys,
   "stopId"
 ];
 
-unstable_useMenuItemDisclosure.keys = keys;
+unstable_useMenuItemDisclosure.__keys = keys;
 
-export const unstable_MenuItemDisclosure = unstable_createComponent(
-  "button",
-  unstable_useMenuItemDisclosure
-);
+export const unstable_MenuItemDisclosure = unstable_createComponent({
+  as: "button",
+  useHook: unstable_useMenuItemDisclosure
+});

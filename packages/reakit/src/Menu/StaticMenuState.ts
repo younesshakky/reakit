@@ -23,7 +23,7 @@ export function unstable_useStaticMenuState(
 }
 
 const keys: Array<keyof unstable_StaticMenuStateReturn> = [
-  ...useRoverState.keys
+  ...useRoverState.__keys
 ];
 
-unstable_useStaticMenuState.keys = keys;
+unstable_useStaticMenuState.__keys = keys;

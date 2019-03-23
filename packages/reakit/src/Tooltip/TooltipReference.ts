@@ -32,13 +32,13 @@ export function useTooltipReference(
 }
 
 const keys: Array<keyof unstable_TooltipReferenceOptions> = [
-  ...useBox.keys,
-  ...useTooltipState.keys
+  ...useBox.__keys,
+  ...useTooltipState.__keys
 ];
 
-useTooltipReference.keys = keys;
+useTooltipReference.__keys = keys;
 
-export const TooltipReference = unstable_createComponent(
-  "div",
-  useTooltipReference
-);
+export const TooltipReference = unstable_createComponent({
+  as: "div",
+  useHook: useTooltipReference
+});

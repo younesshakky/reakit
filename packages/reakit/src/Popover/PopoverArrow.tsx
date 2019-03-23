@@ -57,10 +57,13 @@ export function usePopoverArrow(
 }
 
 const keys: Array<keyof unstable_PopoverArrowOptions> = [
-  ...useBox.keys,
-  ...usePopoverState.keys
+  ...useBox.__keys,
+  ...usePopoverState.__keys
 ];
 
-usePopoverArrow.keys = keys;
+usePopoverArrow.__keys = keys;
 
-export const PopoverArrow = unstable_createComponent("div", usePopoverArrow);
+export const PopoverArrow = unstable_createComponent({
+  as: "div",
+  useHook: usePopoverArrow
+});

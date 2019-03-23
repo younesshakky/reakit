@@ -65,17 +65,17 @@ export function unstable_useFormPushButton<V, P extends DeepPath<V, P>>(
 }
 
 const keys: Array<keyof unstable_FormPushButtonOptions<any, any>> = [
-  ...useButton.keys,
-  ...unstable_useFormState.keys,
+  ...useButton.__keys,
+  ...unstable_useFormState.__keys,
   "name",
   "value"
 ];
 
-unstable_useFormPushButton.keys = keys;
+unstable_useFormPushButton.__keys = keys;
 
-export const unstable_FormPushButton = (unstable_createComponent(
-  "button",
-  unstable_useFormPushButton
-) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "button">(
+export const unstable_FormPushButton = (unstable_createComponent({
+  as: "button",
+  useHook: unstable_useFormPushButton
+}) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "button">(
   props: PropsWithAs<unstable_FormPushButtonOptions<V, P>, T>
 ) => JSX.Element;

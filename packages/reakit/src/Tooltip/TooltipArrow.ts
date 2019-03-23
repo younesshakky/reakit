@@ -22,10 +22,13 @@ export function useTooltipArrow(
 }
 
 const keys: Array<keyof unstable_TooltipArrowOptions> = [
-  ...usePopoverArrow.keys,
-  ...useTooltipState.keys
+  ...usePopoverArrow.__keys,
+  ...useTooltipState.__keys
 ];
 
-useTooltipArrow.keys = keys;
+useTooltipArrow.__keys = keys;
 
-export const TooltipArrow = unstable_createComponent("div", useTooltipArrow);
+export const TooltipArrow = unstable_createComponent({
+  as: "div",
+  useHook: useTooltipArrow
+});

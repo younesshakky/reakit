@@ -22,10 +22,13 @@ export function useMenuSeparator(
 }
 
 const keys: Array<keyof unstable_MenuSeparatorOptions> = [
-  ...useSeparator.keys,
-  ...useMenuState.keys
+  ...useSeparator.__keys,
+  ...useMenuState.__keys
 ];
 
-useMenuSeparator.keys = keys;
+useMenuSeparator.__keys = keys;
 
-export const MenuSeparator = unstable_createComponent("hr", useMenuSeparator);
+export const MenuSeparator = unstable_createComponent({
+  as: "hr",
+  useHook: useMenuSeparator
+});

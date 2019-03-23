@@ -22,13 +22,13 @@ export function useToolbarSeparator(
 }
 
 const keys: Array<keyof unstable_ToolbarSeparatorOptions> = [
-  ...useSeparator.keys,
-  ...useToolbarState.keys
+  ...useSeparator.__keys,
+  ...useToolbarState.__keys
 ];
 
-useToolbarSeparator.keys = keys;
+useToolbarSeparator.__keys = keys;
 
-export const ToolbarSeparator = unstable_createComponent(
-  "hr",
-  useToolbarSeparator
-);
+export const ToolbarSeparator = unstable_createComponent({
+  as: "hr",
+  useHook: useToolbarSeparator
+});

@@ -51,10 +51,10 @@ export function useTab(
 }
 
 const keys: Array<keyof unstable_TabOptions> = [
-  ...useRover.keys,
-  ...useTabState.keys
+  ...useRover.__keys,
+  ...useTabState.__keys
 ];
 
-useTab.keys = keys;
+useTab.__keys = keys;
 
-export const Tab = unstable_createComponent("button", useTab);
+export const Tab = unstable_createComponent({ as: "button", useHook: useTab });

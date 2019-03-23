@@ -42,17 +42,17 @@ export function unstable_useFormLabel<V, P extends DeepPath<V, P>>(
 }
 
 const keys: Array<keyof unstable_FormLabelOptions<any, any>> = [
-  ...useBox.keys,
-  ...unstable_useFormState.keys,
+  ...useBox.__keys,
+  ...unstable_useFormState.__keys,
   "name",
   "label"
 ];
 
-unstable_useFormLabel.keys = keys;
+unstable_useFormLabel.__keys = keys;
 
-export const unstable_FormLabel = (unstable_createComponent(
-  "label",
-  unstable_useFormLabel
-) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "label">(
+export const unstable_FormLabel = (unstable_createComponent({
+  as: "label",
+  useHook: unstable_useFormLabel
+}) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "label">(
   props: PropsWithAs<unstable_FormLabelOptions<V, P>, T>
 ) => JSX.Element;

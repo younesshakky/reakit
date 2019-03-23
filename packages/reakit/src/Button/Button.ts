@@ -35,8 +35,11 @@ export function useButton(
   return htmlProps;
 }
 
-const keys: Array<keyof unstable_ButtonOptions> = [...useTabbable.keys];
+const keys: Array<keyof unstable_ButtonOptions> = [...useTabbable.__keys];
 
-useButton.keys = keys;
+useButton.__keys = keys;
 
-export const Button = unstable_createComponent("button", useButton);
+export const Button = unstable_createComponent({
+  as: "button",
+  useHook: useButton
+});

@@ -43,16 +43,16 @@ export function unstable_useStaticMenu(
 }
 
 const keys: Array<keyof unstable_StaticMenuOptions> = [
-  ...useBox.keys,
-  ...useMenuState.keys
+  ...useBox.__keys,
+  ...useMenuState.__keys
 ];
 
-unstable_useStaticMenu.keys = keys;
+unstable_useStaticMenu.__keys = keys;
 
-export const unstable_StaticMenu = unstable_createComponent(
-  "div",
-  unstable_useStaticMenu,
-  (type, props, children) => {
+export const unstable_StaticMenu = unstable_createComponent({
+  as: "div",
+  useHook: unstable_useStaticMenu,
+  useCreateElement: (type, props, children) => {
     warning(
       props["aria-label"] ||
         props["aria-labelledby"] ||
@@ -64,4 +64,4 @@ See https://www.w3.org/TR/wai-aria-practices-1.1/#wai-aria-roles-states-and-prop
 
     return unstable_useCreateElement(type, props, children);
   }
-);
+});

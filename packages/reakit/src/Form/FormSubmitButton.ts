@@ -43,13 +43,13 @@ export function unstable_useFormSubmitButton(
 }
 
 const keys: Array<keyof unstable_FormSubmitButtonOptions> = [
-  ...useButton.keys,
-  ...unstable_useFormState.keys
+  ...useButton.__keys,
+  ...unstable_useFormState.__keys
 ];
 
-unstable_useFormSubmitButton.keys = keys;
+unstable_useFormSubmitButton.__keys = keys;
 
-export const unstable_FormSubmitButton = unstable_createComponent(
-  "button",
-  unstable_useFormSubmitButton
-);
+export const unstable_FormSubmitButton = unstable_createComponent({
+  as: "button",
+  useHook: unstable_useFormSubmitButton
+});

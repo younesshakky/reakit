@@ -5,13 +5,9 @@
 </p>
 
 <p align="center">
-  <em>Toolkit for building <a href="https://reakit.io/docs/accessibility">accessible</a> UIs with <a href="https://reactjs.org">React</a>.</em>
-</p>
-
-
-<p align="center">
-  <a href="https://reakit.io"><strong>🌎 Website</strong></a> &nbsp; &nbsp;
-  <a href="https://reakit.io/docs"><strong>📚 Documentation</strong></a>
+  Toolkit for building <a href="https://reakit.io/docs/accessibility">accessible</a> UIs with <a href="https://reactjs.org">React</a>.
+  <br>
+  <a href="https://reakit.io"><strong>Explore website »</strong></a>
 </p>
 
 <hr>

@@ -100,11 +100,14 @@ export function useRover(
 }
 
 const keys: Array<keyof unstable_RoverOptions> = [
-  ...useTabbable.keys,
-  ...useRoverState.keys,
+  ...useTabbable.__keys,
+  ...useRoverState.__keys,
   "stopId"
 ];
 
-useRover.keys = keys;
+useRover.__keys = keys;
 
-export const Rover = unstable_createComponent("button", useRover);
+export const Rover = unstable_createComponent({
+  as: "button",
+  useHook: useRover
+});

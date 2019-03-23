@@ -66,17 +66,17 @@ export function unstable_useFormCheckbox<V, P extends DeepPath<V, P>>(
 }
 
 const keys: Array<keyof unstable_FormCheckboxOptions<any, any>> = [
-  ...useCheckbox.keys,
-  ...unstable_useFormState.keys,
+  ...useCheckbox.__keys,
+  ...unstable_useFormState.__keys,
   "name",
   "value"
 ];
 
-unstable_useFormCheckbox.keys = keys;
+unstable_useFormCheckbox.__keys = keys;
 
-export const unstable_FormCheckbox = (unstable_createComponent(
-  "input",
-  unstable_useFormCheckbox
-) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "input">(
+export const unstable_FormCheckbox = (unstable_createComponent({
+  as: "input",
+  useHook: unstable_useFormCheckbox
+}) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "input">(
   props: PropsWithAs<unstable_FormCheckboxOptions<V, P>, T>
 ) => JSX.Element;

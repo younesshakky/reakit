@@ -29,13 +29,13 @@ export function useDialogDisclosure(
 }
 
 const keys: Array<keyof unstable_DialogDisclosureOptions> = [
-  ...useHiddenDisclosure.keys,
-  ...useDialogState.keys
+  ...useHiddenDisclosure.__keys,
+  ...useDialogState.__keys
 ];
 
-useDialogDisclosure.keys = keys;
+useDialogDisclosure.__keys = keys;
 
-export const DialogDisclosure = unstable_createComponent(
-  "button",
-  useDialogDisclosure
-);
+export const DialogDisclosure = unstable_createComponent({
+  as: "button",
+  useHook: useDialogDisclosure
+});

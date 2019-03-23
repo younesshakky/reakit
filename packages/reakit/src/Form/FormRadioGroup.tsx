@@ -41,17 +41,17 @@ export function unstable_useFormRadioGroup<V, P extends DeepPath<V, P>>(
 }
 
 const keys: Array<keyof unstable_FormRadioGroupOptions<any, any>> = [
-  ...unstable_useFormGroup.keys,
-  ...unstable_useFormState.keys,
+  ...unstable_useFormGroup.__keys,
+  ...unstable_useFormState.__keys,
   "name"
 ];
 
-unstable_useFormRadioGroup.keys = keys;
+unstable_useFormRadioGroup.__keys = keys;
 
-export const unstable_FormRadioGroup = (unstable_createComponent(
-  "fieldset",
-  unstable_useFormRadioGroup,
-  (type, props, children) => {
+export const unstable_FormRadioGroup = (unstable_createComponent({
+  as: "fieldset",
+  useHook: unstable_useFormRadioGroup,
+  useCreateElement: (type, props, children) => {
     const element = unstable_useCreateElement(type, props, children);
     const rover = useRoverState({ unstable_loop: true });
     const value = React.useMemo(() => rover, [
@@ -65,6 +65,6 @@ export const unstable_FormRadioGroup = (unstable_createComponent(
       </FormRadioGroupContext.Provider>
     );
   }
-) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "fieldset">(
+}) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "fieldset">(
   props: PropsWithAs<unstable_FormRadioGroupOptions<V, P>, T>
 ) => JSX.Element;

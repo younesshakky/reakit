@@ -20,6 +20,6 @@ export function useBox(
 
 const keys: Array<keyof unstable_BoxOptions> = ["system"];
 
-useBox.keys = keys;
+useBox.__keys = keys;
 
-export const Box = unstable_createComponent("div", useBox);
+export const Box = unstable_createComponent({ as: "div", useHook: useBox });

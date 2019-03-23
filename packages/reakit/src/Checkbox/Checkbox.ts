@@ -87,12 +87,15 @@ export function useCheckbox(
 }
 
 const keys: Array<keyof unstable_CheckboxOptions> = [
-  ...useTabbable.keys,
-  ...useCheckboxState.keys,
+  ...useTabbable.__keys,
+  ...useCheckboxState.__keys,
   "value",
   "checked"
 ];
 
-useCheckbox.keys = keys;
+useCheckbox.__keys = keys;
 
-export const Checkbox = unstable_createComponent("input", useCheckbox);
+export const Checkbox = unstable_createComponent({
+  as: "input",
+  useHook: useCheckbox
+});

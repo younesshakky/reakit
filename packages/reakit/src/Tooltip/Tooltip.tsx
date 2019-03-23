@@ -37,17 +37,17 @@ export function useTooltip(
 }
 
 const keys: Array<keyof unstable_TooltipOptions> = [
-  ...useHidden.keys,
-  ...useTooltipState.keys
+  ...useHidden.__keys,
+  ...useTooltipState.__keys
 ];
 
-useTooltip.keys = keys;
+useTooltip.__keys = keys;
 
-export const Tooltip = unstable_createComponent(
-  "div",
-  useTooltip,
-  (type, props, children) => {
+export const Tooltip = unstable_createComponent({
+  as: "div",
+  useHook: useTooltip,
+  useCreateElement: (type, props, children) => {
     const element = unstable_useCreateElement(type, props, children);
     return <Portal>{element}</Portal>;
   }
-);
+});

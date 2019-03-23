@@ -127,7 +127,7 @@ export function usePopoverState(
 }
 
 const keys: Array<keyof unstable_PopoverStateReturn> = [
-  ...useDialogState.keys,
+  ...useDialogState.__keys,
   "unstable_referenceRef",
   "unstable_popoverRef",
   "unstable_arrowRef",
@@ -138,4 +138,4 @@ const keys: Array<keyof unstable_PopoverStateReturn> = [
   "place"
 ];
 
-usePopoverState.keys = keys;
+usePopoverState.__keys = keys;

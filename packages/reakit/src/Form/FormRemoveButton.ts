@@ -81,17 +81,17 @@ export function unstable_useFormRemoveButton<V, P extends DeepPath<V, P>>(
 }
 
 const keys: Array<keyof unstable_FormRemoveButtonOptions<any, any>> = [
-  ...useButton.keys,
-  ...unstable_useFormState.keys,
+  ...useButton.__keys,
+  ...unstable_useFormState.__keys,
   "name",
   "index"
 ];
 
-unstable_useFormRemoveButton.keys = keys;
+unstable_useFormRemoveButton.__keys = keys;
 
-export const unstable_FormRemoveButton = (unstable_createComponent(
-  "button",
-  unstable_useFormRemoveButton
-) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "button">(
+export const unstable_FormRemoveButton = (unstable_createComponent({
+  as: "button",
+  useHook: unstable_useFormRemoveButton
+}) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "button">(
   props: PropsWithAs<unstable_FormRemoveButtonOptions<V, P>, T>
 ) => JSX.Element;

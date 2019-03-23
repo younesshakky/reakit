@@ -24,10 +24,13 @@ export function useToolbarItem(
 }
 
 const keys: Array<keyof unstable_ToolbarItemOptions> = [
-  ...useRover.keys,
-  ...useToolbarState.keys
+  ...useRover.__keys,
+  ...useToolbarState.__keys
 ];
 
-useToolbarItem.keys = keys;
+useToolbarItem.__keys = keys;
 
-export const ToolbarItem = unstable_createComponent("button", useToolbarItem);
+export const ToolbarItem = unstable_createComponent({
+  as: "button",
+  useHook: useToolbarItem
+});

@@ -50,16 +50,16 @@ export function unstable_useFormMessage<V, P extends DeepPath<V, P>>(
 }
 
 const keys: Array<keyof unstable_FormMessageOptions<any, any>> = [
-  ...useBox.keys,
-  ...unstable_useFormState.keys,
+  ...useBox.__keys,
+  ...unstable_useFormState.__keys,
   "name"
 ];
 
-unstable_useFormMessage.keys = keys;
+unstable_useFormMessage.__keys = keys;
 
-export const unstable_FormMessage = (unstable_createComponent(
-  "div",
-  unstable_useFormMessage
-) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "div">(
+export const unstable_FormMessage = (unstable_createComponent({
+  as: "div",
+  useHook: unstable_useFormMessage
+}) as unknown) as <V, P extends DeepPath<V, P>, T extends As = "div">(
   props: PropsWithAs<unstable_FormMessageOptions<V, P>, T>
 ) => JSX.Element;

@@ -50,11 +50,11 @@ export function useTabState(
 }
 
 const keys: Array<keyof unstable_TabStateReturn> = [
-  ...useRoverState.keys,
+  ...useRoverState.__keys,
   "unstable_baseId",
   "unstable_selectedId",
   "unstable_select",
   "unstable_manual"
 ];
 
-useTabState.keys = keys;
+useTabState.__keys = keys;

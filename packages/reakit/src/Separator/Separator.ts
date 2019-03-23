@@ -32,10 +32,13 @@ export function useSeparator(
 }
 
 const keys: Array<keyof unstable_SeparatorOptions> = [
-  ...useBox.keys,
+  ...useBox.__keys,
   "orientation"
 ];
 
-useSeparator.keys = keys;
+useSeparator.__keys = keys;
 
-export const Separator = unstable_createComponent("hr", useSeparator);
+export const Separator = unstable_createComponent({
+  as: "hr",
+  useHook: useSeparator
+});
