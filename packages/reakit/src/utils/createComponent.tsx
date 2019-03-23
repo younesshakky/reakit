@@ -2,7 +2,6 @@
 import * as React from "react";
 import { forwardRef } from "../__utils/forwardRef";
 import { As, PropsWithAs } from "../__utils/types";
-import { useWhyDidYouUpdate } from "../__utils/useWhyDidYouUpdate";
 import { unstable_useCreateElement as defaultUseCreateElement } from "./useCreateElement";
 import { unstable_splitProps } from "./splitProps";
 
@@ -36,9 +35,6 @@ export function unstable_createComponent<T extends As, O>({
     { as = (type as unknown) as TT, ...props }: PropsWithAs<O, TT>,
     ref: React.Ref<any>
   ) => {
-    if (displayName && process.env.DEBUG) {
-      useWhyDidYouUpdate(displayName, props);
-    }
     if (useHook) {
       const [options, htmlProps] = unstable_splitProps(props, keys);
       const elementProps = useHook(options, { ref, ...htmlProps });
