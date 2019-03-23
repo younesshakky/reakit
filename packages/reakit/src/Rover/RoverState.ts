@@ -12,38 +12,41 @@ export type unstable_RoverState = {
   /** TODO: Description */
   orientation?: "horizontal" | "vertical";
   /** TODO: Description */
-  stops: Stop[];
+  unstable_stops: Stop[];
   /** TODO: Description */
-  currentId: Stop["id"] | null;
+  unstable_currentId: Stop["id"] | null;
   /** TODO: Description */
-  pastId: Stop["id"] | null;
+  unstable_pastId: Stop["id"] | null;
   /** TODO: Description */
-  loop: boolean;
+  unstable_loop: boolean;
 };
 
 export type unstable_RoverActions = {
   /** TODO: Description */
-  register: (id: Stop["id"], ref: Stop["ref"]) => void;
+  unstable_register: (id: Stop["id"], ref: Stop["ref"]) => void;
   /** TODO: Description */
-  unregister: (id: Stop["id"]) => void;
+  unstable_unregister: (id: Stop["id"]) => void;
   /** TODO: Description */
-  move: (id: Stop["id"]) => void;
+  unstable_move: (id: Stop["id"]) => void;
   /** TODO: Description */
-  next: () => void;
+  unstable_next: () => void;
   /** TODO: Description */
-  previous: () => void;
+  unstable_previous: () => void;
   /** TODO: Description */
-  first: () => void;
+  unstable_first: () => void;
   /** TODO: Description */
-  last: () => void;
+  unstable_last: () => void;
   /** TODO: Description */
-  reset: () => void;
+  unstable_reset: () => void;
   /** TODO: Description */
-  orientate: (orientation: unstable_RoverState["orientation"]) => void;
+  unstable_orientate: (orientation: unstable_RoverState["orientation"]) => void;
 };
 
 export type unstable_RoverInitialState = Partial<
-  Pick<unstable_RoverState, "orientation" | "currentId" | "loop">
+  Pick<
+    unstable_RoverState,
+    "orientation" | "unstable_currentId" | "unstable_loop"
+  >
 >;
 
 export type unstable_RoverStateReturn = unstable_RoverState &
@@ -67,7 +70,12 @@ function reducer(
   state: unstable_RoverState,
   action: RoverAction
 ): unstable_RoverState {
-  const { stops, currentId, pastId, loop } = state;
+  const {
+    unstable_stops: stops,
+    unstable_currentId: currentId,
+    unstable_pastId: pastId,
+    unstable_loop: loop
+  } = state;
 
   switch (action.type) {
     case "register": {
@@ -75,7 +83,7 @@ function reducer(
       if (stops.length === 0) {
         return {
           ...state,
-          stops: [{ id, ref }]
+          unstable_stops: [{ id, ref }]
         };
       }
 
@@ -97,12 +105,12 @@ function reducer(
       if (afterRefIndex === -1) {
         return {
           ...state,
-          stops: [...stops, { id, ref }]
+          unstable_stops: [...stops, { id, ref }]
         };
       }
       return {
         ...state,
-        stops: [
+        unstable_stops: [
           ...stops.slice(0, afterRefIndex),
           { id, ref },
           ...stops.slice(afterRefIndex)
@@ -119,9 +127,9 @@ function reducer(
 
       return {
         ...state,
-        stops: nextStops,
-        pastId: pastId && pastId === id ? null : pastId,
-        currentId: currentId && currentId === id ? null : currentId
+        unstable_stops: nextStops,
+        unstable_pastId: pastId && pastId === id ? null : pastId,
+        unstable_currentId: currentId && currentId === id ? null : currentId
       };
     }
     case "move": {
@@ -134,8 +142,8 @@ function reducer(
 
       return {
         ...state,
-        currentId: stops[index].id,
-        pastId: currentId
+        unstable_currentId: stops[index].id,
+        unstable_pastId: currentId
       };
     }
     case "next": {
@@ -161,13 +169,13 @@ function reducer(
     }
     case "previous": {
       const nextState = reducer(
-        { ...state, stops: stops.slice().reverse() },
+        { ...state, unstable_stops: stops.slice().reverse() },
         { type: "next" }
       );
       return {
         ...state,
-        currentId: nextState.currentId,
-        pastId: nextState.pastId
+        unstable_currentId: nextState.unstable_currentId,
+        unstable_pastId: nextState.unstable_pastId
       };
     }
     case "first": {
@@ -181,8 +189,8 @@ function reducer(
     case "reset": {
       return {
         ...state,
-        currentId: null,
-        pastId: null
+        unstable_currentId: null,
+        unstable_pastId: null
       };
     }
     case "orientate":
@@ -195,34 +203,39 @@ function reducer(
 export function useRoverState(
   initialState: SealedInitialState<unstable_RoverInitialState> = {}
 ): unstable_RoverStateReturn {
-  const { currentId = null, loop = false, ...sealed } = useSealedState(
-    initialState
-  );
+  const {
+    unstable_currentId: currentId = null,
+    unstable_loop: loop = false,
+    ...sealed
+  } = useSealedState(initialState);
   const [state, dispatch] = React.useReducer(reducer, {
     ...sealed,
-    stops: [],
-    currentId,
-    pastId: null,
-    loop
+    unstable_stops: [],
+    unstable_currentId: currentId,
+    unstable_pastId: null,
+    unstable_loop: loop
   });
 
   return {
     ...state,
-    register: React.useCallback(
+    unstable_register: React.useCallback(
       (id, ref) => dispatch({ type: "register", id, ref }),
       []
     ),
-    unregister: React.useCallback(
+    unstable_unregister: React.useCallback(
       id => dispatch({ type: "unregister", id }),
       []
     ),
-    move: React.useCallback(id => dispatch({ type: "move", id }), []),
-    next: React.useCallback(() => dispatch({ type: "next" }), []),
-    previous: React.useCallback(() => dispatch({ type: "previous" }), []),
-    first: React.useCallback(() => dispatch({ type: "first" }), []),
-    last: React.useCallback(() => dispatch({ type: "last" }), []),
-    reset: React.useCallback(() => dispatch({ type: "reset" }), []),
-    orientate: React.useCallback(
+    unstable_move: React.useCallback(id => dispatch({ type: "move", id }), []),
+    unstable_next: React.useCallback(() => dispatch({ type: "next" }), []),
+    unstable_previous: React.useCallback(
+      () => dispatch({ type: "previous" }),
+      []
+    ),
+    unstable_first: React.useCallback(() => dispatch({ type: "first" }), []),
+    unstable_last: React.useCallback(() => dispatch({ type: "last" }), []),
+    unstable_reset: React.useCallback(() => dispatch({ type: "reset" }), []),
+    unstable_orientate: React.useCallback(
       o => dispatch({ type: "orientate", orientation: o }),
       []
     )
@@ -231,19 +244,19 @@ export function useRoverState(
 
 const keys: Array<keyof unstable_RoverStateReturn> = [
   "orientation",
-  "stops",
-  "currentId",
-  "pastId",
-  "loop",
-  "register",
-  "unregister",
-  "move",
-  "next",
-  "previous",
-  "first",
-  "last",
-  "reset",
-  "orientate"
+  "unstable_stops",
+  "unstable_currentId",
+  "unstable_pastId",
+  "unstable_loop",
+  "unstable_register",
+  "unstable_unregister",
+  "unstable_move",
+  "unstable_next",
+  "unstable_previous",
+  "unstable_first",
+  "unstable_last",
+  "unstable_reset",
+  "unstable_orientate"
 ];
 
 useRoverState.keys = keys;

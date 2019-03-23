@@ -11,7 +11,7 @@ import { useTabState, unstable_TabStateReturn } from "./TabState";
 
 export type unstable_TabPanelOptions = unstable_HiddenOptions &
   Partial<unstable_TabStateReturn> &
-  Pick<unstable_TabStateReturn, "selectedId"> & {
+  Pick<unstable_TabStateReturn, "unstable_selectedId"> & {
     /** TODO: Description */
     stopId: string;
   };
@@ -22,15 +22,15 @@ export function useTabPanel(
   options: unstable_TabPanelOptions,
   htmlProps: unstable_TabPanelProps = {}
 ) {
-  const visible = options.selectedId === options.stopId;
+  const visible = options.unstable_selectedId === options.stopId;
   const allOptions: unstable_TabPanelOptions = { visible, ...options };
 
   htmlProps = mergeProps(
     {
       role: "tabpanel",
       tabIndex: 0,
-      id: getTabPanelId(options.stopId, options.baseId),
-      "aria-labelledby": getTabId(options.stopId, options.baseId)
+      id: getTabPanelId(options.stopId, options.unstable_baseId),
+      "aria-labelledby": getTabId(options.stopId, options.unstable_baseId)
     } as typeof htmlProps,
     htmlProps
   );

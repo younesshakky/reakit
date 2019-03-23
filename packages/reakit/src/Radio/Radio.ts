@@ -7,7 +7,10 @@ import {
   unstable_RoverProps,
   useRover
 } from "../Rover/Rover";
-import { useRadioState, unstable_RadioStateReturn } from "./RadioState";
+import {
+  unstable_useRadioState,
+  unstable_RadioStateReturn
+} from "./RadioState";
 
 export type unstable_RadioOptions = unstable_RoverOptions &
   Partial<unstable_RadioStateReturn> & {
@@ -20,7 +23,7 @@ export type unstable_RadioOptions = unstable_RoverOptions &
 export type unstable_RadioProps = unstable_RoverProps &
   React.InputHTMLAttributes<any>;
 
-export function useRadio(
+export function unstable_useRadio(
   options: unstable_RadioOptions,
   htmlProps: unstable_RadioProps = {}
 ) {
@@ -54,11 +57,14 @@ export function useRadio(
 
 const keys: Array<keyof unstable_RadioOptions> = [
   ...useRover.keys,
-  ...useRadioState.keys,
+  ...unstable_useRadioState.keys,
   "value",
   "checked"
 ];
 
-useRadio.keys = keys;
+unstable_useRadio.keys = keys;
 
-export const Radio = unstable_createComponent("input", useRadio);
+export const unstable_Radio = unstable_createComponent(
+  "input",
+  unstable_useRadio
+);

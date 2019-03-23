@@ -4,7 +4,7 @@ import { useHook } from "../system/useHook";
 import {
   unstable_RadioOptions,
   unstable_RadioProps,
-  useRadio
+  unstable_useRadio
 } from "../Radio/Radio";
 import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 
@@ -37,13 +37,13 @@ export function unstable_useMenuItemRadio(
         const keyMap = {
           ArrowRight: parentIsHorizontal
             ? () => {
-                parent.next();
+                parent.unstable_next();
                 hide();
               }
             : dir === "left" && hide,
           ArrowLeft: parentIsHorizontal
             ? () => {
-                parent.previous();
+                parent.unstable_previous();
                 hide();
               }
             : dir === "right" && hide
@@ -62,13 +62,16 @@ export function unstable_useMenuItemRadio(
     htmlProps
   );
 
-  htmlProps = useRadio({ ...options, currentValue, setValue }, htmlProps);
+  htmlProps = unstable_useRadio(
+    { ...options, currentValue, setValue },
+    htmlProps
+  );
   htmlProps = useHook("useMenuItemRadio", options, htmlProps);
   return htmlProps;
 }
 
 const keys: Array<keyof unstable_MenuItemRadioOptions> = [
-  ...useRadio.keys,
+  ...unstable_useRadio.keys,
   ...useMenuState.keys,
   "name"
 ];

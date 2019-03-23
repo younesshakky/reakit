@@ -62,7 +62,7 @@ export function useMenuState(
 
   React.useEffect(() => {
     if (!popover.visible) {
-      rover.reset();
+      rover.unstable_reset();
     }
   }, [popover.visible]);
 

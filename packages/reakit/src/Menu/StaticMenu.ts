@@ -9,7 +9,7 @@ import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 
 export type unstable_StaticMenuOptions = unstable_BoxOptions &
   Partial<unstable_MenuStateReturn> &
-  Pick<unstable_MenuStateReturn, "stops" | "move">;
+  Pick<unstable_MenuStateReturn, "unstable_stops" | "unstable_move">;
 
 export type unstable_StaticMenuProps = unstable_BoxProps;
 
@@ -19,7 +19,7 @@ export function unstable_useStaticMenu(
 ) {
   const onKeyDown = useShortcuts(options);
 
-  const ariaOwns = options.stops
+  const ariaOwns = options.unstable_stops
     .map(stop => {
       const ariaControls = stop.ref.current!.getAttribute("aria-controls");
       if (ariaControls) return `${stop.id} ${ariaControls}`;

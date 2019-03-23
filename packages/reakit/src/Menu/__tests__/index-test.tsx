@@ -634,7 +634,7 @@ test("left/right arrow keys in submenu in menubar move focus within menubar", ()
   const Test = () => {
     const menubar = unstable_useStaticMenuState({
       orientation: "horizontal",
-      loop: true
+      unstable_loop: true
     });
     const menu1 = useMenuState({}, menubar);
     const menu2 = useMenuState({}, menubar);

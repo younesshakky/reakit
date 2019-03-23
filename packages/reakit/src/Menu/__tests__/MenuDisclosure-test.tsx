@@ -7,7 +7,7 @@ const props: Parameters<typeof MenuDisclosure>[0] = {
   toggle: jest.fn(),
   placement: "bottom",
   show: jest.fn(),
-  last: jest.fn()
+  unstable_last: jest.fn()
 };
 
 test("render", () => {

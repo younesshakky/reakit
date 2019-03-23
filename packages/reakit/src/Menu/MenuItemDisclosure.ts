@@ -40,14 +40,19 @@ export function unstable_useMenuItemDisclosure(
 
   React.useEffect(() => {
     if (!parent || parent.orientation !== "horizontal") return;
-    const thisStop = parent.stops.find(
+    const thisStop = parent.unstable_stops.find(
       stop => stop.ref.current === ref.current
     );
-    const thisIsCurrent = thisStop && thisStop.id === parent.currentId;
+    const thisIsCurrent = thisStop && thisStop.id === parent.unstable_currentId;
     if (!thisIsCurrent && options.visible) {
       options.hide();
     }
-  }, [parent.orientation, parent.currentId, parent.stops, options.hide]);
+  }, [
+    parent.orientation,
+    parent.unstable_currentId,
+    parent.unstable_stops,
+    options.hide
+  ]);
 
   htmlProps = mergeProps(
     {

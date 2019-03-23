@@ -9,15 +9,15 @@ import {
 
 export type unstable_TabState = unstable_RoverState & {
   /** TODO: Description */
-  baseId: string;
+  unstable_baseId: string;
   /** TODO: Description */
-  selectedId: unstable_RoverState["currentId"];
+  unstable_selectedId: unstable_RoverState["unstable_currentId"];
   /** TODO: Description */
-  manual: boolean;
+  unstable_manual: boolean;
 };
 
 export type unstable_TabActions = unstable_RoverActions & {
-  select: (id: unstable_TabState["selectedId"]) => void;
+  unstable_select: (id: unstable_TabState["unstable_selectedId"]) => void;
 };
 
 export type unstable_TabInitialState = Partial<unstable_TabState>;
@@ -28,30 +28,33 @@ export function useTabState(
   initialState: SealedInitialState<unstable_TabInitialState> = {}
 ): unstable_TabStateReturn {
   const {
-    baseId = unstable_useId("tab-"),
-    selectedId: sealedSelectedId = null,
-    loop = true,
-    manual = false
+    unstable_baseId: baseId = unstable_useId("tab-"),
+    unstable_selectedId: sealedSelectedId = null,
+    unstable_loop: loop = true,
+    unstable_manual: manual = false
   } = useSealedState(initialState);
 
   const [selectedId, select] = React.useState(sealedSelectedId);
-  const rover = useRoverState({ loop, currentId: selectedId });
+  const rover = useRoverState({
+    unstable_loop: loop,
+    unstable_currentId: selectedId
+  });
 
   return {
     ...rover,
-    baseId,
-    selectedId,
-    manual,
-    select
+    unstable_baseId: baseId,
+    unstable_selectedId: selectedId,
+    unstable_manual: manual,
+    unstable_select: select
   };
 }
 
 const keys: Array<keyof unstable_TabStateReturn> = [
   ...useRoverState.keys,
-  "baseId",
-  "selectedId",
-  "select",
-  "manual"
+  "unstable_baseId",
+  "unstable_selectedId",
+  "unstable_select",
+  "unstable_manual"
 ];
 
 useTabState.keys = keys;

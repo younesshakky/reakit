@@ -38,14 +38,14 @@ export function useMenuItem(
           ArrowRight:
             parentIsHorizontal && !isDisclosure
               ? () => {
-                  parent.next();
+                  parent.unstable_next();
                   hide();
                 }
               : dir === "left" && hide,
           ArrowLeft:
             parentIsHorizontal && !isDisclosure
               ? () => {
-                  parent.previous();
+                  parent.unstable_previous();
                   hide();
                 }
               : dir === "right" && hide

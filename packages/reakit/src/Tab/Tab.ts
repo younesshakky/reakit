@@ -11,7 +11,7 @@ import { useTabState, unstable_TabStateReturn } from "./TabState";
 
 export type unstable_TabOptions = unstable_RoverOptions &
   Partial<unstable_TabStateReturn> &
-  Pick<unstable_TabStateReturn, "select"> & {
+  Pick<unstable_TabStateReturn, "unstable_select"> & {
     /** TODO: Description */
     stopId: string;
   };
@@ -23,22 +23,22 @@ export function useTab(
   htmlProps: unstable_TabProps = {}
 ) {
   const allOptions: unstable_TabOptions = { unstable_focusable, ...options };
-  const selected = options.selectedId === options.stopId;
+  const selected = options.unstable_selectedId === options.stopId;
 
   htmlProps = mergeProps(
     {
       role: "tab",
-      id: getTabId(options.stopId, options.baseId),
+      id: getTabId(options.stopId, options.unstable_baseId),
       "aria-selected": selected,
-      "aria-controls": getTabPanelId(options.stopId, options.baseId),
+      "aria-controls": getTabPanelId(options.stopId, options.unstable_baseId),
       onClick: () => {
         if (!options.disabled && !selected) {
-          options.select(options.stopId);
+          options.unstable_select(options.stopId);
         }
       },
       onFocus: () => {
-        if (!options.disabled && !options.manual && !selected) {
-          options.select(options.stopId);
+        if (!options.disabled && !options.unstable_manual && !selected) {
+          options.unstable_select(options.stopId);
         }
       }
     } as typeof htmlProps,

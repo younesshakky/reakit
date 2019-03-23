@@ -3,7 +3,7 @@ import { unstable_BoxOptions, useBox } from "../Box";
 import {
   unstable_RadioOptions,
   unstable_RadioProps,
-  useRadio
+  unstable_useRadio
 } from "../Radio/Radio";
 import { useHook } from "../system/useHook";
 import { unstable_createComponent } from "../utils/createComponent";
@@ -54,7 +54,7 @@ export function unstable_useFormRadio<V, P extends DeepPath<V, P>>(
     htmlProps
   );
 
-  htmlProps = useRadio(allOptions, htmlProps);
+  htmlProps = unstable_useRadio(allOptions, htmlProps);
   htmlProps = useHook("useFormRadio", allOptions, htmlProps);
   return htmlProps;
 }
