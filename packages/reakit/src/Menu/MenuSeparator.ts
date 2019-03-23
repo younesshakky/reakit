@@ -6,9 +6,10 @@ import {
   useSeparator
 } from "../Separator/Separator";
 import { Keys } from "../__utils/types";
-import { useMenuState } from "./MenuState";
+import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 
-export type unstable_MenuSeparatorOptions = unstable_SeparatorOptions;
+export type unstable_MenuSeparatorOptions = unstable_SeparatorOptions &
+  Partial<unstable_MenuStateReturn>;
 
 export type unstable_MenuSeparatorProps = unstable_SeparatorProps;
 
@@ -21,12 +22,12 @@ export function useMenuSeparator(
   return htmlProps;
 }
 
-const keys: Keys<unstable_MenuSeparatorOptions> = [...useSeparator.__keys];
-
-const allKeys = [...useSeparator.__allKeys, ...useMenuState.__allKeys, ...keys];
+const keys: Keys<unstable_MenuSeparatorOptions> = [
+  ...useSeparator.__keys,
+  ...useMenuState.__keys
+];
 
 useMenuSeparator.__keys = keys;
-useMenuSeparator.__allKeys = allKeys;
 
 export const MenuSeparator = unstable_createComponent({
   as: "hr",

@@ -44,19 +44,12 @@ export function unstable_useFormLabel<V, P extends DeepPath<V, P>>(
 
 const keys: Keys<unstable_FormLabelOptions<any, any>> = [
   ...useBox.__keys,
-  "baseId",
+  ...unstable_useFormState.__keys,
   "name",
   "label"
 ];
 
-const allKeys = [
-  ...useBox.__allKeys,
-  ...unstable_useFormState.__allKeys,
-  ...keys
-];
-
 unstable_useFormLabel.__keys = keys;
-unstable_useFormLabel.__allKeys = allKeys;
 
 export const unstable_FormLabel = (unstable_createComponent({
   as: "label",

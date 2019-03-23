@@ -8,7 +8,7 @@ import { Keys } from "../__utils/types";
 import { unstable_ToolbarStateReturn, useToolbarState } from "./ToolbarState";
 
 export type unstable_ToolbarOptions = unstable_BoxOptions &
-  Partial<Pick<unstable_ToolbarStateReturn, "orientation">>;
+  Partial<unstable_ToolbarStateReturn>;
 
 export type unstable_ToolbarProps = unstable_BoxProps;
 
@@ -28,12 +28,12 @@ export function useToolbar(
   return htmlProps;
 }
 
-const keys: Keys<unstable_ToolbarOptions> = [...useBox.__keys, "orientation"];
-
-const allKeys = [...useBox.__allKeys, ...useToolbarState.__allKeys, ...keys];
+const keys: Keys<unstable_ToolbarOptions> = [
+  ...useBox.__keys,
+  ...useToolbarState.__keys
+];
 
 useToolbar.__keys = keys;
-useToolbar.__allKeys = allKeys;
 
 export const Toolbar = unstable_createComponent({
   as: "div",

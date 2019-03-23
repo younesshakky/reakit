@@ -21,10 +21,7 @@ export function useBox(
 
 const keys: Keys<unstable_BoxOptions> = ["system"];
 
-const allKeys = [...keys];
-
 useBox.__keys = keys;
-useBox.__allKeys = allKeys;
 
 export const Box = unstable_createComponent({
   as: "div",

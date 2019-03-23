@@ -13,6 +13,7 @@ import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 
 export type unstable_MenuItemCheckboxOptions = unstable_CheckboxOptions &
   unstable_MenuItemOptions &
+  Partial<unstable_MenuStateReturn> &
   Pick<unstable_MenuStateReturn, "unstable_values" | "unstable_update"> & {
     /** TODO: Description */
     name: string;
@@ -45,20 +46,11 @@ export function unstable_useMenuItemCheckbox(
 const keys: Keys<unstable_MenuItemCheckboxOptions> = [
   ...useCheckbox.__keys,
   ...useMenuItem.__keys,
-  "unstable_values",
-  "unstable_update",
+  ...useMenuState.__keys,
   "name"
 ];
 
-const allKeys = [
-  ...useCheckbox.__allKeys,
-  ...useMenuItem.__allKeys,
-  ...useMenuState.__allKeys,
-  ...keys
-];
-
 unstable_useMenuItemCheckbox.__keys = keys;
-unstable_useMenuItemCheckbox.__allKeys = allKeys;
 
 export const unstable_MenuItemCheckbox = unstable_createComponent({
   as: "input",

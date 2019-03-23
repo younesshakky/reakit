@@ -6,9 +6,13 @@ import { mergeProps } from "../utils/mergeProps";
 import { unstable_useCreateElement } from "../utils/useCreateElement";
 import { warning } from "../__utils/warning";
 import { Keys } from "../__utils/types";
-import { unstable_useRadioState } from "./RadioState";
+import {
+  unstable_useRadioState,
+  unstable_RadioStateReturn
+} from "./RadioState";
 
-export type unstable_RadioGroupOptions = unstable_BoxOptions;
+export type unstable_RadioGroupOptions = unstable_BoxOptions &
+  Partial<unstable_RadioStateReturn>;
 
 export type unstable_RadioGroupProps = unstable_BoxProps &
   React.FieldsetHTMLAttributes<any>;
@@ -28,16 +32,12 @@ export function useRadioGroup(
   return htmlProps;
 }
 
-const keys: Keys<unstable_RadioGroupOptions> = [...useBox.__keys];
-
-const allKeys = [
-  ...useBox.__allKeys,
-  ...unstable_useRadioState.__allKeys,
-  ...keys
+const keys: Keys<unstable_RadioGroupOptions> = [
+  ...useBox.__keys,
+  ...unstable_useRadioState.__keys
 ];
 
 useRadioGroup.__keys = keys;
-useRadioGroup.__allKeys = allKeys;
 
 export const RadioGroup = unstable_createComponent({
   as: "fieldset",

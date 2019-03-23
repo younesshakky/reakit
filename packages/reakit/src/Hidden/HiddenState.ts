@@ -51,7 +51,7 @@ export function useHiddenState(
   };
 }
 
-const allKeys: Keys<unstable_HiddenStateReturn> = [
+const keys: Keys<unstable_HiddenStateReturn> = [
   "unstable_hiddenId",
   "visible",
   "show",
@@ -59,4 +59,4 @@ const allKeys: Keys<unstable_HiddenStateReturn> = [
   "toggle"
 ];
 
-useHiddenState.__allKeys = allKeys;
+useHiddenState.__keys = keys;

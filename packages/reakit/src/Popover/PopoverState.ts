@@ -127,8 +127,8 @@ export function usePopoverState(
   };
 }
 
-const allKeys: Keys<unstable_PopoverStateReturn> = [
-  ...useDialogState.__allKeys,
+const keys: Keys<unstable_PopoverStateReturn> = [
+  ...useDialogState.__keys,
   "unstable_referenceRef",
   "unstable_popoverRef",
   "unstable_arrowRef",
@@ -139,4 +139,4 @@ const allKeys: Keys<unstable_PopoverStateReturn> = [
   "place"
 ];
 
-usePopoverState.__allKeys = allKeys;
+usePopoverState.__keys = keys;

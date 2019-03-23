@@ -82,21 +82,12 @@ export function unstable_useFormRemoveButton<V, P extends DeepPath<V, P>>(
 
 const keys: Keys<unstable_FormRemoveButtonOptions<any, any>> = [
   ...useButton.__keys,
-  "baseId",
-  "values",
-  "remove",
+  ...unstable_useFormState.__keys,
   "name",
   "index"
 ];
 
-const allKeys = [
-  ...useButton.__allKeys,
-  ...unstable_useFormState.__allKeys,
-  ...keys
-];
-
 unstable_useFormRemoveButton.__keys = keys;
-unstable_useFormRemoveButton.__allKeys = allKeys;
 
 export const unstable_FormRemoveButton = (unstable_createComponent({
   as: "button",

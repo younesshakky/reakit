@@ -13,7 +13,7 @@ import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 import { useKeyboardFocus } from "./__utils/useKeyboardFocus";
 
 export type unstable_MenuItemDisclosureOptions = unstable_MenuDisclosureOptions &
-  Partial<Pick<unstable_MenuStateReturn, "unstable_parent" | "visible">> &
+  Partial<unstable_MenuStateReturn> &
   Pick<unstable_MenuStateReturn, "show" | "hide"> & {
     /** TODO: Description */
     stopId?: string;
@@ -71,21 +71,11 @@ export function unstable_useMenuItemDisclosure(
 
 const keys: Keys<unstable_MenuItemDisclosureOptions> = [
   ...useMenuDisclosure.__keys,
-  "unstable_parent",
-  "visible",
-  "show",
-  "hide",
+  ...useMenuState.__keys,
   "stopId"
 ];
 
-const allKeys = [
-  ...useMenuDisclosure.__allKeys,
-  ...useMenuState.__allKeys,
-  ...keys
-];
-
 unstable_useMenuItemDisclosure.__keys = keys;
-unstable_useMenuItemDisclosure.__allKeys = allKeys;
 
 export const unstable_MenuItemDisclosure = unstable_createComponent({
   as: "button",

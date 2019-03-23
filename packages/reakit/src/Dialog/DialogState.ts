@@ -22,6 +22,6 @@ export function useDialogState(
   return useHiddenState(initialState);
 }
 
-const allKeys: Keys<unstable_DialogStateReturn> = [...useHiddenState.__allKeys];
+const keys: Keys<unstable_DialogStateReturn> = [...useHiddenState.__keys];
 
-useDialogState.__allKeys = allKeys;
+useDialogState.__keys = keys;

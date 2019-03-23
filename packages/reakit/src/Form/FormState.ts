@@ -325,7 +325,7 @@ export function unstable_useFormState<V = Record<any, any>>(
   };
 }
 
-const allKeys: Keys<unstable_FormStateReturn<any>> = [
+const keys: Keys<unstable_FormStateReturn<any>> = [
   "baseId",
   "values",
   "touched",
@@ -345,4 +345,4 @@ const allKeys: Keys<unstable_FormStateReturn<any>> = [
   "remove"
 ];
 
-unstable_useFormState.__allKeys = allKeys;
+unstable_useFormState.__keys = keys;

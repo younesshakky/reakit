@@ -67,24 +67,12 @@ export function unstable_useFormCheckbox<V, P extends DeepPath<V, P>>(
 
 const keys: Keys<unstable_FormCheckboxOptions<any, any>> = [
   ...useCheckbox.__keys,
-  "baseId",
-  "values",
-  "update",
-  "blur",
-  "touched",
-  "errors",
+  ...unstable_useFormState.__keys,
   "name",
   "value"
 ];
 
-const allKeys = [
-  ...useCheckbox.__allKeys,
-  ...unstable_useFormState.__allKeys,
-  ...keys
-];
-
 unstable_useFormCheckbox.__keys = keys;
-unstable_useFormCheckbox.__allKeys = allKeys;
 
 export const unstable_FormCheckbox = (unstable_createComponent({
   as: "input",

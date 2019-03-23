@@ -38,10 +38,7 @@ export function useButton(
 
 const keys: Keys<unstable_ButtonOptions> = [...useTabbable.__keys];
 
-const allKeys = [...useTabbable.__allKeys];
-
 useButton.__keys = keys;
-useButton.__allKeys = allKeys;
 
 export const Button = unstable_createComponent({
   as: "button",

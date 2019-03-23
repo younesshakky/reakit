@@ -7,12 +7,7 @@ import { Keys } from "../__utils/types";
 import { usePopoverState, unstable_PopoverStateReturn } from "./PopoverState";
 
 export type unstable_PopoverArrowOptions = unstable_BoxOptions &
-  Partial<
-    Pick<
-      unstable_PopoverStateReturn,
-      "unstable_arrowRef" | "unstable_arrowStyles"
-    >
-  > &
+  Partial<unstable_PopoverStateReturn> &
   Pick<unstable_PopoverStateReturn, "placement">;
 
 export type unstable_PopoverArrowProps = unstable_BoxProps;
@@ -64,15 +59,10 @@ export function usePopoverArrow(
 
 const keys: Keys<unstable_PopoverArrowOptions> = [
   ...useBox.__keys,
-  "unstable_arrowRef",
-  "unstable_arrowStyles",
-  "placement"
+  ...usePopoverState.__keys
 ];
 
-const allKeys = [...useBox.__allKeys, ...usePopoverState.__allKeys, ...keys];
-
 usePopoverArrow.__keys = keys;
-usePopoverArrow.__allKeys = allKeys;
 
 export const PopoverArrow = unstable_createComponent({
   as: "div",

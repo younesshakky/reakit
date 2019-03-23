@@ -243,7 +243,7 @@ export function useRoverState(
   };
 }
 
-const allKeys: Keys<unstable_RoverStateReturn> = [
+const keys: Keys<unstable_RoverStateReturn> = [
   "orientation",
   "unstable_stops",
   "unstable_currentId",
@@ -260,4 +260,4 @@ const allKeys: Keys<unstable_RoverStateReturn> = [
   "unstable_orientate"
 ];
 
-useRoverState.__allKeys = allKeys;
+useRoverState.__keys = keys;

@@ -11,7 +11,7 @@ import { getTabId, getTabPanelId } from "./__utils";
 import { useTabState, unstable_TabStateReturn } from "./TabState";
 
 export type unstable_TabOptions = unstable_RoverOptions &
-  Partial<Pick<unstable_TabStateReturn, "unstable_manual">> &
+  Partial<unstable_TabStateReturn> &
   Pick<
     unstable_TabStateReturn,
     "unstable_baseId" | "unstable_selectedId" | "unstable_select"
@@ -56,15 +56,10 @@ export function useTab(
 
 const keys: Keys<unstable_TabOptions> = [
   ...useRover.__keys,
-  "unstable_manual",
-  "unstable_baseId",
-  "unstable_selectedId",
-  "unstable_select"
+  ...useTabState.__keys,
+  "stopId"
 ];
 
-const allKeys = [...useRover.__allKeys, ...useTabState.__allKeys, ...keys];
-
 useTab.__keys = keys;
-useTab.__allKeys = allKeys;
 
 export const Tab = unstable_createComponent({ as: "button", useHook: useTab });

@@ -44,9 +44,6 @@ export function useCheckboxState(
   };
 }
 
-const allKeys: Keys<unstable_CheckboxStateReturn> = [
-  "currentValue",
-  "setValue"
-];
+const keys: Keys<unstable_CheckboxStateReturn> = ["currentValue", "setValue"];
 
-useCheckboxState.__allKeys = allKeys;
+useCheckboxState.__keys = keys;

@@ -15,7 +15,7 @@ import {
 } from "./CheckboxState";
 
 export type unstable_CheckboxOptions = unstable_TabbableOptions &
-  Partial<Pick<unstable_CheckboxStateReturn, "currentValue" | "setValue">> & {
+  Partial<unstable_CheckboxStateReturn> & {
     /**
      * Checkbox's value is going to be used when multiple checkboxes share the
      * same state. Checking a checkbox with value will add it to the state
@@ -89,20 +89,12 @@ export function useCheckbox(
 
 const keys: Keys<unstable_CheckboxOptions> = [
   ...useTabbable.__keys,
-  "currentValue",
-  "setValue",
+  ...useCheckboxState.__keys,
   "value",
   "checked"
 ];
 
-const allKeys = [
-  ...useTabbable.__allKeys,
-  ...useCheckboxState.__allKeys,
-  ...keys
-];
-
 useCheckbox.__keys = keys;
-useCheckbox.__allKeys = allKeys;
 
 export const Checkbox = unstable_createComponent({
   as: "input",

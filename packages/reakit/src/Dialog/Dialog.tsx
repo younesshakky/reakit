@@ -22,7 +22,7 @@ import { useFocusOnHide } from "./__utils/useFocusOnHide";
 import { useDialogState, unstable_DialogStateReturn } from "./DialogState";
 
 export type unstable_DialogOptions = unstable_HiddenOptions &
-  Partial<Pick<unstable_DialogStateReturn, "hide" | "visible">> &
+  Partial<unstable_DialogStateReturn> &
   Pick<unstable_DialogStateReturn, "unstable_hiddenId"> & {
     /** TODO: Description */
     unstable_modal?: boolean;
@@ -150,9 +150,7 @@ export function useDialog(
 
 const keys: Keys<unstable_DialogOptions> = [
   ...useHidden.__keys,
-  "hide",
-  "visible",
-  "unstable_hiddenId",
+  ...useDialogState.__keys,
   "unstable_modal",
   "unstable_hideOnEsc",
   "unstable_hideOnClickOutside",
@@ -163,10 +161,7 @@ const keys: Keys<unstable_DialogOptions> = [
   "unstable_autoFocusOnHide"
 ];
 
-const allKeys = [...useHidden.__allKeys, ...useDialogState.__allKeys, ...keys];
-
 useDialog.__keys = keys;
-useDialog.__allKeys = allKeys;
 
 export const Dialog = unstable_createComponent({
   as: "div",

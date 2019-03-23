@@ -12,14 +12,12 @@ type Hook<O> = {
     props: React.HTMLAttributes<any> & React.RefAttributes<any>
   ): typeof props;
   __keys?: any[];
-  __allKeys?: any[];
 };
 
 type Options<T extends As, O> = {
   as: T;
   useHook?: Hook<O>;
   keys?: any[];
-  allKeys?: any[];
   useCreateElement?: typeof defaultUseCreateElement;
 };
 
@@ -27,7 +25,6 @@ export function unstable_createComponent<T extends As, O>({
   as: type,
   useHook,
   keys = (useHook && useHook.__keys) || [],
-  allKeys = (useHook && (useHook.__allKeys || useHook.__keys)) || [],
   useCreateElement = defaultUseCreateElement
 }: Options<T, O>) {
   const displayName =
@@ -43,8 +40,7 @@ export function unstable_createComponent<T extends As, O>({
       useWhyDidYouUpdate(displayName, props);
     }
     if (useHook) {
-      const [allOptions, htmlProps] = unstable_splitProps(props, allKeys);
-      const [options] = unstable_splitProps(allOptions, keys);
+      const [options, htmlProps] = unstable_splitProps(props, keys);
       const elementProps = useHook(options, { ref, ...htmlProps });
       return useCreateElement(as, elementProps);
     }

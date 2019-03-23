@@ -6,7 +6,7 @@ import { Keys } from "../__utils/types";
 import { useHiddenState, unstable_HiddenStateReturn } from "./HiddenState";
 
 export type unstable_HiddenOptions = unstable_BoxOptions &
-  Partial<Pick<unstable_HiddenStateReturn, "visible" | "unstable_hiddenId">>;
+  Partial<unstable_HiddenStateReturn>;
 
 export type unstable_HiddenProps = unstable_BoxProps;
 
@@ -30,18 +30,10 @@ export function useHidden(
 
 const keys: Keys<unstable_HiddenOptions> = [
   ...useBox.__keys,
-  "unstable_hiddenId",
-  "visible"
-];
-
-const allKeys: Keys<unstable_HiddenOptions & unstable_HiddenStateReturn> = [
-  ...useBox.__allKeys,
-  ...useHiddenState.__allKeys,
-  ...keys
+  ...useHiddenState.__keys
 ];
 
 useHidden.__keys = keys;
-useHidden.__allKeys = allKeys;
 
 export const Hidden = unstable_createComponent({
   as: "div",

@@ -23,8 +23,6 @@ export function useTooltipState(
   return usePopoverState({ ...sealed, placement });
 }
 
-const allKeys: Keys<unstable_TooltipStateReturn> = [
-  ...usePopoverState.__allKeys
-];
+const keys: Keys<unstable_TooltipStateReturn> = [...usePopoverState.__keys];
 
-useTooltipState.__allKeys = allKeys;
+useTooltipState.__keys = keys;

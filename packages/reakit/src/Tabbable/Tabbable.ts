@@ -94,10 +94,7 @@ const keys: Keys<unstable_TabbableOptions> = [
   "unstable_clickKeys"
 ];
 
-const allKeys = [...useBox.__allKeys, ...keys];
-
 useTabbable.__keys = keys;
-useTabbable.__allKeys = allKeys;
 
 export const Tabbable = unstable_createComponent({
   as: "button",

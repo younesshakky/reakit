@@ -10,7 +10,7 @@ import { Keys } from "../__utils/types";
 import { usePopoverState, unstable_PopoverStateReturn } from "./PopoverState";
 
 export type unstable_PopoverDisclosureOptions = unstable_DialogDisclosureOptions &
-  Partial<Pick<unstable_PopoverStateReturn, "unstable_referenceRef">>;
+  Partial<unstable_PopoverStateReturn>;
 
 export type unstable_PopoverDisclosureProps = unstable_DialogDisclosureProps;
 
@@ -31,17 +31,10 @@ export function usePopoverDisclosure(
 
 const keys: Keys<unstable_PopoverDisclosureOptions> = [
   ...useDialogDisclosure.__keys,
-  "unstable_referenceRef"
-];
-
-const allKeys = [
-  ...useDialogDisclosure.__allKeys,
-  ...usePopoverState.__allKeys,
-  ...keys
+  ...usePopoverState.__keys
 ];
 
 usePopoverDisclosure.__keys = keys;
-usePopoverDisclosure.__allKeys = allKeys;
 
 export const PopoverDisclosure = unstable_createComponent({
   as: "button",

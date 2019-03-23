@@ -46,20 +46,11 @@ export function unstable_useFormGroup<V, P extends DeepPath<V, P>>(
 
 const keys: Keys<unstable_FormGroupOptions<any, any>> = [
   ...useBox.__keys,
-  "baseId",
-  "touched",
-  "errors",
+  ...unstable_useFormState.__keys,
   "name"
 ];
 
-const allKeys = [
-  ...useBox.__allKeys,
-  ...unstable_useFormState.__allKeys,
-  ...keys
-];
-
 unstable_useFormGroup.__keys = keys;
-unstable_useFormGroup.__allKeys = allKeys;
 
 export const unstable_FormGroup = (unstable_createComponent({
   as: "fieldset",

@@ -23,8 +23,6 @@ export function unstable_useStaticMenuState(
   return useRoverState({ ...sealed, orientation });
 }
 
-const allKeys: Keys<unstable_StaticMenuStateReturn> = [
-  ...useRoverState.__allKeys
-];
+const keys: Keys<unstable_StaticMenuStateReturn> = [...useRoverState.__keys];
 
-unstable_useStaticMenuState.__allKeys = allKeys;
+unstable_useStaticMenuState.__keys = keys;

@@ -4,9 +4,10 @@ import { unstable_createComponent } from "../utils/createComponent";
 import { useHook } from "../system/useHook";
 import { unstable_BoxOptions, unstable_BoxProps, useBox } from "../Box/Box";
 import { Keys } from "../__utils/types";
-import { useMenuState } from "./MenuState";
+import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 
-export type unstable_MenuGroupOptions = unstable_BoxOptions;
+export type unstable_MenuGroupOptions = unstable_BoxOptions &
+  Partial<unstable_MenuStateReturn>;
 
 export type unstable_MenuGroupProps = unstable_BoxProps &
   React.FieldsetHTMLAttributes<any>;
@@ -27,12 +28,12 @@ export function useMenuGroup(
   return htmlProps;
 }
 
-const keys: Keys<unstable_MenuGroupOptions> = [...useBox.__keys];
-
-const allKeys = [...useBox.__allKeys, ...useMenuState.__allKeys, ...keys];
+const keys: Keys<unstable_MenuGroupOptions> = [
+  ...useBox.__keys,
+  ...useMenuState.__keys
+];
 
 useMenuGroup.__keys = keys;
-useMenuGroup.__allKeys = allKeys;
 
 export const MenuGroup = unstable_createComponent({
   as: "fieldset",

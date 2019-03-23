@@ -10,6 +10,7 @@ import { Keys } from "../__utils/types";
 import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 
 export type unstable_MenuDisclosureOptions = unstable_PopoverDisclosureOptions &
+  Partial<unstable_MenuStateReturn> &
   Pick<
     unstable_MenuStateReturn,
     "placement" | "show" | "unstable_first" | "unstable_last"
@@ -56,20 +57,10 @@ export function useMenuDisclosure(
 
 const keys: Keys<unstable_MenuDisclosureOptions> = [
   ...usePopoverDisclosure.__keys,
-  "placement",
-  "show",
-  "unstable_first",
-  "unstable_last"
-];
-
-const allKeys = [
-  ...usePopoverDisclosure.__allKeys,
-  ...useMenuState.__allKeys,
-  ...keys
+  ...useMenuState.__keys
 ];
 
 useMenuDisclosure.__keys = keys;
-useMenuDisclosure.__allKeys = allKeys;
 
 export const MenuDisclosure = unstable_createComponent({
   as: "button",

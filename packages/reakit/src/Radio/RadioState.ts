@@ -44,10 +44,10 @@ export function unstable_useRadioState(
   };
 }
 
-const allKeys: Keys<unstable_RadioStateReturn> = [
-  ...useRoverState.__allKeys,
+const keys: Keys<unstable_RadioStateReturn> = [
+  ...useRoverState.__keys,
   "currentValue",
   "setValue"
 ];
 
-unstable_useRadioState.__allKeys = allKeys;
+unstable_useRadioState.__keys = keys;

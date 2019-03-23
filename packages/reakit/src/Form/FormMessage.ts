@@ -54,21 +54,11 @@ export function unstable_useFormMessage<V, P extends DeepPath<V, P>>(
 
 const keys: Keys<unstable_FormMessageOptions<any, any>> = [
   ...useBox.__keys,
-  "baseId",
-  "touched",
-  "errors",
-  "messages",
+  ...unstable_useFormState.__keys,
   "name"
 ];
 
-const allKeys = [
-  ...useBox.__allKeys,
-  ...unstable_useFormState.__allKeys,
-  ...keys
-];
-
 unstable_useFormMessage.__keys = keys;
-unstable_useFormMessage.__allKeys = allKeys;
 
 export const unstable_FormMessage = (unstable_createComponent({
   as: "div",

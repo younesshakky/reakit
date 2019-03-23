@@ -41,17 +41,11 @@ export function unstable_useFormRadioGroup<V, P extends DeepPath<V, P>>(
 
 const keys: Keys<unstable_FormRadioGroupOptions<any, any>> = [
   ...unstable_useFormGroup.__keys,
+  ...unstable_useFormState.__keys,
   "name"
 ];
 
-const allKeys = [
-  ...unstable_useFormGroup.__allKeys,
-  ...unstable_useFormState.__allKeys,
-  ...keys
-];
-
 unstable_useFormRadioGroup.__keys = keys;
-unstable_useFormRadioGroup.__allKeys = allKeys;
 
 export const unstable_FormRadioGroup = (unstable_createComponent({
   as: "fieldset",

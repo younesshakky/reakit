@@ -63,21 +63,12 @@ export function unstable_useFormPushButton<V, P extends DeepPath<V, P>>(
 
 const keys: Keys<unstable_FormPushButtonOptions<any, any>> = [
   ...useButton.__keys,
-  "baseId",
-  "values",
-  "push",
+  ...unstable_useFormState.__keys,
   "name",
   "value"
 ];
 
-const allKeys = [
-  ...useButton.__allKeys,
-  ...unstable_useFormState.__allKeys,
-  ...keys
-];
-
 unstable_useFormPushButton.__keys = keys;
-unstable_useFormPushButton.__allKeys = allKeys;
 
 export const unstable_FormPushButton = (unstable_createComponent({
   as: "button",

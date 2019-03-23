@@ -61,21 +61,12 @@ export function unstable_useFormRadio<V, P extends DeepPath<V, P>>(
 
 const keys: Keys<unstable_FormRadioOptions<any, any>> = [
   ...useBox.__keys,
-  "values",
-  "update",
-  "blur",
+  ...unstable_useFormState.__keys,
   "name",
   "value"
 ];
 
-const allKeys = [
-  ...useBox.__allKeys,
-  ...unstable_useFormState.__allKeys,
-  ...keys
-];
-
 unstable_useFormRadio.__keys = keys;
-unstable_useFormRadio.__allKeys = allKeys;
 
 export const unstable_FormRadio = (unstable_createComponent({
   as: "input",

@@ -13,7 +13,7 @@ import { Keys } from "../__utils/types";
 import { unstable_RoverStateReturn, useRoverState } from "./RoverState";
 
 export type unstable_RoverOptions = unstable_TabbableOptions &
-  Partial<Pick<unstable_RoverStateReturn, "orientation">> &
+  Partial<unstable_RoverStateReturn> &
   Pick<
     unstable_RoverStateReturn,
     | "unstable_stops"
@@ -102,23 +102,11 @@ export function useRover(
 
 const keys: Keys<unstable_RoverOptions> = [
   ...useTabbable.__keys,
-  "orientation",
-  "unstable_stops",
-  "unstable_currentId",
-  "unstable_register",
-  "unstable_unregister",
-  "unstable_move",
-  "unstable_next",
-  "unstable_previous",
-  "unstable_first",
-  "unstable_last",
+  ...useRoverState.__keys,
   "stopId"
 ];
 
-const allKeys = [...useTabbable.__allKeys, ...useRoverState.__allKeys, ...keys];
-
 useRover.__keys = keys;
-useRover.__allKeys = allKeys;
 
 export const Rover = unstable_createComponent({
   as: "button",

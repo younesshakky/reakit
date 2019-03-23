@@ -34,10 +34,7 @@ export function useSeparator(
 
 const keys: Keys<unstable_SeparatorOptions> = [...useBox.__keys, "orientation"];
 
-const allKeys = [...useBox.__allKeys, ...keys];
-
 useSeparator.__keys = keys;
-useSeparator.__allKeys = allKeys;
 
 export const Separator = unstable_createComponent({
   as: "hr",

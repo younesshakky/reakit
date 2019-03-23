@@ -7,6 +7,7 @@ import { Keys } from "../__utils/types";
 import { unstable_FormStateReturn, unstable_useFormState } from "./FormState";
 
 export type unstable_FormOptions = unstable_BoxOptions &
+  Partial<unstable_FormStateReturn<any>> &
   Pick<unstable_FormStateReturn<any>, "submit">;
 
 export type unstable_FormProps = unstable_BoxProps &
@@ -33,16 +34,12 @@ export function unstable_useForm(
   return htmlProps;
 }
 
-const keys: Keys<unstable_FormOptions> = [...useBox.__keys, "submit"];
-
-const allKeys = [
-  ...useBox.__allKeys,
-  ...unstable_useFormState.__allKeys,
-  ...keys
+const keys: Keys<unstable_FormOptions> = [
+  ...useBox.__keys,
+  ...unstable_useFormState.__keys
 ];
 
 unstable_useForm.__keys = keys;
-unstable_useForm.__allKeys = allKeys;
 
 export const unstable_Form = unstable_createComponent({
   as: "form",

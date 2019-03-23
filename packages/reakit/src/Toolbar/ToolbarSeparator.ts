@@ -6,9 +6,10 @@ import {
   useSeparator
 } from "../Separator/Separator";
 import { Keys } from "../__utils/types";
-import { useToolbarState } from "./ToolbarState";
+import { useToolbarState, unstable_ToolbarStateReturn } from "./ToolbarState";
 
-export type unstable_ToolbarSeparatorOptions = unstable_SeparatorOptions;
+export type unstable_ToolbarSeparatorOptions = unstable_SeparatorOptions &
+  Partial<unstable_ToolbarStateReturn>;
 
 export type unstable_ToolbarSeparatorProps = unstable_SeparatorProps;
 
@@ -21,16 +22,12 @@ export function useToolbarSeparator(
   return htmlProps;
 }
 
-const keys: Keys<unstable_ToolbarSeparatorOptions> = [...useSeparator.__keys];
-
-const allKeys = [
-  ...useSeparator.__allKeys,
-  ...useToolbarState.__allKeys,
-  ...keys
+const keys: Keys<unstable_ToolbarSeparatorOptions> = [
+  ...useSeparator.__keys,
+  ...useToolbarState.__keys
 ];
 
 useToolbarSeparator.__keys = keys;
-useToolbarSeparator.__allKeys = allKeys;
 
 export const ToolbarSeparator = unstable_createComponent({
   as: "hr",

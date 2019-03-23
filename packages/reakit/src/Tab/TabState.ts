@@ -50,12 +50,12 @@ export function useTabState(
   };
 }
 
-const allKeys: Keys<unstable_TabStateReturn> = [
-  ...useRoverState.__allKeys,
+const keys: Keys<unstable_TabStateReturn> = [
+  ...useRoverState.__keys,
   "unstable_baseId",
   "unstable_selectedId",
   "unstable_select",
   "unstable_manual"
 ];
 
-useTabState.__allKeys = allKeys;
+useTabState.__keys = keys;

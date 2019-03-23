@@ -84,12 +84,12 @@ export function useMenuState(
   };
 }
 
-const allKeys: Keys<unstable_MenuStateReturn> = [
-  ...useRoverState.__allKeys,
-  ...usePopoverState.__allKeys,
+const keys: Keys<unstable_MenuStateReturn> = [
+  ...useRoverState.__keys,
+  ...usePopoverState.__keys,
   "unstable_parent",
   "unstable_values",
   "unstable_update"
 ];
 
-useMenuState.__allKeys = allKeys;
+useMenuState.__keys = keys;

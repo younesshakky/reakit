@@ -55,23 +55,11 @@ export function unstable_useFormInput<V, P extends DeepPath<V, P>>(
 
 const keys: Keys<unstable_FormInputOptions<any, any>> = [
   ...useBox.__keys,
-  "baseId",
-  "values",
-  "touched",
-  "errors",
-  "update",
-  "blur",
+  ...unstable_useFormState.__keys,
   "name"
 ];
 
-const allKeys = [
-  ...useBox.__allKeys,
-  ...unstable_useFormState.__allKeys,
-  ...keys
-];
-
 unstable_useFormInput.__keys = keys;
-unstable_useFormInput.__allKeys = allKeys;
 
 export const unstable_FormInput = (unstable_createComponent({
   as: "input",

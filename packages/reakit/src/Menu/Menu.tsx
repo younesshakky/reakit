@@ -20,7 +20,7 @@ import { useMenuState, unstable_MenuStateReturn } from "./MenuState";
 
 export type unstable_MenuOptions = unstable_PopoverOptions &
   unstable_StaticMenuOptions &
-  Partial<Pick<unstable_MenuStateReturn, "unstable_parent">>;
+  Partial<unstable_MenuStateReturn>;
 
 export type unstable_MenuProps = unstable_PopoverProps &
   unstable_StaticMenuProps;
@@ -46,18 +46,10 @@ export function useMenu(
 const keys: Keys<unstable_MenuOptions> = [
   ...usePopover.__keys,
   ...unstable_useStaticMenu.__keys,
-  "unstable_parent"
-];
-
-const allKeys = [
-  ...usePopover.__allKeys,
-  ...unstable_useStaticMenu.__allKeys,
-  ...useMenuState.__allKeys,
-  ...keys
+  ...useMenuState.__keys
 ];
 
 useMenu.__keys = keys;
-useMenu.__allKeys = allKeys;
 
 export const Menu = unstable_createComponent({
   as: "div",
