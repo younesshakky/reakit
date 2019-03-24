@@ -1004,6 +1004,14 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@dsherret/to-absolute-glob@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@dsherret/to-absolute-glob/-/to-absolute-glob-2.0.2.tgz#1f6475dc8bd974cea07a2daf3864b317b1dd332c"
+  integrity sha1-H2R13IvZdM6gei2vOGSzF7HdMyw=
+  dependencies:
+    is-absolute "^1.0.0"
+    is-negated-glob "^1.0.0"
+
 "@emotion/cache@^10.0.9":
   version "10.0.9"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.9.tgz#e0c7b7a289f7530edcfad4dcf3858bd2e5700a6f"
@@ -3890,6 +3898,11 @@ coa@~1.0.1:
   integrity sha1-qe8VNmDWqGqL3sAomlxoTSF0Mv0=
   dependencies:
     q "^1.1.2"
+
+code-block-writer@7.2.2:
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/code-block-writer/-/code-block-writer-7.2.2.tgz#14ec0120de9a65d2cc5d214561d51d1660dddbb1"
+  integrity sha512-8SyXM1bWsMDCzvCoTdnDBhnnUbHntxcba4ApBIO3S3QX0M2Iq0xZCzs6SYdBOGaSUi4drysvrAK15JoXhlpsvQ==
 
 code-point-at@^1.0.0:
   version "1.1.0"
@@ -8353,6 +8366,11 @@ is-natural-number@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/is-natural-number/-/is-natural-number-4.0.1.tgz#ab9d76e1db4ced51e35de0c72ebecf09f734cde8"
   integrity sha1-q5124dtM7VHjXeDHLr7PCfc0zeg=
+
+is-negated-glob@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/is-negated-glob/-/is-negated-glob-1.0.0.tgz#6910bca5da8c95e784b5751b976cf5a10fee36d2"
+  integrity sha1-aRC8pdqMleeEtXUbl2z1oQ/uNtI=
 
 is-npm@^1.0.0:
   version "1.0.0"
@@ -14739,6 +14757,21 @@ ts-invariant@^0.3.2:
   dependencies:
     tslib "^1.9.3"
 
+ts-morph@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/ts-morph/-/ts-morph-1.3.1.tgz#70795b7d54489c419b50911273675151b7bab8af"
+  integrity sha512-zWjy62PNOeX7LP6Q1h5UM7uBetEHKu9P2EoRQn0CZwqANxU/ZXvEiOtKeQJwKihRfslES+pLNCfIG7R0WS4ZbQ==
+  dependencies:
+    "@dsherret/to-absolute-glob" "^2.0.2"
+    code-block-writer "7.2.2"
+    fs-extra "^7.0.0"
+    glob-parent "^3.1.0"
+    globby "^8.0.1"
+    is-negated-glob "^1.0.0"
+    multimatch "^2.1.0"
+    tslib "^1.9.0"
+    typescript "^3.0.1"
+
 ts-pnp@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.0.1.tgz#fde74a6371676a167abaeda1ffc0fdb423520098"
@@ -14798,7 +14831,7 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@3.3.4000:
+typescript@3.3.4000, typescript@^3.0.1:
   version "3.3.4000"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.3.4000.tgz#76b0f89cfdbf97827e1112d64f283f1151d6adf0"
   integrity sha512-jjOcCZvpkl2+z7JFn0yBOoLQyLoIkNZAs/fYJkUG6VKy6zLPHJGfQJYFHzibB6GJaF/8QrcECtlQ5cpvRHSMEA==
