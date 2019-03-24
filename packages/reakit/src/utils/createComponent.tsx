@@ -2,8 +2,8 @@
 import * as React from "react";
 import { forwardRef } from "../__utils/forwardRef";
 import { As, PropsWithAs } from "../__utils/types";
+import { splitProps } from "../__utils/splitProps";
 import { unstable_useCreateElement as defaultUseCreateElement } from "./useCreateElement";
-import { unstable_splitProps } from "./splitProps";
 
 type Hook<O> = {
   (
@@ -26,25 +26,20 @@ export function unstable_createComponent<T extends As, O>({
   keys = (useHook && useHook.__keys) || [],
   useCreateElement = defaultUseCreateElement
 }: Options<T, O>) {
-  const displayName =
-    process.env.NODE_ENV !== "production" && useHook
-      ? useHook.name.replace(/^(unstable_)?use/, "")
-      : undefined;
-
   const Comp = <TT extends As = T>(
     { as = (type as unknown) as TT, ...props }: PropsWithAs<O, TT>,
     ref: React.Ref<any>
   ) => {
     if (useHook) {
-      const [options, htmlProps] = unstable_splitProps(props, keys);
+      const [options, htmlProps] = splitProps(props, keys);
       const elementProps = useHook(options, { ref, ...htmlProps });
       return useCreateElement(as, elementProps);
     }
     return useCreateElement(as, props);
   };
 
-  if (displayName) {
-    (Comp as any).displayName = displayName;
+  if (process.env.NODE_ENV !== "production" && useHook) {
+    (Comp as any).displayName = useHook.name.replace(/^(unstable_)?use/, "");
   }
 
   return forwardRef(Comp);
