@@ -6,16 +6,16 @@ import { unstable_useCreateElement as defaultUseCreateElement } from "./useCreat
 
 type Hook<O> = {
   (
-    options: O,
-    props: React.HTMLAttributes<any> & React.RefAttributes<any>
+    options?: O,
+    props?: React.HTMLAttributes<any> & React.RefAttributes<any>
   ): typeof props;
-  __keys?: any[];
+  __keys?: Array<keyof O>;
 };
 
 type Options<T extends As, O> = {
   as: T;
   useHook?: Hook<O>;
-  keys?: any[];
+  keys?: Array<keyof O>;
   useCreateElement?: typeof defaultUseCreateElement;
 };
 
@@ -30,9 +30,9 @@ export function unstable_createComponent<T extends As, O>({
     ref: React.Ref<any>
   ) => {
     if (useHook) {
-      const [options, htmlProps] = splitProps(props, keys);
+      const [options, htmlProps] = splitProps(props, keys as any[]);
       const elementProps = useHook(options, { ref, ...htmlProps });
-      return useCreateElement(as, elementProps);
+      return useCreateElement(as, elementProps || {});
     }
     return useCreateElement(as, props);
   };
