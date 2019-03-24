@@ -7,6 +7,7 @@ export type unstable_CheckboxState = {
    * Stores the state of the checkbox.
    * If checkboxes that share this state have defined a `value` prop, it's
    * going to be an array.
+   * @default false
    */
   currentValue: boolean | "indeterminate" | any[];
 };

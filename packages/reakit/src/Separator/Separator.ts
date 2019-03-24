@@ -5,7 +5,13 @@ import { unstable_BoxOptions, unstable_BoxProps, useBox } from "../Box/Box";
 import { Keys } from "../__utils/types";
 
 export type unstable_SeparatorOptions = unstable_BoxOptions & {
-  /** TODO: Description */
+  /**
+   * Separator's context orientation.
+   * The actual separator's oriention will be flipped based on this prop.
+   * So a `"vertical"` orientation means that the separator will have a
+   * `"horizontal"` orientation.
+   * @default "vertical"
+   */
   orientation?: "horizontal" | "vertical";
 };
 

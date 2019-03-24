@@ -15,9 +15,13 @@ import {
 
 export type unstable_RadioOptions = unstable_RoverOptions &
   Partial<unstable_RadioStateReturn> & {
-    /** TODO: Descriptions */
+    /**
+     * Same as the `value` attribute.
+     */
     value: any;
-    /** TODO: Descriptions */
+    /**
+     * Same as the `checked` attribute.
+     */
     checked?: boolean;
   };
 

@@ -4,18 +4,29 @@ import { unstable_useId } from "../utils/useId";
 import { Keys } from "../__utils/types";
 
 export type unstable_HiddenState = {
-  /** TODO: Description */
+  /**
+   * Hidden element id.
+   */
   unstable_hiddenId: string;
-  /** Tell whether it's visible or not */
+  /**
+   * Whether it's visible or not.
+   * @default false
+   */
   visible: boolean;
 };
 
 export type unstable_HiddenActions = {
-  /** Change the `visible` state to `true` */
+  /**
+   * Changes the `visible` state to `true`
+   */
   show: () => void;
-  /** Change the `visible` state to `false` */
+  /**
+   * Changes the `visible` state to `false`
+   */
   hide: () => void;
-  /** Toggle the `visible` state */
+  /**
+   * Toggles the `visible` state
+   */
   toggle: () => void;
 };
 

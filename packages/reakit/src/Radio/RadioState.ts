@@ -9,12 +9,16 @@ import {
 import { Keys } from "../__utils/types";
 
 export type unstable_RadioState = unstable_RoverState & {
-  /** TODO: Description */
+  /**
+   * The `value` attribute of the current checked radio.
+   */
   currentValue: any;
 };
 
 export type unstable_RadioActions = unstable_RoverActions & {
-  /** TODO: Description */
+  /**
+   * Changes the `currentValue` state.
+   */
   setValue: React.Dispatch<React.SetStateAction<any>>;
 };
 

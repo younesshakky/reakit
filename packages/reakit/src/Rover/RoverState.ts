@@ -10,36 +10,64 @@ type Stop = {
 };
 
 export type unstable_RoverState = {
-  /** TODO: Description */
+  /**
+   * Defines the orientation of the rover list.
+   */
   orientation?: "horizontal" | "vertical";
-  /** TODO: Description */
+  /**
+   * A list of element refs and IDs of the roving items.
+   */
   unstable_stops: Stop[];
-  /** TODO: Description */
+  /**
+   * The current focused element ID.
+   */
   unstable_currentId: Stop["id"] | null;
-  /** TODO: Description */
+  /**
+   * The last focused element ID.
+   */
   unstable_pastId: Stop["id"] | null;
-  /** TODO: Description */
+  /**
+   * If enabled, the next item after the last one will be the first one.
+   */
   unstable_loop: boolean;
 };
 
 export type unstable_RoverActions = {
-  /** TODO: Description */
+  /**
+   * Registers the element ID and ref in the roving tab index list.
+   */
   unstable_register: (id: Stop["id"], ref: Stop["ref"]) => void;
-  /** TODO: Description */
+  /**
+   * Unregisters the roving item.
+   */
   unstable_unregister: (id: Stop["id"]) => void;
-  /** TODO: Description */
+  /**
+   * Moves focus onto a given element ID.
+   */
   unstable_move: (id: Stop["id"]) => void;
-  /** TODO: Description */
+  /**
+   * Moves focus onto the next element.
+   */
   unstable_next: () => void;
-  /** TODO: Description */
+  /**
+   * Moves focus onto the previous element.
+   */
   unstable_previous: () => void;
-  /** TODO: Description */
+  /**
+   * Moves focus onto the first element.
+   */
   unstable_first: () => void;
-  /** TODO: Description */
+  /**
+   * Moves focus onto the last element.
+   */
   unstable_last: () => void;
-  /** TODO: Description */
+  /**
+   * Resets `currentId` and `pastId` states.
+   */
   unstable_reset: () => void;
-  /** TODO: Description */
+  /**
+   * Changes the `orientation` state of the roving tab index list.
+   */
   unstable_orientate: (orientation: unstable_RoverState["orientation"]) => void;
 };
 

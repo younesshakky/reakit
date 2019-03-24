@@ -24,21 +24,51 @@ import { useDialogState, unstable_DialogStateReturn } from "./DialogState";
 export type unstable_DialogOptions = unstable_HiddenOptions &
   Partial<unstable_DialogStateReturn> &
   Pick<unstable_DialogStateReturn, "unstable_hiddenId"> & {
-    /** TODO: Description */
+    /**
+     * Toggles Dialog's `modal` state.
+     *  - Non-modal: `preventBodyScroll` doesn't work and focus is free.
+     *  - Modal: `preventBodyScroll` is automatically enabled and focus is
+     * trapped within the dialog.
+     * @default true
+     */
     unstable_modal?: boolean;
-    /** TODO: Description */
+    /**
+     * When enabled, user can hide the dialog by pressing `Escape`.
+     * @default true
+     */
     unstable_hideOnEsc?: boolean;
-    /** TODO: Description */
+    /**
+     * When enabled, user can hide the dialog by clicking outside it.
+     * @default true
+     */
     unstable_hideOnClickOutside?: boolean;
-    /** TODO: Description */
+    /**
+     * When enabled, user can't scroll on body when the dialog is visible.
+     * This option doesn't work if the dialog isn't modal.
+     * @default true
+     */
     unstable_preventBodyScroll?: boolean;
-    /** TODO: Description */
+    /**
+     * The element that will be focused when the dialog shows.
+     * When not set, the first tabbable element within the dialog will be used.
+     * `autoFocusOnShow` disables it.
+     */
     unstable_initialFocusRef?: React.RefObject<HTMLElement>;
-    /** TODO: Description */
+    /**
+     * The element that will be focused when the dialog hides.
+     * When not set, the disclosure component will be used.
+     * `autoFocusOnHide` disables it.
+     */
     unstable_finalFocusRef?: React.RefObject<HTMLElement>;
-    /** TODO: Description */
+    /**
+     * Whether or not to move focus when the dialog shows.
+     * @default true
+     */
     unstable_autoFocusOnShow?: boolean;
-    /** TODO: Description */
+    /**
+     * Whether or not to move focus when the dialog hides.
+     * @default true
+     */
     unstable_autoFocusOnHide?: boolean;
   };
 

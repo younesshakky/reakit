@@ -26,7 +26,9 @@ export type unstable_RoverOptions = unstable_TabbableOptions &
     | "unstable_first"
     | "unstable_last"
   > & {
-    /** TODO: Descriptions */
+    /**
+     * Element ID.
+     */
     stopId?: string;
   };
 

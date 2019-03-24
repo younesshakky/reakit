@@ -7,15 +7,28 @@ import { useLiveRef } from "../__utils/useLiveRef";
 import { Keys } from "../__utils/types";
 
 export type unstable_TabbableOptions = unstable_BoxOptions & {
-  /** TODO: Description */
+  /**
+   * Same as the HTML attribute.
+   * @default 0
+   */
   tabIndex?: number;
-  /** TODO: Description */
+  /**
+   * Same as the HTML attribute.
+   */
   disabled?: boolean;
-  /** TODO: Description */
+  /**
+   * Same as the React prop. This won't be called if the `disabled` is passed.
+   */
   onClick?: React.MouseEventHandler;
-  /** TODO: Description */
+  /**
+   * When an element is `disabled`, it may still be `focusable`.
+   * In this case, only `aria-disabled` will be set.
+   */
   unstable_focusable?: boolean;
-  /** TODO: Description */
+  /**
+   * Keyboard keys to trigger click.
+   * @default [" "] // (space)
+   */
   unstable_clickKeys?: string[];
 };
 

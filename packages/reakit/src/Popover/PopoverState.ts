@@ -10,34 +10,60 @@ import {
 import { Keys } from "../__utils/types";
 
 export type unstable_PopoverState = unstable_DialogState & {
-  /** TODO: Description */
+  /**
+   * The reference element.
+   */
   unstable_referenceRef: React.RefObject<HTMLElement | null>;
-  /** TODO: Description */
+  /**
+   * The popover element.
+   */
   unstable_popoverRef: React.RefObject<HTMLElement | null>;
-  /** TODO: Description */
+  /**
+   * The arrow element.
+   */
   unstable_arrowRef: React.RefObject<HTMLElement | null>;
-  /** TODO: Description */
+  /**
+   * Popover styles.
+   */
   unstable_popoverStyles: Partial<CSSStyleDeclaration>;
-  /** TODO: Description */
+  /**
+   * Arrow styles.
+   */
   unstable_arrowStyles: Partial<CSSStyleDeclaration>;
-  /** TODO: Description */
+  /**
+   * `placement` passed to the hook.
+   */
   unstable_originalPlacement: Placement;
-  /** TODO: Description */
+  /**
+   * Actual `placement`.
+   * @default "bottom"
+   */
   placement: Placement;
 };
 
 export type unstable_PopoverActions = unstable_DialogActions & {
-  /** TODO: Description */
+  /**
+   * Change the `placement` state.
+   */
   place: React.Dispatch<React.SetStateAction<Placement>>;
 };
 
 export type unstable_PopoverInitialState = unstable_DialogInitialState &
   Partial<Pick<unstable_PopoverState, "placement">> & {
-    /** TODO: Description */
+    /**
+     * Whether or not flip the popover.
+     * @default true
+     */
     unstable_flip?: boolean;
-    /** TODO: Description */
+    /**
+     * Whether or not shift the popover.
+     * @default true
+     */
     unstable_shift?: boolean;
-    /** TODO: Description */
+    /**
+     * Offset between the reference and the popover.
+     * @default 12
+     */
     unstable_gutter?: number;
   };
 
