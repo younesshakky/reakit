@@ -20,7 +20,11 @@ export function unstable_useStaticMenuState(
   initialState: SealedInitialState<unstable_StaticMenuInitialState> = {}
 ): unstable_StaticMenuStateReturn {
   const { orientation = "vertical", ...sealed } = useSealedState(initialState);
-  return useRoverState({ ...sealed, orientation });
+  return useRoverState({
+    unstable_loop: orientation === "horizontal",
+    ...sealed,
+    orientation
+  });
 }
 
 const keys: Keys<unstable_StaticMenuStateReturn> = [...useRoverState.__keys];
