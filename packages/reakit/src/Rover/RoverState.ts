@@ -91,7 +91,7 @@ function reducer(
       const index = stops.findIndex(stop => stop.id === id);
 
       if (index >= 0) {
-        warning(false, `${id} stop is already registered`, "RoverState");
+        warning(true, `${id} stop is already registered`, "RoverState");
         return state;
       }
 
@@ -122,7 +122,7 @@ function reducer(
       const { id } = action;
       const nextStops = stops.filter(stop => stop.id !== id);
       if (nextStops.length === stops.length) {
-        warning(false, `${id} stop is not registered`, "RoverState");
+        warning(true, `${id} stop is not registered`, "RoverState");
         return state;
       }
 

@@ -1,4 +1,3 @@
-// TODO: Refactor
 import * as React from "react";
 import { forwardRef } from "../__utils/forwardRef";
 import { As, PropsWithAs } from "../__utils/types";

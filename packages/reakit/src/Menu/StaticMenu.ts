@@ -58,9 +58,9 @@ export const unstable_StaticMenu = unstable_createComponent({
   useHook: unstable_useStaticMenu,
   useCreateElement: (type, props, children) => {
     warning(
-      props["aria-label"] ||
-        props["aria-labelledby"] ||
-        props.role === "menubar",
+      !props["aria-label"] &&
+        !props["aria-labelledby"] &&
+        props.role !== "menubar",
       `You should provide either \`aria-label\` or \`aria-labelledby\` props.
 See https://www.w3.org/TR/wai-aria-practices-1.1/#wai-aria-roles-states-and-properties-13`,
       "StaticMenu"
